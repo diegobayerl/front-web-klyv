@@ -1,0 +1,214 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1200 658"
+  fill="none"
+  role="img"
+  aria-label="Klyv"
+>
+  <defs>
+    <!-- BASE -->
+    <linearGradient
+      id="baseGradient"
+      x1="155"
+      y1="295"
+      x2="506"
+      y2="527"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#052A3D"/>
+      <stop offset="0.52" stop-color="#073F67"/>
+      <stop offset="1" stop-color="#117192"/>
+    </linearGradient>
+
+    <!-- PARTE SUPERIOR -->
+    <linearGradient
+      id="topGradient"
+      x1="288"
+      y1="347"
+      x2="485"
+      y2="91"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#078BF4"/>
+      <stop offset="0.48" stop-color="#09B5F0"/>
+      <stop offset="1" stop-color="#19D1E6"/>
+    </linearGradient>
+
+    <!-- DOBRA -->
+    <linearGradient
+      id="foldGradient"
+      x1="229"
+      y1="278"
+      x2="363"
+      y2="397"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#0878D8"/>
+      <stop offset="0.55" stop-color="#087EE8"/>
+      <stop offset="1" stop-color="#078BF4"/>
+    </linearGradient>
+
+    <!-- BRILHO INFERIOR -->
+    <linearGradient
+      id="edgeGradient"
+      x1="95"
+      y1="379"
+      x2="526"
+      y2="475"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#078BF4" stop-opacity="0.35"/>
+      <stop offset="0.5" stop-color="#00A8FF"/>
+      <stop offset="1" stop-color="#19D1E6" stop-opacity="0.55"/>
+    </linearGradient>
+
+    <!-- SOMBRAS -->
+    <filter
+      id="shadow"
+      x="-20%"
+      y="-20%"
+      width="140%"
+      height="160%"
+    >
+      <feDropShadow
+        dx="0"
+        dy="12"
+        stdDeviation="13"
+        flood-color="#001D31"
+        flood-opacity="0.22"
+      />
+    </filter>
+
+    <filter
+      id="softShadow"
+      x="-30%"
+      y="-30%"
+      width="160%"
+      height="180%"
+    >
+      <feDropShadow
+        dx="0"
+        dy="10"
+        stdDeviation="10"
+        flood-color="#001D31"
+        flood-opacity="0.20"
+      />
+    </filter>
+  </defs>
+
+  <!-- ========================= -->
+  <!-- SÍMBOLO KLYV              -->
+  <!-- ========================= -->
+
+  <g transform="translate(0 0)">
+
+    <!-- BASE -->
+    <path
+      d="
+        M108 347
+        L228 278
+        C241 270 257 270 271 278
+        L516 421
+        C543 437 543 463 516 479
+        L384 555
+        C366 566 344 566 326 555
+        L107 428
+        C82 413 82 362 108 347Z
+      "
+      fill="url(#baseGradient)"
+      filter="url(#shadow)"
+    />
+
+    <!-- FILETE LUMINOSO -->
+    <path
+      d="
+        M91 392
+        C91 406 97 417 108 424
+        L327 551
+        C344 561 366 561 383 551
+        L515 475
+        C528 468 534 458 534 447
+      "
+      stroke="url(#edgeGradient)"
+      stroke-width="4"
+      stroke-linecap="round"
+      opacity="0.9"
+    />
+
+    <!-- DOBRA -->
+    <path
+      d="
+        M227 253
+        C227 237 244 228 258 236
+        L387 311
+        L278 397
+        C255 415 227 399 227 370
+        Z
+      "
+      fill="url(#foldGradient)"
+    />
+
+    <!-- PARTE SUPERIOR -->
+    <path
+      d="
+        M227 253
+        C227 234 237 218 253 209
+        L426 109
+        C446 97 470 97 490 109
+        L548 142
+        C565 152 570 168 566 187
+        L552 235
+        C549 247 541 257 530 263
+        L391 343
+        C379 350 364 350 352 343
+        L248 283
+        C235 276 227 265 227 253Z
+      "
+      fill="url(#topGradient)"
+      filter="url(#softShadow)"
+    />
+
+    <!-- CONTINUAÇÃO DA DOBRA -->
+    <path
+      d="
+        M227 253
+        C227 267 235 277 248 284
+        L352 344
+        C361 349 371 351 381 347
+        L278 397
+        C255 414 227 398 227 370
+        Z
+      "
+      fill="url(#foldGradient)"
+      opacity="0.96"
+    />
+
+    <!-- HIGHLIGHT -->
+    <path
+      d="
+        M253 209
+        L426 109
+        C446 97 470 97 490 109
+      "
+      stroke="#35E2EF"
+      stroke-width="2"
+      stroke-linecap="round"
+      opacity="0.35"
+    />
+  </g>
+
+  <!-- ========================= -->
+  <!-- WORDMARK                  -->
+  <!-- ========================= -->
+
+  <text
+    x="610"
+    y="410"
+    fill="#06172B"
+    font-family="Inter, Arial, sans-serif"
+    font-size="205"
+    font-weight="700"
+    letter-spacing="-10"
+  >Klyv</text>
+
+</svg>
