@@ -32,36 +32,36 @@ const capabilities = [
 
 
 const plans = [
-  { name: 'Trial', value: 'R$ 0', billing: 'por 14 dias', cta: 'Testar grátis', href: signup },
-  { name: 'Basic', value: 'R$ 67', billing: 'por mês', cta: 'Escolher Basic', href: signup },
-  { name: 'Pro', value: 'R$ 157', billing: 'por mês', cta: 'Escolher Pro', href: signup },
-  { name: 'Enterprise', value: 'Personalizado', billing: 'sob demanda', cta: 'Conhecer Enterprise', href: signup },
+  { name: 'Free', value: 'R$ 0', billing: 'sempre gratuito', cta: 'Começar grátis', href: `${signup}?plan=free` },
+  { name: 'Basic', value: 'R$ 67', billing: 'por mês', cta: 'Escolher Basic', href: `${signup}?plan=basic` },
+  { name: 'Pro', value: 'R$ 157', billing: 'por mês', cta: 'Escolher Pro', href: `${signup}?plan=pro` },
+  { name: 'Enterprise', value: 'Personalizado', billing: 'sob demanda', cta: 'Conhecer Enterprise', href: `${signup}?plan=enterprise` },
 ];
 
 type FeatureStatus = 'full' | 'basic' | 'none';
 
 interface ComparisonFeature {
   name: string;
-  trial: FeatureStatus | string;
+  free: FeatureStatus | string;
   basic: FeatureStatus | string;
   pro: FeatureStatus | string;
   enterprise: FeatureStatus | string;
 }
 
 const comparisonFeatures: ComparisonFeature[] = [
-  { name: 'Usuários', trial: '1 usuário', basic: '1 usuário', pro: 'até 2 usuários', enterprise: 'sob demanda' },
-  { name: 'Clientes / Contatos', trial: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Propostas / Pipeline', trial: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Agenda / Anotações', trial: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Execução do serviço', trial: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Metas Comerciais', trial: 'full', basic: 'basic', pro: 'full', enterprise: 'full' },
-  { name: 'Dashboard', trial: 'full', basic: 'basic', pro: 'full', enterprise: 'full' },
-  { name: 'Pós-Venda & Execução', trial: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Pesquisas de Satisfação', trial: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Lia', trial: 'full', basic: 'none', pro: 'basic', enterprise: 'full' },
-  { name: 'Lia pesquisa de satisfação', trial: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
-  { name: 'Lia no Dashboard', trial: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
-  { name: 'Operação pelo WhatsApp', trial: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
+  { name: 'Usuários', free: '1 usuário', basic: '1 usuário', pro: 'até 2 usuários', enterprise: 'sob demanda' },
+  { name: 'Clientes / Contatos', free: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
+  { name: 'Propostas / Pipeline', free: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
+  { name: 'Agenda / Anotações', free: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
+  { name: 'Execução do serviço', free: 'none', basic: 'full', pro: 'full', enterprise: 'full' },
+  { name: 'Metas Comerciais', free: 'none', basic: 'basic', pro: 'full', enterprise: 'full' },
+  { name: 'Dashboard', free: 'basic', basic: 'basic', pro: 'full', enterprise: 'full' },
+  { name: 'Pós-Venda & Execução', free: 'none', basic: 'full', pro: 'full', enterprise: 'full' },
+  { name: 'Pesquisas de Satisfação', free: 'none', basic: 'full', pro: 'full', enterprise: 'full' },
+  { name: 'Lia', free: 'none', basic: 'none', pro: 'basic', enterprise: 'full' },
+  { name: 'Lia pesquisa de satisfação', free: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
+  { name: 'Lia no Dashboard', free: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
+  { name: 'Operação pelo WhatsApp', free: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
 ];
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://klyv.com.br").replace(/\/$/, "");
@@ -138,7 +138,7 @@ export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [activePreview, setActivePreview] = useState(0);
   const [mobilePlan, setMobilePlan] = useState(0);
-  const planKeys = ['trial', 'basic', 'pro', 'enterprise'] as const;
+  const planKeys = ['free', 'basic', 'pro', 'enterprise'] as const;
   const selectedPlan = plans[mobilePlan];
   const preview = previews[activePreview];
 
@@ -168,15 +168,15 @@ export default function Home() {
           {[['#produto', 'O produto'], ['#recursos', 'Possibilidades'], ['#lia', 'IA'], ['#planos', 'Planos'], ['#duvidas', 'Dúvidas']].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
           <div className="mobile-nav-cta">
             <a className="login-link-mobile" href={crm} onClick={() => setMobileMenu(false)}>Entrar no Klyv <ArrowUpRight size={15} /></a>
-            <a className="button small" href={signup} onClick={() => setMobileMenu(false)}>Começar 14 dias grátis</a>
+            <a className="button small" href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}>Começar grátis</a>
           </div>
         </nav>
-        <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="button small" href={signup}>Criar conta</a><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
+        <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="button small" href={`${signup}?plan=free`}>Criar conta</a><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
       </div>
     </header>
     <main id="conteudo">
       <section className="hero wrap">
-        <div className="hero-copy"><h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1><p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega em um só lugar.</p><div className="hero-actions"><a className="button" href={signup}>Começar agora</a><a className="button secondary" href="#produto">Conheça a Klyv</a></div><span className="hero-note"><span className="tiny-check"><Check size={11} /></span> Faça um teste por 14 dias · Sem cartão de crédito</span></div>
+        <div className="hero-copy"><h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1><p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega em um só lugar.</p><div className="hero-actions"><a className="button" href={`${signup}?plan=free`}>Começar agora</a><a className="button secondary" href="#produto">Conheça a Klyv</a></div><span className="hero-note"><span className="tiny-check"><Check size={11} /></span> Comece no plano gratuito · Sem cartão de crédito</span></div>
         <div className="hero-visual">
           <div className="visual-orbit orbit-one" /><div className="visual-orbit orbit-two" />
           <div className="hero-product">
@@ -218,7 +218,7 @@ export default function Home() {
                 <h3>{preview.title}</h3>
                 <p>{preview.text}</p>
               </div>
-              <a className="text-link" href={signup}>
+              <a className="text-link" href={`${signup}?plan=free`}>
                 Começar agora <ArrowRight size={15} />
               </a>
             </div>
@@ -247,7 +247,7 @@ export default function Home() {
         </div>
       </section>
       <LiaShowcase />
-      <section className="method-section"><div className="wrap method-inner"><div><h2>Cada feedback<br />transformado em<br /><em>melhoria contínua.</em></h2><a className="button light" href={signup}>Dê o primeiro passo <ArrowRight size={16} /></a></div><ol className="steps">{[['Pesquisas de satisfação no timing certo.', 'Dispare pesquisas dinâmicas por e-mail ou link. Colete notas, percepções e retornos reais logo após cada entrega ou fechamento.'], ['Acúmulo de histórico e dados reais.', 'Cada resposta enriquece a história do seu cliente na Klyv, transformando opiniões em uma base estruturada de inteligência comercial.'], ['A Lia e a melhoria contínua.', 'Com base no histórico acumulado e no retorno dos clientes, a Lia cruza satisfação e metas para apoiar a evolução constante das suas vendas.']].map(([title, text], index) => <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></div></section>
+      <section className="method-section"><div className="wrap method-inner"><div><h2>Cada feedback<br />transformado em<br /><em>melhoria contínua.</em></h2><a className="button light" href={`${signup}?plan=free`}>Dê o primeiro passo <ArrowRight size={16} /></a></div><ol className="steps">{[['Pesquisas de satisfação no timing certo.', 'Dispare pesquisas dinâmicas por e-mail ou link. Colete notas, percepções e retornos reais logo após cada entrega ou fechamento.'], ['Acúmulo de histórico e dados reais.', 'Cada resposta enriquece a história do seu cliente na Klyv, transformando opiniões em uma base estruturada de inteligência comercial.'], ['A Lia e a melhoria contínua.', 'Com base no histórico acumulado e no retorno dos clientes, a Lia cruza satisfação e metas para apoiar a evolução constante das suas vendas.']].map(([title, text], index) => <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></div></section>
       <section className="section wrap pricing-section" id="planos">
         <div className="pricing-heading">
           <h2>Um plano para cada momento.</h2>
@@ -292,7 +292,7 @@ export default function Home() {
             <tbody>
               {comparisonFeatures.map(row => <tr key={row.name}>
                 <th scope="row" className="cell-feature-name">{row.name}</th>
-                {(['trial', 'basic', 'pro', 'enterprise'] as const).map(key => {
+                {(['free', 'basic', 'pro', 'enterprise'] as const).map(key => {
                   const value = row[key];
                   return <td className="cell-plan-val" key={key}>
                     {value === 'full' ? <span className="comparison-status included"><Check size={15} aria-hidden="true" />Completo</span>
@@ -305,7 +305,7 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-        <p className="comparison-note">Comece pelo teste gratuito de 14 dias. Compare acima os recursos disponíveis em cada plano.</p>
+        <p className="comparison-note">Comece no plano gratuito ou escolha o plano ideal para a sua operação. Você pode alterar seu plano a qualquer momento.</p>
       </section>
       <section className="section faq-section wrap" id="duvidas"><div><span className="eyebrow">Antes de começar</span><h2>Vamos deixar<br /><span>tudo claro.</span></h2><p>Respostas diretas para os próximos passos.</p></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={17} /></summary><p>{answer}</p></details>)}</div></section>
       <section className="final-section wrap">
@@ -315,8 +315,8 @@ export default function Home() {
             <h2>Construa relações mais próximas.<br /><span>Feche negócios com clareza.</span></h2>
           </div>
           <div>
-            <a className="button" href={signup}>Começar 14 dias grátis <ArrowRight size={16} /></a>
-            <p>Venha para a Klyv. Sem cartão de crédito</p>
+            <a className="button" href={`${signup}?plan=free`}>Começar agora <ArrowRight size={16} /></a>
+            <p>Venha para a Klyv. Sem cartão de crédito no plano gratuito.</p>
           </div>
         </div>
       </section>
