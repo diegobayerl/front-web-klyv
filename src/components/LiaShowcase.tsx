@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { 
   ArrowUp, 
+  ArrowUpRight,
   Calendar, 
   Check, 
   Clock, 
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 
 interface Scenario {
+  label: string;
   title: string;
   prompt: string;
   reply: string;
@@ -24,6 +26,7 @@ interface Scenario {
 
 const scenarios: Record<string, Scenario> = {
   reuniao: {
+    label: "Agendar reunião",
     title: "Agendar reunião com Aurora Tecnologia",
     prompt: "Lia, agenda uma reunião com a Aurora Tecnologia para amanhã às 10h para falar da proposta.",
     reply: "Reunião de alinhamento agendada com sucesso na sua agenda! Convite preparado e proposta vinculada.",
@@ -34,16 +37,18 @@ const scenarios: Record<string, Scenario> = {
     },
   },
   followup: {
+    label: "Follow-up WhatsApp",
     title: "Criar follow-up WhatsApp para Horizonte Saúde",
     prompt: "Cria uma ação de follow-up para a Horizonte Saúde na sexta-feira às 14h via WhatsApp.",
     reply: "Ação de follow-up registrada! A equipe será notificada na data e o canal WhatsApp foi selecionado.",
     actionCard: {
       badge: "Ação de Follow-up",
       summary: "Follow-up WhatsApp com Horizonte Saúde em 24/10/2026 às 14:00 (Validação de Minuta)",
-      status: "Ação registrada no CRM",
+      status: "Ação registrada no Klyv",
     },
   },
   metas: {
+    label: "Consultar metas",
     title: "Consultar meta anual e propostas quentes",
     prompt: "Como estamos em relação à nossa meta anual e quanto falta para atingir?",
     reply: "Vocês já realizaram R$ 420.000 (70% da meta planejada de R$ 600.000). Faltam R$ 180.000 para atingir a meta anual, e há 5 propostas quentes no funil somando R$ 215.000 com alta probabilidade de fechamento.",
@@ -56,11 +61,24 @@ export function LiaShowcase() {
 
   const handleSelectScenario = (key: string) => {
     setActiveScenarioKey(key);
-    setInputValue(scenarios[key].prompt);
+    setInputValue("");
   };
 
   const handleReset = () => {
     setActiveScenarioKey(null);
+    setInputValue("");
+  };
+
+  const handleCustomSubmit = () => {
+    const text = inputValue.trim().toLowerCase();
+    if (!text) return;
+    if (text.includes("meta") || text.includes("receita") || text.includes("falta")) {
+      setActiveScenarioKey("metas");
+    } else if (text.includes("follow") || text.includes("whatsapp") || text.includes("horizonte")) {
+      setActiveScenarioKey("followup");
+    } else {
+      setActiveScenarioKey("reuniao");
+    }
     setInputValue("");
   };
 
@@ -103,7 +121,7 @@ export function LiaShowcase() {
                   <div className="lia-letter">A</div>
                   <div>
                     <strong>Ação</strong>
-                    <span>Execução real no CRM sob o seu pedido: agenda compromissos, salva follow-ups e atualiza negociações sem formulários.</span>
+                    <span>Execução real no Klyv sob o seu pedido: agenda compromissos, salva follow-ups e atualiza negociações sem formulários.</span>
                   </div>
                 </div>
               </div>
@@ -112,7 +130,20 @@ export function LiaShowcase() {
 
           {/* Coluna da Direita: A Lia Exatamente Como Aparece na Tela */}
           <div className="lia-interface-column">
-            <div className="lia-drawer-frame" aria-label="Interface da Lia no CRM Klyv">
+            <div className="lia-scenario-pills" role="group" aria-label="Testar comandos na Lia">
+              {Object.entries(scenarios).map(([key, item]) => (
+                <button
+                  key={key}
+                  type="button"
+                  className={activeScenarioKey === key ? "active" : ""}
+                  aria-pressed={activeScenarioKey === key}
+                  onClick={() => handleSelectScenario(key)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            <div className="lia-drawer-frame" aria-label="Interface da Lia no Klyv">
               {/* O Chat Exato da Lia */}
               <div className="kia-chat">
                 {/* Cabeçalho Oficial da Lia */}
@@ -151,6 +182,18 @@ export function LiaShowcase() {
                       </div>
                       <h3>Olá.</h3>
                       <p>Por onde vamos começar?</p>
+                      <div className="kia-suggestions">
+                        {Object.entries(scenarios).map(([key, item]) => (
+                          <button
+                            key={key}
+                            type="button"
+                            onClick={() => handleSelectScenario(key)}
+                          >
+                            <span>{item.title}</span>
+                            <ArrowUpRight size={14} />
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   ) : (
                     <div className="kia-messages" role="log" aria-live="polite">
@@ -183,7 +226,7 @@ export function LiaShowcase() {
 
                 {/* Composer Oficial da Lia */}
                 <div className="kia-composer-area">
-                  <form className="kia-composer" onSubmit={(e) => e.preventDefault()}>
+                  <form className="kia-composer" onSubmit={(e) => { e.preventDefault(); handleCustomSubmit(); }}>
                     <textarea
                       rows={2}
                       maxLength={500}
@@ -194,9 +237,7 @@ export function LiaShowcase() {
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && !e.shiftKey) {
                           e.preventDefault();
-                          if (inputValue.trim()) {
-                            setActiveScenarioKey("reuniao");
-                          }
+                          handleCustomSubmit();
                         }
                       }}
                     />
@@ -207,11 +248,7 @@ export function LiaShowcase() {
                         aria-label="Enviar"
                         disabled={!inputValue.trim()}
                         style={{ opacity: inputValue.trim() ? 1 : 0.4 }}
-                        onClick={() => {
-                          if (inputValue.trim()) {
-                            setActiveScenarioKey("reuniao");
-                          }
-                        }}
+                        onClick={handleCustomSubmit}
                       >
                         <ArrowUp size={18} />
                       </button>

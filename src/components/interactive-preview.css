@@ -19,6 +19,112 @@
 .demo-chat{width:300px;flex-shrink:0;display:flex;flex-direction:column;background:var(--crm-surface);border-right:1px solid var(--crm-border)}.demo-chat header{display:flex;align-items:center;gap:8px;padding:20px 16px}.demo-chat header>svg{color:var(--crm-accent)}.demo-chat header strong{font-weight:500}.demo-chat header small{font-size:9px;margin-right:auto}.demo-chat-messages{flex:1;min-height:0;overflow:hidden!important;padding:20px}.demo-chat-welcome{padding:20px 4px}.demo-chat-welcome>svg{color:var(--crm-accent)}.demo-chat-welcome h2{font-size:26px;font-weight:500;letter-spacing:-.04em;margin-top:24px}.demo-chat-welcome p{color:var(--crm-muted);margin:4px 0 30px}.demo-chat-welcome button{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--crm-border);border-radius:8px;width:100%;padding:12px 10px;text-align:left;font-size:10px;margin:10px 0;color:var(--crm-muted)}.demo-chat-welcome button:hover{background:var(--crm-hover)}.demo-message{margin-bottom:24px;overflow-wrap:anywhere}.demo-message small{font-size:9px}.demo-message p{font-size:12px;line-height:1.9;margin-top:8px}.demo-message.user{background:var(--crm-hover);padding:14px;border-radius:12px 12px 0 12px;margin-left:15px}.demo-chat form{border:1px solid var(--crm-border);border-radius:14px;margin:12px 16px;padding:12px}.demo-chat textarea{width:100%;height:65px;background:transparent;border:0;resize:none;font-size:12px;outline:none}.demo-chat form>div{display:flex;align-items:center;justify-content:space-between}.demo-chat form small{font-size:8px}.demo-chat form button{display:grid;place-items:center;background:var(--crm-accent);color:white;width:30px;height:30px;border-radius:8px}.demo-chat-disclaimer{padding:0 12px 16px;text-align:center;font-size:8px!important}
 .demo-notifications{position:absolute;right:0;top:45px;z-index:5;display:block!important;width:275px;padding:20px;background:var(--crm-surface);border:1px solid var(--crm-border);box-shadow:0 10px 30px #0002;border-radius:12px}.demo-notifications p{padding-top:16px;font-size:11px}.demo-modal-backdrop{position:absolute;inset:0;z-index:10;background:#0005;display:grid;place-items:center;padding:24px}.demo-modal{position:relative;max-width:520px;width:100%;padding:30px;background:var(--crm-surface);border:1px solid var(--crm-border);border-radius:14px}.demo-modal>.demo-icon{position:absolute;right:14px;top:14px}.demo-modal h2{font-size:24px;margin:15px 0}.demo-modal h3{display:flex;align-items:center;gap:10px;margin:20px 0}.demo-modal p{color:var(--crm-muted)}
 @container (max-width:850px){.demo-sidebar{width:165px}.demo-main{padding:28px 24px}.demo-dashboard-header{align-items:flex-start;flex-wrap:wrap}.demo-dashboard-header>div:first-child{flex-wrap:wrap}.demo-chat{width:260px}}
-@container (max-width:700px){.demo-dashboard-header>div>span{display:none}.crm-demo .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.crm-demo .dashboard-charts,.crm-demo .dashboard-two-columns{grid-template-columns:1fr}.crm-demo .dashboard-goal-strip{grid-template-columns:1fr;gap:20px}.demo-detail-metrics strong{font-size:18px}}
-@container (max-width:550px){.demo-sidebar{width:56px;padding-inline:5px}.demo-sidebar nav span,.demo-sidebar nav small,.demo-sidebar footer>button span,.demo-user>div,.demo-user>svg,.demo-brand img{display:none}.demo-brand{padding-inline:6px}.demo-sidebar nav>button,.demo-sidebar footer>button{padding:0 13px}.demo-main{padding:22px 16px}.demo-chat{width:calc(100% - 56px)}.demo-shell:has(.demo-chat) .demo-main{display:none}.demo-calendar button{padding:4px;min-height:55px}.demo-calendar button small{font-size:7px}.demo-modal{padding:24px 18px}.demo-detail-metrics{flex-wrap:wrap}}
+@container (max-width:700px){.demo-shell{height:auto;min-height:540px}.demo-dashboard-header>div>span{display:none}.crm-demo .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:20px}.crm-demo .dashboard-kpi{padding:14px 12px;min-height:96px}.crm-demo .dashboard-kpi>strong{font-size:18px;margin:8px 0 4px}.crm-demo .dashboard-charts,.crm-demo .dashboard-two-columns{grid-template-columns:1fr}.crm-demo .dashboard-goal-strip{grid-template-columns:1fr;gap:16px;padding:18px}.crm-demo .dashboard-goal-strip>div:first-child{min-width:0}.crm-demo .dashboard-section-title{margin:20px 0 12px}.demo-detail-metrics strong{font-size:18px}.demo-kanban{overflow-x:auto!important;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;min-height:360px}.demo-kanban>section{flex:0 0 210px;scroll-snap-align:start}}
+@container (max-width:550px){.demo-sidebar{width:52px;padding-inline:4px}.demo-sidebar nav span,.demo-sidebar nav small,.demo-sidebar footer>button span,.demo-user>div,.demo-user>svg,.demo-brand img{display:none}.demo-brand{padding-inline:4px;height:48px}.demo-sidebar nav>button,.demo-sidebar footer>button{padding:0 11px;height:36px}.demo-main{padding:18px 14px 24px}.demo-dashboard-header{padding-bottom:14px;margin-bottom:16px}.demo-periods button{padding:3px 7px!important;font-size:10px}.demo-toolbar{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:18px}.demo-toolbar .demo-search{max-width:100%}.demo-chat{width:calc(100% - 52px)}.demo-shell:has(.demo-chat) .demo-main{display:none}.demo-calendar button{padding:4px;min-height:55px}.demo-calendar button small{font-size:7px}.demo-modal{padding:22px 16px}.demo-detail-metrics{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.crm-demo *{transition:none!important;animation:none!important}}
+
+
+/* Force mobile preview responsiveness */
+@media (max-width: 800px) {
+  .hero-visual {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    padding-inline: 0 !important;
+    margin-top: 10px !important;
+  }
+  .hero-product,
+  .product-screen {
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+  .crm-demo {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 14px !important;
+  }
+  .crm-demo .demo-shell {
+    height: auto !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .crm-demo .demo-sidebar {
+    display: none !important;
+  }
+  .crm-demo .demo-main {
+    padding: 16px 12px 20px !important;
+    width: 100% !important;
+  }
+  .crm-demo .dashboard-kpis {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+  .crm-demo .dashboard-kpi {
+    padding: 12px 10px !important;
+    min-height: 75px !important;
+    border-radius: 10px !important;
+  }
+  .crm-demo .dashboard-kpi > strong {
+    font-size: 15px !important;
+    margin: 6px 0 2px !important;
+    white-space: normal !important;
+  }
+  .crm-demo .dashboard-kpi > div {
+    font-size: 11px !important;
+  }
+  .crm-demo .dashboard-goal-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 14px !important;
+    gap: 12px !important;
+    border-radius: 10px !important;
+  }
+  .crm-demo .dashboard-goal-strip > div:first-child {
+    min-width: 0 !important;
+  }
+  .crm-demo .dashboard-goal-strip h2 {
+    font-size: 15px !important;
+  }
+  .crm-demo .dashboard-section-title {
+    margin: 16px 0 10px !important;
+  }
+  .crm-demo .dashboard-section-title h2 {
+    font-size: 15px !important;
+  }
+  .crm-demo .demo-dashboard-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 14px !important;
+  }
+  .crm-demo .demo-dashboard-header > div:first-child {
+    width: 100% !important;
+  }
+  .crm-demo .demo-dashboard-header > div:last-child {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  .crm-demo .demo-periods {
+    flex: 1 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-right: 8px !important;
+  }
+  .crm-demo .demo-periods button {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 4px 6px !important;
+    font-size: 10.5px !important;
+  }
+  .float-label {
+    display: none !important;
+  }
+}

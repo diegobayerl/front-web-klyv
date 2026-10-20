@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+
+
 :root {
   --ink: #122f3b;
   --muted: #5e737c;
@@ -1192,16 +1194,24 @@ h2 > span {
   }
 }
 
+.mobile-nav-cta {
+  display: none;
+}
+
 @media (max-width: 800px) {
   .wrap {
-    width: calc(100% - 40px);
+    width: calc(100% - 32px);
+    overflow-x: hidden;
+  }
+  body, html {
+    overflow-x: hidden;
   }
   .nav-wrap {
-    height: 76px;
+    height: 74px;
   }
   .brand img {
     width: auto;
-    height: 46px;
+    height: 44px;
   }
   .main-nav {
     display: none;
@@ -1209,24 +1219,48 @@ h2 > span {
   .main-nav.open {
     display: flex;
     position: absolute;
-    top: 76px;
+    top: 74px;
     left: 0;
     right: 0;
     flex-direction: column;
     align-items: stretch;
-    padding: 24px;
+    padding: 20px 24px 28px;
     background: var(--paper);
     border-bottom: 1px solid var(--line);
-    gap: 12px;
+    box-shadow: 0 20px 40px rgba(18, 47, 59, 0.08);
+    gap: 8px;
   }
   .main-nav.open a {
     font-size: 16px;
-    padding: 12px 18px;
+    padding: 12px 16px;
     border-radius: 12px;
+  }
+  .mobile-nav-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .login-link-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 46px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-weight: 700;
+    color: #073F67;
+    background: #fff;
   }
   .menu-button {
     display: grid;
     place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     background: none;
     border: 0;
     color: var(--ink);
@@ -1235,25 +1269,30 @@ h2 > span {
     display: none;
   }
   .nav-actions {
-    gap: 16px;
+    gap: 10px;
   }
   .hero {
     grid-template-columns: 1fr;
-    gap: 16px;
-    padding-block: 54px 45px;
+    gap: 20px;
+    min-height: auto;
+    padding-block: 36px 40px;
   }
   .hero h1 {
-    font-size: 54px;
+    font-size: clamp(38px, 10vw, 52px);
+    margin-bottom: 20px;
   }
   .hero-copy {
     transform: none;
   }
   .hero-copy > p {
-    max-width: 430px;
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 28px;
   }
   .hero-visual {
-    padding: 45px 0 60px;
-    margin-top: 8px;
+    padding: 36px 0 16px;
+    margin-top: 4px;
   }
   .hero-product {
     width: 100%;
@@ -1261,14 +1300,17 @@ h2 > span {
     border-radius: 12px;
   }
   .visual-caption {
-    top: 12px;
+    top: 6px;
     left: 0;
   }
   .float-label {
+    position: relative;
     left: auto;
-    right: 12px;
-    bottom: 34px;
-    padding: 12px 16px;
+    right: auto;
+    bottom: auto;
+    margin-top: 14px;
+    padding: 14px 18px;
+    width: 100%;
   }
   .orbit-one,
   .orbit-two {
@@ -1277,11 +1319,12 @@ h2 > span {
   .capabilities {
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 14px 20px;
-    padding-bottom: 32px;
+    gap: 10px 12px;
+    padding-block: 24px 30px;
   }
   .capabilities > span {
     width: 100%;
+    margin-bottom: 4px;
   }
   .capabilities > span br {
     display: none;
@@ -1291,15 +1334,18 @@ h2 > span {
   }
   .capability-item {
     font-size: 13px;
-    padding: 6px 10px;
+    padding: 8px 12px;
+    background: #f2f6f3;
+    border: 1px solid #e1eae4;
   }
   .section {
-    padding-block: 70px;
+    padding-block: 64px;
   }
   .section-heading {
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 18px;
+    margin-bottom: 32px;
   }
   .section-heading > p {
     max-width: 480px;
@@ -1308,23 +1354,26 @@ h2 > span {
     max-width: 100%;
     padding-left: 16px;
     margin-top: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
   .product-tabs button {
-    padding: 14px 10px;
+    padding: 14px 8px;
     gap: 7px;
-    font-size: 12px;
-  }
-  .product-tabs button > svg:last-child {
-    display: none;
+    font-size: 12.5px;
   }
   .product-panel-copy {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
+    padding: 8px 0 22px;
   }
   .product-panel-copy p {
     max-width: 100%;
+  }
+  .product-panel-copy .text-link {
+    padding: 8px 14px;
+    background: rgba(7, 63, 103, 0.07);
+    font-size: 14px;
   }
   .feature-grid {
     grid-template-columns: 1fr 1fr;
@@ -1346,36 +1395,44 @@ h2 > span {
     grid-column: span 2;
   }
   .method-section {
-    padding-block: 65px;
+    padding-block: 64px;
   }
   .method-inner {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 44px;
   }
   .method-section h2 {
-    font-size: 38px;
+    font-size: 34px;
   }
   .steps p {
     max-width: 100%;
   }
   .faq-section {
     grid-template-columns: 1fr;
-    gap: 35px;
+    gap: 32px;
+    padding-top: 64px;
+  }
+  .final-section {
+    padding-bottom: 56px;
   }
   .final-cta {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 36px 28px;
+    align-items: stretch;
+    padding: 32px 24px;
+    gap: 24px;
   }
   .final-cta h2 {
-    font-size: 32px;
+    font-size: clamp(26px, 7vw, 32px);
+  }
+  .final-cta .button {
+    width: 100%;
   }
   .final-cta > div > p {
-    text-align: left;
+    text-align: center;
   }
   .footer-top {
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 16px;
   }
   .footer-top > a:last-child {
     margin: 0;
@@ -1390,31 +1447,46 @@ h2 > span {
 }
 
 @media (max-width: 480px) {
+  .wrap {
+    width: calc(100% - 28px);
+  }
   .hero h1 {
-    font-size: 46px;
+    font-size: 40px;
   }
   .hero-copy > p {
     font-size: 15px;
   }
   .hero-actions {
-    gap: 16px;
-  }
-  .nav-actions .button {
-    font-size: 12px;
-    padding: 10px 14px;
-    gap: 7px;
-  }
-  .nav-actions {
+    flex-direction: column;
+    align-items: stretch;
     gap: 12px;
   }
+  .hero-actions .button {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 24px;
+  }
+  .hero-actions .button.secondary {
+    border: 1px solid #d2deda;
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .nav-actions .button {
+    font-size: 13px;
+    min-height: 40px;
+    padding: 8px 14px;
+    gap: 6px;
+  }
+  .nav-actions {
+    gap: 8px;
+  }
   .hero-visual {
-    margin-inline: -6px;
+    margin-inline: 0;
   }
   .float-label strong {
-    font-size: 11px;
+    font-size: 12px;
   }
   .float-label div > span {
-    font-size: 10px;
+    font-size: 11px;
   }
   .feature-grid {
     grid-template-columns: 1fr;
@@ -1444,22 +1516,36 @@ h2 > span {
   .plan h3 {
     margin-top: 20px;
   }
+  .product-tabs {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-bottom: 2px solid #cedbd2;
+    margin-bottom: 20px;
+  }
+  .product-tabs::-webkit-scrollbar {
+    display: none;
+  }
   .product-tabs button {
-    flex-direction: column;
+    flex: 1 0 auto;
+    white-space: nowrap;
+    padding: 12px 14px;
+    font-size: 13px;
     gap: 8px;
-    text-align: center;
   }
   .section-heading h2 {
     font-size: 28px;
   }
   .hero-note {
-    font-size: 11px;
+    font-size: 12px;
+    margin-top: 20px;
   }
   .capabilities {
-    gap: 12px 16px;
+    gap: 8px;
   }
   .footer-bottom nav {
-    gap: 16px;
+    gap: 14px;
   }
 }
 
@@ -1476,11 +1562,20 @@ h2 > span {
 }
 
 /* Keep both product previews at realistic app proportions */
-.hero-product {
-  width: 1120px !important;
-  max-width: none;
-  transform: rotate(-1deg);
-  transform-origin: left center;
+@media (min-width: 1001px) {
+  .hero-product {
+    width: 1120px !important;
+    max-width: none;
+    transform: rotate(-1deg);
+    transform-origin: left center;
+  }
+}
+@media (max-width: 1000px) {
+  .hero-product {
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
 }
 
 .hero-product .crm-demo {
@@ -1515,10 +1610,15 @@ h2 > span {
 .crm-demo .demo-shell,
 .crm-demo .demo-sidebar nav,
 .crm-demo .demo-table-wrap,
-.crm-demo .demo-kanban,
 .crm-demo .demo-chat-messages,
 .crm-demo .dashboard-page {
   overflow: hidden !important;
+}
+
+@media (min-width: 801px) {
+  .crm-demo .demo-kanban {
+    overflow: hidden !important;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -1526,12 +1626,14 @@ h2 > span {
     width: 100% !important;
     transform: none;
   }
-  .hero-product .demo-shell {
-    height: 620px;
+  .hero-product .demo-shell,
+  .product-screen .demo-shell {
+    height: auto;
+    min-height: 540px;
   }
 }
 
-/* Lia Showcase Section - Official CRM Lia Experience */
+/* Lia Showcase Section - Official Klyv Lia Experience */
 .lia-showcase-section {
   background: linear-gradient(180deg, #fcfdfc 0%, #f4f8f6 60%, #edf4f1 100%);
   border-top: 1px solid var(--line);
@@ -1689,6 +1791,50 @@ h2 > span {
   top: 110px;
 }
 
+.lia-scenario-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.lia-scenario-pills button {
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #556c70;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(7, 63, 103, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.lia-scenario-pills button:hover {
+  color: #073F67;
+  border-color: rgba(7, 63, 103, 0.25);
+  background: rgba(7, 63, 103, 0.04);
+  transform: translateY(-1px);
+}
+
+.lia-scenario-pills button:active {
+  transform: scale(0.97);
+}
+
+.lia-scenario-pills button.active {
+  background: #073F67;
+  color: #ffffff;
+  border-color: #073F67;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(7, 63, 103, 0.2);
+}
+
+.lia-scenario-pills button.active:hover {
+  background: #052A3D;
+  border-color: #052A3D;
+}
+
 .lia-drawer-frame {
   background: white;
   border: 1px solid #d0dbd5;
@@ -1707,7 +1853,7 @@ h2 > span {
   margin-top: 14px;
 }
 
-/* Estilos Oficiais do Chat da Lia (1:1 com o CRM) */
+/* Estilos Oficiais do Chat da Lia (1:1 com o Klyv) */
 .kia-chat {
   height: 100%;
   min-height: 0;
@@ -2018,9 +2164,191 @@ h2 > span {
   }
 }
 
+@media (max-width: 600px) {
+  .lia-showcase-section {
+    padding-block: 68px 72px;
+  }
+  .lia-drawer-frame {
+    height: 540px;
+  }
+  .lia-scenario-pills {
+    gap: 8px;
+  }
+  .lia-scenario-pills button {
+    font-size: 12px;
+    padding: 8px 13px;
+    border-radius: 10px;
+  }
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* Discreet legal access in the home footer. */
 .footer-bottom nav { align-items: center; flex-wrap: wrap; }
 .footer-bottom .footer-legal-button { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 7px; color: var(--ink); white-space: nowrap; transition: background .15s, border-color .15s; }
 .footer-bottom .footer-legal-button:hover { background: #eef3f1; border-color: #b6c8c2; }
+
+
+/* Mobile layout: constrain grid children instead of clipping the entire page. */
+@media (max-width: 800px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .hero-copy, .hero-visual, .product-panel, .product-panel-copy, .lia-text-column, .lia-interface-column { min-width: 0; max-width: 100%; }
+  .hero-visual::before { inset: 0; }
+  .nav-wrap { gap: 12px; }
+  .nav-actions { flex-shrink: 0; }
+  .hero-product, .hero-product:hover, .hero-product:focus-within { width: 100% !important; max-width: 100%; transform: none; }
+  .hero-actions { width: 100%; min-width: 0; }
+  .hero-actions .button { max-width: 100%; white-space: normal; text-align: center; }
+  .hero-note { line-height: 1.6; align-items: flex-start; }
+  .tiny-check { flex-shrink: 0; }
+  .hero-product .demo-sidebar { display: none; }
+  .hero-product .demo-main { padding: 20px 14px; }
+  .hero-product .demo-shell { min-height: 0; height: auto; }
+  .hero-product .demo-dashboard-header { gap: 12px; }
+  .hero-product .demo-dashboard-header > div { min-width: 0; flex-wrap: wrap; }
+  .hero-product .dashboard-kpi > strong { font-size: clamp(15px, 4.4vw, 21px); overflow-wrap: normal; }
+  .lia-grid-layout, .method-inner, .faq-section { grid-template-columns: minmax(0, 1fr); }
+  .lia-scenario-pills { flex-wrap: wrap; }
+  .product-tabs { min-width: 0; }
+  .comparison-table-wrapper { max-width: 100%; }
+  .footer-top > a:last-child { overflow-wrap: anywhere; }
+}
+@media (max-width: 480px) {
+  .wrap { width: calc(100% - 36px); }
+  .nav-wrap { height: 68px; gap: 8px; }
+  .brand img { height: 36px; }
+  .nav-actions { gap: 6px; }
+  .nav-actions .button { padding: 8px 12px; font-size: 12px; }
+  .menu-button { width: 36px; flex-shrink: 0; }
+  .main-nav.open { top: 68px; }
+  .hero { padding-block: 36px 28px; gap: 24px; }
+  .hero h1 { font-size: clamp(32px, 9.2vw, 42px); line-height: 1.12; margin-bottom: 20px; }
+  .hero-copy > p { font-size: 15px; line-height: 1.75; margin-bottom: 24px; }
+  .hero-actions { gap: 10px; }
+  .hero-actions .button { min-height: 48px; padding: 12px 16px; font-size: 14px; }
+  .hero-note { font-size: 11px; margin-top: 16px; }
+  .hero-visual { padding: 24px 0 0; margin: 0; }
+  .visual-caption { font-size: 10px; }
+  .feature-card { padding: 24px; }
+}
+
+
+/* Fix hero and product preview on mobile */
+@media (max-width: 800px) {
+  .hero-visual {
+    width: 100%;
+    overflow: hidden;
+    padding-inline: 0;
+  }
+  .hero-product,
+  .product-screen {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .crm-demo {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 14px;
+  }
+  .crm-demo .demo-shell {
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .crm-demo .demo-sidebar {
+    display: none !important;
+  }
+  .crm-demo .demo-main {
+    padding: 16px 14px 20px !important;
+  }
+  .crm-demo .dashboard-kpis {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+  .crm-demo .dashboard-kpi {
+    padding: 12px 10px !important;
+    min-height: 80px !important;
+    border-radius: 10px !important;
+  }
+  .crm-demo .dashboard-kpi > strong {
+    font-size: 16px !important;
+    margin: 6px 0 2px !important;
+    white-space: normal !important;
+  }
+  .crm-demo .dashboard-kpi > div {
+    font-size: 11px !important;
+  }
+  .crm-demo .dashboard-goal-strip {
+    padding: 14px !important;
+    gap: 12px !important;
+    border-radius: 10px !important;
+  }
+  .crm-demo .dashboard-goal-strip h2 {
+    font-size: 15px !important;
+  }
+  .crm-demo .dashboard-section-title {
+    margin: 16px 0 10px !important;
+  }
+  .crm-demo .dashboard-section-title h2 {
+    font-size: 15px !important;
+  }
+  .crm-demo .demo-dashboard-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 14px !important;
+  }
+  .crm-demo .demo-dashboard-header > div:last-child {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  .crm-demo .demo-periods {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+  .crm-demo .demo-periods button {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 4px 6px !important;
+    font-size: 10.5px !important;
+  }
+}
+
+
+/* Inlined Pricing Table CSS */
+.comparison-table-wrapper { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: #fff; scrollbar-width: thin; }
+.comparison-table-wrapper:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+.comparison-table { width: 100%; min-width: 830px; border-collapse: separate; border-spacing: 0; color: var(--ink); font-size: 13px; }
+.comparison-table th, .comparison-table td { padding: 15px 18px; border-bottom: 1px solid var(--line); }
+.comparison-table thead th { padding-top: 28px; padding-bottom: 25px; vertical-align: bottom; background: #fff; }
+.comparison-table .col-feature { width: 27%; text-align: left; color: var(--muted); font-weight: 500; }
+.comparison-table .col-plan { width: 18.25%; text-align: center; }
+.plan-th-head { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+.plan-th-title { font-size: 15px; font-weight: 650; }
+.plan-th-price { font-size: clamp(19px, 2vw, 27px); letter-spacing: -.045em; font-weight: 600; white-space: nowrap; margin-top: 7px; }
+.plan-th-billing { color: var(--muted); font-size: 12px; font-weight: 400; }
+.plan-compare-button { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 8px; min-height: 42px; width: 100%; border: 1px solid var(--line); border-radius: 7px; margin-top: 10px; font-size: 11px; font-weight: 600; color: var(--ink); transition: background .15s; }
+.plan-compare-button:hover { background: #f1f6f7; }
+.plan-compare-button.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
+.plan-compare-button.primary:hover { background: var(--teal); }
+.plan-compare-button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+.comparison-table .cell-feature-name { text-align: left; font-weight: 500; background: #fff; }
+.comparison-table .cell-plan-val { text-align: center; font-size: 12px; }
+.comparison-table tbody tr:last-child > * { border-bottom: 0; }
+.comparison-table tbody tr:hover > * { background: #f7fafb; }
+.comparison-status { display: inline-flex; align-items: center; justify-content: center; gap: 5px; white-space: nowrap; }
+.comparison-status.included svg { color: #14866d; }
+.comparison-status.basic { color: #835c20; }
+.comparison-status.excluded { color: #78858b; }
+.comparison-note { color: var(--muted); text-align: center; font-size: 12px; line-height: 1.7; margin: 20px 0 0; }
+.comparison-scroll-hint { display: none; color: var(--muted); font-size: 12px; }
+.comparison-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 850px) {
+  .comparison-scroll-hint { display: block; margin: 0 0 12px; }
+  .comparison-table { min-width: 820px; }
+  .comparison-table th, .comparison-table td { padding: 13px 12px; }
+  .comparison-table .col-feature, .comparison-table .cell-feature-name { position: sticky; left: 0; z-index: 1; background: #fff; width: 150px; min-width: 150px; max-width: 150px; box-shadow: 1px 0 0 var(--line); }
+  .plan-th-price { font-size: 22px; }
+}

@@ -29,13 +29,17 @@ const colors = ['#3b82f6', '#f59e0b', '#10b981', '#f43f5e'];
 /** Offline product demonstration. Only maintains code for Dashboard, Propostas, and Pesquisas de Satisfação. */
 export function InteractiveDashboardPreview({
   initialPage = 'dashboard',
+  currentPage,
+  onPageChange,
   lockToDashboard = false,
 }: {
   initialPage?: Page;
+  currentPage?: Page;
+  onPageChange?: (page: Page) => void;
   lockToDashboard?: boolean;
 }) {
   const [theme, setTheme] = useState('light');
-  const [page, setPage] = useState<Page>(lockToDashboard ? 'dashboard' : initialPage);
+  const [internalPage, setInternalPage] = useState<Page>(lockToDashboard ? 'dashboard' : initialPage);
   const [collapsed, setCollapsed] = useState(false);
   const [lia, setLia] = useState(false);
   const [period, setPeriod] = useState<PeriodOption>('ytd');
@@ -47,11 +51,15 @@ export function InteractiveDashboardPreview({
 
   const data = dashboardData(period);
   const k = data.kpis;
-  const activePage: Page = lockToDashboard ? 'dashboard' : page;
+  const activePage: Page = lockToDashboard ? 'dashboard' : (currentPage ?? internalPage);
 
   const changePage = (next: Page) => {
     if (lockToDashboard) return;
-    setPage(next);
+    if (onPageChange) {
+      onPageChange(next);
+    } else {
+      setInternalPage(next);
+    }
     setSearch('');
     setDeal(null);
   };
@@ -194,7 +202,7 @@ export function InteractiveDashboardPreview({
           </section>
         )}
 
-        <div className="demo-main" aria-label="Conteúdo do CRM demonstrativo">
+        <div className="demo-main" aria-label="Conteúdo demonstrativo do Klyv">
           {activePage === 'dashboard' ? (
             <>
               <header className="demo-dashboard-header">
@@ -330,7 +338,7 @@ export function InteractiveDashboardPreview({
             </div>
             <h3>Versão #1 <Check size={14} /></h3>
             <p>{deals[deal].product} · Condições comerciais demonstrativas.</p>
-            <p className="demo-count">Prévia local. Nenhuma alteração será enviada ao CRM.</p>
+            <p className="demo-count">Prévia local. Nenhuma alteração será enviada ao Klyv.</p>
           </section>
         </div>
       )}
