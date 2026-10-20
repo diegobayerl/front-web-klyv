@@ -16,8 +16,8 @@ const previews = [
 ];
 const faqs = [
   ["O que consigo organizar no Klyv?", "Clientes, contatos, propostas e suas versões, contratos, execução, follow-ups, ações, metas, agenda e anotações. As pesquisas de satisfação completam a visão do relacionamento após a venda."],
-  ["Posso começar gratuitamente?", "Sim. Novas contas começam com um período de Trial de 14 dias com os recursos indicados na coluna Trial do comparativo."],
-  ["A partir de que plano posso ter acesso à Lia?", "Durante o seu teste gratuito de 14 dias (Trial), você pode experimentar a Lia, com as funcionalidades indicadas no comparativo de planos. Após o período de avaliação, o acesso à Lia estará disponível a partir do plano Pro (e Enterprise), voltado para operações que buscam inteligência e automação de rotina."],
+  ["Posso começar gratuitamente?", "Sim. Novas contas no plano Free contam com 14 dias de avaliação gratuita para você conhecer o Klyv sem precisar de cartão de crédito."],
+  ["A partir de que plano posso ter acesso à Lia?", "O acesso à Lia está disponível a partir do plano Pro (e Enterprise), voltado para operações que buscam inteligência comercial e automação de rotinas via chat e WhatsApp."],
   ["Quais funcionalidades a Lia pode fazer?", "A Lia executa tarefas comerciais sob o seu comando: agenda reuniões na sua pauta, cria lembretes e ações de follow-up (via WhatsApp, e-mail ou telefone), consulta metas e receita em tempo real e atualiza negociações — operando tanto pelo chat do Klyv quanto diretamente pelo WhatsApp."],
   ["Existe processo de pós-venda no Klyv?", "Sim. No Klyv, a venda é só o começo: você conta com um módulo de execução para acompanhar entregas, centraliza o histórico do cliente e envia pesquisas de satisfação dinâmicas por e-mail ou link para garantir a melhoria contínua."]
 ];
@@ -32,7 +32,7 @@ const capabilities = [
 
 
 const plans = [
-  { name: 'Free', value: 'R$ 0', billing: 'sempre gratuito', cta: 'Começar grátis', href: `${signup}?plan=free` },
+  { name: 'Free', value: 'R$ 0', billing: '14 dias de teste grátis', cta: 'Testar 14 dias grátis', href: `${signup}?plan=free` },
   { name: 'Basic', value: 'R$ 67', billing: 'por mês', cta: 'Escolher Basic', href: `${signup}?plan=basic` },
   { name: 'Pro', value: 'R$ 157', billing: 'por mês', cta: 'Escolher Pro', href: `${signup}?plan=pro` },
   { name: 'Enterprise', value: 'Personalizado', billing: 'sob demanda', cta: 'Conhecer Enterprise', href: `${signup}?plan=enterprise` },
@@ -111,12 +111,12 @@ const structuredData = {
       ],
       offers: {
         "@type": "Offer",
-        name: "Trial Gratuito de 14 dias",
+        name: "Plano Free - 14 dias de avaliação gratuita",
         price: "0.00",
         priceCurrency: "BRL",
         availability: "https://schema.org/InStock",
-        url: signup,
-        description: "Teste gratuito por 14 dias com acesso completo ao Klyv e à Lia, sem cartão de crédito.",
+        url: `${signup}?plan=free`,
+        description: "Avaliação gratuita por 14 dias para você conhecer o Klyv sem cartão de crédito.",
       },
     },
     {
@@ -168,7 +168,7 @@ export default function Home() {
           {[['#produto', 'O produto'], ['#recursos', 'Possibilidades'], ['#lia', 'IA'], ['#planos', 'Planos'], ['#duvidas', 'Dúvidas']].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
           <div className="mobile-nav-cta">
             <a className="login-link-mobile" href={crm} onClick={() => setMobileMenu(false)}>Entrar no Klyv <ArrowUpRight size={15} /></a>
-            <a className="button small" href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}>Começar grátis</a>
+            <a className="button small" href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}>Começar 14 dias grátis</a>
           </div>
         </nav>
         <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="button small" href={`${signup}?plan=free`}>Criar conta</a><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
@@ -176,7 +176,7 @@ export default function Home() {
     </header>
     <main id="conteudo">
       <section className="hero wrap">
-        <div className="hero-copy"><h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1><p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega em um só lugar.</p><div className="hero-actions"><a className="button" href={`${signup}?plan=free`}>Começar agora</a><a className="button secondary" href="#produto">Conheça a Klyv</a></div><span className="hero-note"><span className="tiny-check"><Check size={11} /></span> Comece no plano gratuito · Sem cartão de crédito</span></div>
+        <div className="hero-copy"><h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1><p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega em um só lugar.</p><div className="hero-actions"><a className="button" href={`${signup}?plan=free`}>Começar agora</a><a className="button secondary" href="#produto">Conheça a Klyv</a></div><span className="hero-note"><span className="tiny-check"><Check size={11} /></span> Avaliação gratuita por 14 dias · Sem cartão de crédito</span></div>
         <div className="hero-visual">
           <div className="visual-orbit orbit-one" /><div className="visual-orbit orbit-two" />
           <div className="hero-product">
@@ -305,7 +305,7 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-        <p className="comparison-note">Comece no plano gratuito ou escolha o plano ideal para a sua operação. Você pode alterar seu plano a qualquer momento.</p>
+        <p className="comparison-note">Comece pela avaliação gratuita de 14 dias no plano Free. Compare acima os recursos disponíveis em cada plano.</p>
       </section>
       <section className="section faq-section wrap" id="duvidas"><div><span className="eyebrow">Antes de começar</span><h2>Vamos deixar<br /><span>tudo claro.</span></h2><p>Respostas diretas para os próximos passos.</p></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={17} /></summary><p>{answer}</p></details>)}</div></section>
       <section className="final-section wrap">
@@ -315,8 +315,8 @@ export default function Home() {
             <h2>Construa relações mais próximas.<br /><span>Feche negócios com clareza.</span></h2>
           </div>
           <div>
-            <a className="button" href={`${signup}?plan=free`}>Começar agora <ArrowRight size={16} /></a>
-            <p>Venha para a Klyv. Sem cartão de crédito no plano gratuito.</p>
+            <a className="button" href={`${signup}?plan=free`}>Começar 14 dias grátis <ArrowRight size={16} /></a>
+            <p>Venha para a Klyv. Avaliação gratuita por 14 dias · Sem cartão de crédito</p>
           </div>
         </div>
       </section>
