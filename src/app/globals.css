@@ -2352,3 +2352,29 @@ h2 > span {
   .comparison-table .col-feature, .comparison-table .cell-feature-name { position: sticky; left: 0; z-index: 1; background: #fff; width: 150px; min-width: 150px; max-width: 150px; box-shadow: 1px 0 0 var(--line); }
   .plan-th-price { font-size: 22px; }
 }
+
+.mobile-plan-comparison { display: none; }
+@media (max-width: 700px) {
+  .pricing-section .comparison-table-wrapper { display: none; }
+  .mobile-plan-comparison { display: block; min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px 16px 8px; }
+  .mobile-plan-navigation { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 8px; }
+  .mobile-plan-navigation > button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: #fff; cursor: pointer; }
+  .mobile-plan-navigation > button:hover { background: #f1f6f7; }
+  .mobile-plan-navigation > div { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .mobile-plan-navigation strong { font-size: 20px; font-weight: 650; }
+  .mobile-plan-navigation > div > span { font-size: 11px; color: var(--muted); }
+  .mobile-plan-price { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 22px 0 12px; }
+  .mobile-plan-price strong { font-size: 30px; letter-spacing: -.04em; font-weight: 600; }
+  .mobile-plan-price > span { font-size: 12px; color: var(--muted); }
+  .mobile-plan-comparison > .plan-compare-button { min-height: 46px; font-size: 13px; margin-bottom: 20px; }
+  .mobile-plan-features { margin: 0; }
+  .mobile-plan-features > div { display: grid; grid-template-columns: minmax(0, 1fr) 95px; gap: 10px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); font-size: 12px; line-height: 1.5; }
+  .mobile-plan-features dt { font-weight: 500; }
+  .mobile-plan-features dd { margin: 0; text-align: right; font-size: 11px; }
+  .mobile-plan-features .comparison-status { gap: 3px; }
+  .mobile-plan-dots { display: flex; justify-content: center; padding-top: 5px; }
+  .mobile-plan-dots button { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: transparent; cursor: pointer; }
+  .mobile-plan-dots span { width: 7px; height: 7px; border-radius: 50%; background: #cedbdc; }
+  .mobile-plan-dots button[aria-pressed="true"] span { background: var(--teal); width: 18px; border-radius: 4px; }
+  .mobile-plan-comparison button:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+}

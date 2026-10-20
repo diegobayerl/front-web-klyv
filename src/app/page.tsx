@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ScrollEffects } from "../components/ScrollEffects";
 import { useState } from "react";
-import { ArrowRight, ArrowUpRight, BarChart3, Check, ChevronDown, FileText, Layers3, Menu, MessageSquare, Minus, Sparkles, Target, Users, Workflow, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, BarChart3, Check, ChevronDown, FileText, Layers3, Menu, MessageSquare, Minus, Sparkles, Target, Users, Workflow, X } from "lucide-react";
 import { InteractiveDashboardPreview } from "../components/InteractiveDashboardPreview";
 import { LiaShowcase } from "../components/LiaShowcase";
 
@@ -137,6 +137,9 @@ const structuredData = {
 export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [activePreview, setActivePreview] = useState(0);
+  const [mobilePlan, setMobilePlan] = useState(0);
+  const planKeys = ['trial', 'basic', 'pro', 'enterprise'] as const;
+  const selectedPlan = plans[mobilePlan];
   const preview = previews[activePreview];
 
   const handleCapabilityClick = (action: string) => {
@@ -250,8 +253,27 @@ export default function Home() {
           <h2>Um plano para cada momento.</h2>
         </div>
 
-        <p className="comparison-scroll-hint" id="comparison-help">No celular, deslize para comparar os quatro planos.</p>
-        <div className="comparison-table-wrapper" role="region" aria-label="Comparação de planos Klyv" aria-describedby="comparison-help" tabIndex={0}>
+        <div className="mobile-plan-comparison">
+          <div className="mobile-plan-navigation">
+            <button type="button" aria-label="Plano anterior" onClick={() => setMobilePlan(index => (index + plans.length - 1) % plans.length)}><ChevronLeft size={21} aria-hidden="true" /></button>
+            <div aria-live="polite" aria-atomic="true"><strong>{selectedPlan.name}</strong><span>{mobilePlan + 1} de {plans.length} planos</span></div>
+            <button type="button" aria-label="Próximo plano" onClick={() => setMobilePlan(index => (index + 1) % plans.length)}><ChevronRight size={21} aria-hidden="true" /></button>
+          </div>
+          <div className="mobile-plan-price"><strong>{selectedPlan.value}</strong><span>{selectedPlan.billing}</span></div>
+          <a className={`plan-compare-button ${selectedPlan.name === 'Pro' ? 'primary' : ''}`} href={selectedPlan.href}>{selectedPlan.cta}<ArrowUpRight size={14} aria-hidden="true" /></a>
+          <dl className="mobile-plan-features" aria-label={`Funcionalidades do plano ${selectedPlan.name}`}>
+            {comparisonFeatures.map(row => {
+              const value = row[planKeys[mobilePlan]];
+              return <div key={row.name}><dt>{row.name}</dt><dd>
+                {value === 'full' ? <span className="comparison-status included"><Check size={14} aria-hidden="true" />Completo</span>
+                  : value === 'basic' ? <span className="comparison-status basic">Básico</span>
+                  : value === 'none' ? <span className="comparison-status excluded"><Minus size={14} aria-hidden="true" />Não incluso</span> : value}
+              </dd></div>;
+            })}
+          </dl>
+          <div className="mobile-plan-dots" aria-label="Escolher plano">{plans.map((plan, index) => <button type="button" key={plan.name} aria-label={`Ver plano ${plan.name}`} aria-pressed={index === mobilePlan} onClick={() => setMobilePlan(index)}><span /></button>)}</div>
+        </div>
+        <div className="comparison-table-wrapper" role="region" aria-label="Comparação de planos Klyv" tabIndex={0}>
           <table className="comparison-table">
             <caption className="comparison-sr-only">Preços, usuários e funcionalidades de cada plano Klyv</caption>
             <thead>
