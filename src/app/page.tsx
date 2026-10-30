@@ -192,7 +192,7 @@ export default function Home() {
           <SeamlessLoopVideo
             src="/blue-fox-mascot.mp4?v=8"
             className="hero-fullvideo-player"
-            objectPosition="center 12%"
+            objectPosition="68% 15%"
           />
           {/* Suave vinheta escura apenas na base do hoodie para máxima legibilidade sem nenhum card */}
           <div className="hero-bottom-scrim" />
@@ -202,7 +202,7 @@ export default function Home() {
         <div className="hero-bottom-container wrap">
           <div className="hero-bottom-copy">
             <h1>
-              Seu comercial mais próximo. <span>Mais à frente.</span>
+              Seu comercial mais próximo.<br /><span>Mais à frente.</span>
             </h1>
 
             <p>
