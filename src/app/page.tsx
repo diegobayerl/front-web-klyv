@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, BarChart3, Check, ChevronDown, FileText, Layers3, Menu, MessageSquare, Minus, Sparkles, Target, Users, Workflow, X } from "lucide-react";
 import { InteractiveDashboardPreview } from "../components/InteractiveDashboardPreview";
 import { LiaShowcase } from "../components/LiaShowcase";
+import { SeamlessLoopVideo } from "../components/SeamlessLoopVideo";
 
 const crm = (process.env.NEXT_PUBLIC_CRM_URL || "https://app.klyv.com.br").replace(/\/$/, "");
 const signup = `${crm}/company/create`;
@@ -195,12 +196,8 @@ export default function Home() {
         <div className="hero-mascot-hero">
           <div className="mascot-stage">
             <div className="mascot-video-frame">
-              <video
+              <SeamlessLoopVideo
                 src="/blue-fox-mascot.mp4?v=3"
-                autoPlay
-                loop
-                muted
-                playsInline
                 className="hero-mascot-main-video"
               />
             </div>
