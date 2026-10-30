@@ -501,6 +501,11 @@ summary:focus-visible,
   align-items: center;
 }
 
+.hero-mascot-spacer {
+  pointer-events: none;
+  min-height: 480px;
+}
+
 .hero-mascot-hero {
   position: relative;
   display: flex;

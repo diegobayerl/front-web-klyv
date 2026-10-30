@@ -215,25 +215,7 @@ export default function Home() {
               Avaliação gratuita por 14 dias · Sem cartão de crédito
             </span>
           </div>
-          <div className="hero-mascot-hero">
-            <div className="mascot-stage-bubbles">
-              {/* Balões de inteligência comercial da Lia */}
-              <div className="mascot-speech-bubble bubble-top">
-                <span className="bubble-icon">📅</span>
-                <div>
-                  <strong>Reunião agendada</strong>
-                  <span>Aurora Tecnologia · 10h</span>
-                </div>
-              </div>
-              <div className="mascot-speech-bubble bubble-bottom">
-                <span className="bubble-icon">🎯</span>
-                <div>
-                  <strong>Meta de Vendas</strong>
-                  <span>R$ 420k realizados (70%)</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div className="hero-mascot-spacer" aria-hidden="true" />
         </section>
       </div>
       <div className="capabilities wrap" aria-label="Áreas do Klyv">
