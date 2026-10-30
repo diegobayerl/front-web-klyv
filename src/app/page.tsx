@@ -182,7 +182,35 @@ export default function Home() {
           <div className="hero-product">
             <InteractiveDashboardPreview lockToDashboard />
           </div>
-          <div className="float-label"><span className="float-icon"><Layers3 size={18} /></span><div><strong>Menos ferramentas soltas.</strong><span>Mais contexto em cada decisão.</span></div></div>
+          <a href="#lia" className="hero-lia-card" aria-label="Conheça a Lia, inteligência artificial integrada ao Klyv">
+            <div className="lia-mascot-wrapper">
+              <video
+                src="/blue-fox-mascot.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="lia-mascot-video"
+                aria-hidden="true"
+              />
+              <span className="lia-status-dot" title="Lia online" />
+            </div>
+            <div className="lia-card-content">
+              <div className="lia-card-header">
+                <span className="lia-card-badge">
+                  <Sparkles size={12} strokeWidth={2.4} />
+                  Lia · IA Operacional
+                </span>
+                <span className="lia-card-tag">WhatsApp & CRM</span>
+              </div>
+              <p className="lia-card-speech">
+                “Agendei sua reunião com a Aurora e preparei o follow-up.”
+              </p>
+            </div>
+            <div className="lia-card-arrow" aria-hidden="true">
+              <ArrowUpRight size={15} />
+            </div>
+          </a>
           <div className="visual-caption"><span className="caption-line" /> Uma visão clara do que move seu negócio.</div>
         </div>
       </section>
