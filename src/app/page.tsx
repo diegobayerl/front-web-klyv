@@ -196,7 +196,7 @@ export default function Home() {
           <div className="mascot-stage">
             <div className="mascot-video-frame">
               <video
-                src="/blue-fox-mascot.mp4"
+                src="/blue-fox-mascot.mp4?v=3"
                 autoPlay
                 loop
                 muted
