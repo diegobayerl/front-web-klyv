@@ -3247,9 +3247,11 @@ h2 > span {
 }
 
 .hero-bottom-copy h1 span {
-  color: #38bdf8;
+  color: #09b5f0;
   display: inline-block;
-  text-shadow: 0 0 24px rgba(56, 189, 248, 0.5);
+  -webkit-text-stroke: 3.5px #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 3px 10px rgba(7, 30, 48, 0.45));
 }
 
 .hero-bottom-copy p {
