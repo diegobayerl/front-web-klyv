@@ -21,32 +21,20 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(7, 63, 103, 0.22) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Minimalist floating pill scrollbar */
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Ocultar barra de rolagem mantendo a funcionalidade de scroll 100% ativa */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(7, 63, 103, 0.22);
-  border-radius: 9999px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  transition: background 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(7, 63, 103, 0.42);
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 ::-webkit-scrollbar-corner {
@@ -112,26 +100,29 @@ summary:focus-visible,
   top: 12px;
 }
 
-/* Site Header Dinâmico: Transparente no topo sobre o vídeo, branco glass ao rolar */
+/* Site Header Dinâmico: 100% flutuante sobre o vídeo no topo, branco glass rico ao rolar */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 40;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 50;
   transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
 }
 
-/* Quando o scroll está no topo: meio transparente sobre o vídeo com leve blur */
+/* No topo: completamente transparente, sem faixa branca, com o vídeo passando literalmente por baixo */
 .site-header.at-top {
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: none;
 }
 
-/* Depois que rola a tela: branco com efeito de vidro glass rico, não transparente */
+/* Depois de rolar a tela: branco com efeito de vidro glass rico */
 .site-header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(227, 233, 225, 0.85);
@@ -414,14 +405,11 @@ summary:focus-visible,
   z-index: 20;
 }
 
-/* Hero Immersive Section: vídeo pega todo o rosto da página e fica por baixo do header */
+/* Hero Immersive Section: vídeo pega todo o rosto da página e fica literalmente por baixo do header */
 .hero-immersive-section {
   position: relative;
   width: 100%;
-  min-height: 840px;
-  height: 100vh;
-  max-height: 960px;
-  margin-top: -90px;
+  min-height: 100vh;
   padding-top: 90px;
   display: flex;
   align-items: center;
@@ -449,12 +437,14 @@ summary:focus-visible,
 /* Scrim Gradients: Iluminação e contraste editorial perfeito para o texto */
 .hero-scrim-left {
   position: absolute;
-  inset: 0;
-  width: 62%;
+  top: 90px;
+  left: 0;
+  bottom: 0;
+  width: 55%;
   background: linear-gradient(90deg, 
-    rgba(251, 252, 250, 0.98) 0%, 
-    rgba(251, 252, 250, 0.94) 42%, 
-    rgba(251, 252, 250, 0.65) 72%, 
+    rgba(251, 252, 250, 0.95) 0%, 
+    rgba(251, 252, 250, 0.88) 35%, 
+    rgba(251, 252, 250, 0.50) 65%, 
     rgba(251, 252, 250, 0.0) 100%
   );
   z-index: 2;
