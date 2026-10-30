@@ -23,8 +23,8 @@ export function SeamlessLoopVideo({
     const v2 = video2Ref.current;
     if (!v1 || !v2) return;
 
-    // Crossfade 450ms before video reaches its end
-    const crossfadeThreshold = 0.45;
+    // Crossfade 200ms before video reaches its end
+    const crossfadeThreshold = 0.2;
 
     const handleV1TimeUpdate = () => {
       if (v1.duration && v1.currentTime >= v1.duration - crossfadeThreshold) {
@@ -122,7 +122,7 @@ export function SeamlessLoopVideo({
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          transition: "opacity 0.4s ease-in-out",
+          transition: "opacity 0.2s ease-in-out",
           opacity: activeVideo === 1 ? 1 : 0,
           zIndex: activeVideo === 1 ? 2 : 1,
           pointerEvents: "none",
@@ -144,7 +144,7 @@ export function SeamlessLoopVideo({
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          transition: "opacity 0.4s ease-in-out",
+          transition: "opacity 0.2s ease-in-out",
           opacity: activeVideo === 2 ? 1 : 0,
           zIndex: activeVideo === 2 ? 2 : 1,
           pointerEvents: "none",

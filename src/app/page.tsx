@@ -197,7 +197,7 @@ export default function Home() {
           <div className="mascot-stage">
             <div className="mascot-video-frame">
               <SeamlessLoopVideo
-                src="/blue-fox-mascot.mp4?v=3"
+                src="/blue-fox-mascot.mp4?v=4"
                 className="hero-mascot-main-video"
               />
             </div>
