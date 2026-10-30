@@ -112,15 +112,15 @@ summary:focus-visible,
   top: 12px;
 }
 
-/* Site Header */
+/* Site Header - Translúcido e flutuante sobre o vídeo */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(251, 252, 250, 0.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(227, 233, 225, 0.5);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
@@ -463,18 +463,7 @@ summary:focus-visible,
 }
 
 .hero-scrim-top {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 140px;
-  background: linear-gradient(180deg, 
-    rgba(251, 252, 250, 0.65) 0%, 
-    rgba(251, 252, 250, 0.2) 60%, 
-    transparent 100%
-  );
-  z-index: 2;
-  pointer-events: none;
+  display: none;
 }
 
 .hero-immersive-section .hero {

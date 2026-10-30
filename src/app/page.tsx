@@ -180,13 +180,12 @@ export default function Home() {
         {/* Camada do Vídeo em tela cheia por baixo do header */}
         <div className="hero-bg-video-layer" aria-hidden="true">
           <SeamlessLoopVideo
-            src="/blue-fox-mascot.mp4?v=5"
+            src="/blue-fox-mascot.mp4?v=6"
             className="hero-fullscreen-video"
-            objectPosition="68% center"
+            objectPosition="68% 5%"
           />
           <div className="hero-scrim-left" />
           <div className="hero-scrim-bottom" />
-          <div className="hero-scrim-top" />
         </div>
 
         <section className="hero wrap">
