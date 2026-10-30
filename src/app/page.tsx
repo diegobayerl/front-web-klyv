@@ -176,42 +176,50 @@ export default function Home() {
     </header>
     <main id="conteudo">
       <section className="hero wrap">
-        <div className="hero-copy"><h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1><p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega em um só lugar.</p><div className="hero-actions"><a className="button" href={`${signup}?plan=free`}>Começar agora</a><a className="button secondary" href="#produto">Conheça a Klyv</a></div><span className="hero-note"><span className="tiny-check"><Check size={11} /></span> Avaliação gratuita por 14 dias · Sem cartão de crédito</span></div>
-        <div className="hero-visual">
-          <div className="visual-orbit orbit-one" /><div className="visual-orbit orbit-two" />
-          <div className="hero-product">
-            <InteractiveDashboardPreview lockToDashboard />
+        <div className="hero-copy">
+          <div className="hero-mascot-pill">
+            <span className="mascot-sparkle"><Sparkles size={14} /></span>
+            <span>Conheça a <strong>Lia</strong>, sua IA comercial no Klyv</span>
           </div>
-          <a href="#lia" className="hero-lia-card" aria-label="Conheça a Lia, inteligência artificial integrada ao Klyv">
-            <div className="lia-mascot-wrapper">
+          <h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1>
+          <p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega com a inteligência da Lia ao seu lado.</p>
+          <div className="hero-actions">
+            <a className="button" href={`${signup}?plan=free`}>Começar 14 dias grátis</a>
+            <a className="button secondary" href="#produto">Conheça o produto</a>
+          </div>
+          <span className="hero-note">
+            <span className="tiny-check"><Check size={11} /></span>
+            Avaliação gratuita por 14 dias · Sem cartão de crédito
+          </span>
+        </div>
+        <div className="hero-mascot-hero">
+          <div className="mascot-stage">
+            <div className="mascot-video-frame">
               <video
                 src="/blue-fox-mascot.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="lia-mascot-video"
-                aria-hidden="true"
+                className="hero-mascot-main-video"
               />
-              <span className="lia-status-dot" title="Lia online" />
             </div>
-            <div className="lia-card-content">
-              <div className="lia-card-header">
-                <span className="lia-card-badge">
-                  <Sparkles size={12} strokeWidth={2.4} />
-                  Lia · IA Operacional
-                </span>
-                <span className="lia-card-tag">WhatsApp & CRM</span>
+            {/* Balões de inteligência comercial da Lia */}
+            <div className="mascot-speech-bubble bubble-top">
+              <span className="bubble-icon">📅</span>
+              <div>
+                <strong>Reunião agendada</strong>
+                <span>Aurora Tecnologia · 10h</span>
               </div>
-              <p className="lia-card-speech">
-                “Agendei sua reunião com a Aurora e preparei o follow-up.”
-              </p>
             </div>
-            <div className="lia-card-arrow" aria-hidden="true">
-              <ArrowUpRight size={15} />
+            <div className="mascot-speech-bubble bubble-bottom">
+              <span className="bubble-icon">🎯</span>
+              <div>
+                <strong>Meta de Vendas</strong>
+                <span>R$ 420k realizados (70%)</span>
+              </div>
             </div>
-          </a>
-          <div className="visual-caption"><span className="caption-line" /> Uma visão clara do que move seu negócio.</div>
+          </div>
         </div>
       </section>
       <div className="capabilities wrap" aria-label="Áreas do Klyv">
