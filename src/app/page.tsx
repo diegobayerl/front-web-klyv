@@ -186,34 +186,47 @@ export default function Home() {
       </div>
     </header>
     <main id="conteudo">
-      <div className="hero-immersive-section">
-        {/* Camada do Vídeo em tela cheia por baixo do header */}
-        <div className="hero-bg-video-layer" aria-hidden="true">
+      <section className="hero-fullvideo-section">
+        {/* Vídeo Full-Bleed em Loop Contínuo Sem Nenhum Filtro Branco */}
+        <div className="hero-fullvideo-backdrop" aria-hidden="true">
           <SeamlessLoopVideo
-            src="/blue-fox-mascot.mp4?v=7"
-            className="hero-fullscreen-video"
-            objectPosition="68% 0%"
+            src="/blue-fox-mascot.mp4?v=8"
+            className="hero-fullvideo-player"
+            objectPosition="72% center"
           />
-          <div className="hero-scrim-left" />
-          <div className="hero-scrim-bottom" />
         </div>
 
-        <section className="hero wrap">
-          <div className="hero-copy">
-            <h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1>
-            <p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega com a inteligência da Lia ao seu lado.</p>
-            <div className="hero-actions">
+        {/* Cockpit Executivo Estruturado sobre o Vídeo (Sem cobrir a Lia) */}
+        <div className="hero-fullvideo-content wrap">
+          <div className="hero-cockpit-card">
+            <div className="hero-card-tag">
+              <span className="hero-card-tag-dot" />
+              <Sparkles size={13} className="hero-card-tag-icon" />
+              <span>Inteligência Comercial com a <strong>Lia</strong></span>
+            </div>
+
+            <h1>
+              Seu comercial.<br />
+              Mais próximo.<br />
+              <span className="hero-accent">Mais à frente.</span>
+            </h1>
+
+            <p>
+              Do primeiro contato à próxima conquista. Organize clientes, conduza propostas em kanban e acompanhe cada entrega com a inteligência da Lia operando no Klyv e no WhatsApp.
+            </p>
+
+            <div className="hero-card-actions">
               <a className="button" href={`${signup}?plan=free`}>Começar 14 dias grátis</a>
               <a className="button secondary" href="#produto">Conheça o produto</a>
             </div>
-            <span className="hero-note">
-              <span className="tiny-check"><Check size={11} /></span>
-              Avaliação gratuita por 14 dias · Sem cartão de crédito
-            </span>
+
+            <div className="hero-card-guarantee">
+              <span className="guarantee-check"><Check size={12} strokeWidth={2.5} /></span>
+              <span>Avaliação gratuita por 14 dias · Sem cartão de crédito</span>
+            </div>
           </div>
-          <div className="hero-mascot-spacer" aria-hidden="true" />
-        </section>
-      </div>
+        </div>
+      </section>
       <div className="capabilities wrap" aria-label="Áreas do Klyv">
         <span>Uma jornada.<br /><strong>Tudo conectado.</strong></span>
         {capabilities.map((item) => {
