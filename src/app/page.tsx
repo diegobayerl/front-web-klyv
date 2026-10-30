@@ -202,7 +202,9 @@ export default function Home() {
         <div className="hero-bottom-container wrap">
           <div className="hero-bottom-copy">
             <h1>
-              Seu comercial mais próximo.<br /><span>Mais à frente.</span>
+              Seu comercial.<br />
+              Mais próximo.<br />
+              <span>Mais à frente.</span>
             </h1>
 
             <p>
