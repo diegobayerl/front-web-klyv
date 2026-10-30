@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ScrollEffects } from "../components/ScrollEffects";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, BarChart3, Check, ChevronDown, FileText, Layers3, Menu, MessageSquare, Minus, Sparkles, Target, Users, Workflow, X } from "lucide-react";
 import { InteractiveDashboardPreview } from "../components/InteractiveDashboardPreview";
 import { LiaShowcase } from "../components/LiaShowcase";
@@ -139,6 +139,16 @@ export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [activePreview, setActivePreview] = useState(0);
   const [mobilePlan, setMobilePlan] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const planKeys = ['free', 'basic', 'pro', 'enterprise'] as const;
   const selectedPlan = plans[mobilePlan];
   const preview = previews[activePreview];
@@ -162,7 +172,7 @@ export default function Home() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
     />
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <header className="site-header">
+    <header className={`site-header ${isScrolled ? "scrolled" : "at-top"}`}>
       <div className="nav-wrap wrap">
         <a className="brand" href="#" aria-label="Klyv, início"><Image src="/klyv.svg" alt="Klyv" width={140} height={56} priority /></a>
         <nav className={mobileMenu ? "main-nav open" : "main-nav"} aria-label="Navegação principal">

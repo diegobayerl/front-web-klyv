@@ -112,16 +112,30 @@ summary:focus-visible,
   top: 12px;
 }
 
-/* Site Header - Translúcido e flutuante sobre o vídeo */
+/* Site Header Dinâmico: Transparente no topo sobre o vídeo, branco glass ao rolar */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(255, 255, 255, 0.22);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+/* Quando o scroll está no topo: meio transparente sobre o vídeo com leve blur */
+.site-header.at-top {
+  background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  transition: background 0.3s ease, border-color 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: none;
+}
+
+/* Depois que rola a tela: branco com efeito de vidro glass rico, não transparente */
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(227, 233, 225, 0.85);
+  box-shadow: 0 8px 30px -4px rgba(7, 63, 103, 0.08);
 }
 
 .nav-wrap {
