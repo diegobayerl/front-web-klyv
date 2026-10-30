@@ -187,14 +187,38 @@ export default function Home() {
     </header>
     <main id="conteudo">
       <section className="hero-fullvideo-section">
-        <h1 className="sr-only">Klyv · Inteligência Comercial e CRM com a Lia</h1>
-        {/* Vídeo Full-Bleed em Loop Contínuo Sem Filtro */}
+        {/* Vídeo Full-Bleed em Loop Contínuo Sem Filtro Branco */}
         <div className="hero-fullvideo-backdrop" aria-hidden="true">
           <SeamlessLoopVideo
             src="/blue-fox-mascot.mp4?v=8"
             className="hero-fullvideo-player"
-            objectPosition="center center"
+            objectPosition="center 12%"
           />
+          {/* Suave vinheta escura apenas na base do hoodie para máxima legibilidade sem nenhum card */}
+          <div className="hero-bottom-scrim" />
+        </div>
+
+        {/* Conteúdo na parte inferior */}
+        <div className="hero-bottom-container wrap">
+          <div className="hero-bottom-copy">
+            <h1>
+              Seu comercial mais próximo. <span>Mais à frente.</span>
+            </h1>
+
+            <p>
+              Do primeiro contato à próxima conquista. Organize clientes, conduza propostas em kanban e acompanhe cada entrega com a inteligência da Lia operando no Klyv e no WhatsApp.
+            </p>
+
+            <div className="hero-bottom-actions">
+              <a className="button hero-btn-start" href={`${signup}?plan=free`}>Começar 14 dias grátis</a>
+              <a className="button hero-btn-tour" href="#produto">Conheça o produto</a>
+            </div>
+
+            <div className="hero-bottom-guarantee">
+              <span className="tiny-check"><Check size={11} strokeWidth={2.5} /></span>
+              <span>Avaliação gratuita por 14 dias · Sem cartão de crédito</span>
+            </div>
+          </div>
         </div>
       </section>
       <div className="capabilities wrap" aria-label="Áreas do Klyv">

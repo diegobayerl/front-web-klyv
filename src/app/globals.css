@@ -3154,3 +3154,188 @@ h2 > span {
     font-size: 32px;
   }
 }
+
+
+/* ==========================================================================
+   HERO FULL-BLEED VIDEO & BOTTOM CONTENT (Sem Card Gigante)
+   ========================================================================== */
+.hero-fullvideo-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  background: #547288;
+  padding-bottom: 48px;
+}
+
+.hero-fullvideo-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-fullvideo-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-bottom-scrim {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(7, 30, 48, 0.15) 20%, 
+    rgba(7, 30, 48, 0.58) 60%, 
+    rgba(7, 30, 48, 0.88) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-bottom-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-bottom-copy {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: heroBottomFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroBottomFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-bottom-copy h1 {
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 14px rgba(7, 30, 48, 0.7);
+}
+
+.hero-bottom-copy h1 span {
+  color: #38bdf8;
+  display: inline-block;
+  text-shadow: 0 0 24px rgba(56, 189, 248, 0.5);
+}
+
+.hero-bottom-copy p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 620px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 8px rgba(7, 30, 48, 0.8);
+}
+
+.hero-bottom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.hero-bottom-actions .button.hero-btn-start {
+  height: 48px;
+  padding: 0 26px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 14px;
+  background: #09b5f0;
+  color: #072a42;
+  box-shadow: 0 8px 24px -4px rgba(9, 181, 240, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-bottom-actions .button.hero-btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(9, 181, 240, 0.6);
+}
+
+.hero-bottom-actions .button.hero-btn-tour {
+  height: 48px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  color: #ffffff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-bottom-actions .button.hero-btn-tour:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.hero-bottom-guarantee {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  text-shadow: 0 1px 6px rgba(7, 30, 48, 0.8);
+}
+
+.hero-bottom-guarantee .tiny-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+@media (max-width: 800px) {
+  .hero-bottom-copy h1 {
+    font-size: 28px;
+  }
+  .hero-bottom-copy p {
+    font-size: 14px;
+    padding-inline: 12px;
+  }
+  .hero-fullvideo-section {
+    padding-bottom: 28px;
+  }
+}
