@@ -3238,10 +3238,10 @@ h2 > span {
 .hero-bottom-copy h1 {
   font-size: clamp(32px, 4vw, 46px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.12;
   letter-spacing: -0.03em;
   color: #ffffff;
-  margin-bottom: 14px;
+  margin-bottom: 24px;
   text-align: left;
   text-shadow: 0 2px 14px rgba(7, 30, 48, 0.75);
 }
@@ -3254,10 +3254,10 @@ h2 > span {
 
 .hero-bottom-copy p {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: rgba(255, 255, 255, 0.92);
-  max-width: 440px;
-  margin-bottom: 20px;
+  max-width: 450px;
+  margin-bottom: 32px;
   text-align: left;
   text-shadow: 0 1px 8px rgba(7, 30, 48, 0.85);
 }
