@@ -3236,7 +3236,7 @@ h2 > span {
 }
 
 .hero-bottom-copy h1 {
-  font-size: clamp(32px, 4vw, 46px);
+  font-size: clamp(36px, 4.6vw, 52px);
   font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.03em;
