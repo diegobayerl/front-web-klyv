@@ -176,49 +176,57 @@ export default function Home() {
       </div>
     </header>
     <main id="conteudo">
-      <section className="hero wrap">
-        <div className="hero-copy">
-          <div className="hero-mascot-pill">
-            <span className="mascot-sparkle"><Sparkles size={14} /></span>
-            <span>Conheça a <strong>Lia</strong>, sua IA comercial no Klyv</span>
-          </div>
-          <h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1>
-          <p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega com a inteligência da Lia ao seu lado.</p>
-          <div className="hero-actions">
-            <a className="button" href={`${signup}?plan=free`}>Começar 14 dias grátis</a>
-            <a className="button secondary" href="#produto">Conheça o produto</a>
-          </div>
-          <span className="hero-note">
-            <span className="tiny-check"><Check size={11} /></span>
-            Avaliação gratuita por 14 dias · Sem cartão de crédito
-          </span>
+      <div className="hero-immersive-section">
+        {/* Camada do Vídeo em tela cheia por baixo do header */}
+        <div className="hero-bg-video-layer" aria-hidden="true">
+          <SeamlessLoopVideo
+            src="/blue-fox-mascot.mp4?v=5"
+            className="hero-fullscreen-video"
+            objectPosition="68% center"
+          />
+          <div className="hero-scrim-left" />
+          <div className="hero-scrim-bottom" />
+          <div className="hero-scrim-top" />
         </div>
-        <div className="hero-mascot-hero">
-          <div className="mascot-stage">
-            <div className="mascot-video-frame">
-              <SeamlessLoopVideo
-                src="/blue-fox-mascot.mp4?v=5"
-                className="hero-mascot-main-video"
-              />
+
+        <section className="hero wrap">
+          <div className="hero-copy">
+            <div className="hero-mascot-pill">
+              <span className="mascot-sparkle"><Sparkles size={14} /></span>
+              <span>Conheça a <strong>Lia</strong>, sua IA comercial no Klyv</span>
             </div>
-            {/* Balões de inteligência comercial da Lia */}
-            <div className="mascot-speech-bubble bubble-top">
-              <span className="bubble-icon">📅</span>
-              <div>
-                <strong>Reunião agendada</strong>
-                <span>Aurora Tecnologia · 10h</span>
+            <h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1>
+            <p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega com a inteligência da Lia ao seu lado.</p>
+            <div className="hero-actions">
+              <a className="button" href={`${signup}?plan=free`}>Começar 14 dias grátis</a>
+              <a className="button secondary" href="#produto">Conheça o produto</a>
+            </div>
+            <span className="hero-note">
+              <span className="tiny-check"><Check size={11} /></span>
+              Avaliação gratuita por 14 dias · Sem cartão de crédito
+            </span>
+          </div>
+          <div className="hero-mascot-hero">
+            <div className="mascot-stage-bubbles">
+              {/* Balões de inteligência comercial da Lia */}
+              <div className="mascot-speech-bubble bubble-top">
+                <span className="bubble-icon">📅</span>
+                <div>
+                  <strong>Reunião agendada</strong>
+                  <span>Aurora Tecnologia · 10h</span>
+                </div>
+              </div>
+              <div className="mascot-speech-bubble bubble-bottom">
+                <span className="bubble-icon">🎯</span>
+                <div>
+                  <strong>Meta de Vendas</strong>
+                  <span>R$ 420k realizados (70%)</span>
+                </div>
               </div>
             </div>
-            <div className="mascot-speech-bubble bubble-bottom">
-              <span className="bubble-icon">🎯</span>
-              <div>
-                <strong>Meta de Vendas</strong>
-                <span>R$ 420k realizados (70%)</span>
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
       <div className="capabilities wrap" aria-label="Áreas do Klyv">
         <span>Uma jornada.<br /><strong>Tudo conectado.</strong></span>
         {capabilities.map((item) => {

@@ -6,12 +6,14 @@ interface SeamlessLoopVideoProps {
   src: string;
   poster?: string;
   className?: string;
+  objectPosition?: string;
 }
 
 export function SeamlessLoopVideo({
   src,
   poster = "/mascot-poster.webp",
   className = "",
+  objectPosition = "center center",
 }: SeamlessLoopVideoProps) {
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
@@ -111,6 +113,7 @@ export function SeamlessLoopVideo({
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          objectPosition: objectPosition,
           zIndex: hasStarted ? 0 : 3,
           opacity: hasStarted ? 0 : 1,
           transition: "opacity 0.25s ease-out",
@@ -134,6 +137,7 @@ export function SeamlessLoopVideo({
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          objectPosition: objectPosition,
           opacity: 1,
           zIndex: activeVideo === 1 ? 2 : 1,
           pointerEvents: "none",
@@ -156,6 +160,7 @@ export function SeamlessLoopVideo({
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          objectPosition: objectPosition,
           opacity: 1,
           zIndex: activeVideo === 2 ? 2 : 1,
           pointerEvents: "none",
