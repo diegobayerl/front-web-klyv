@@ -214,10 +214,7 @@ export default function Home() {
               <a className="button hero-btn-tour" href="#produto">Conheça o produto</a>
             </div>
 
-            <div className="hero-bottom-guarantee">
-              <span className="tiny-check"><Check size={11} strokeWidth={2.5} /></span>
-              <span>Avaliação gratuita por 14 dias · Sem cartão de crédito</span>
-            </div>
+
           </div>
         </div>
       </section>

@@ -3268,7 +3268,7 @@ h2 > span {
   justify-content: flex-start;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 
 .hero-bottom-actions .button.hero-btn-start {
