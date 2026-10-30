@@ -200,10 +200,6 @@ export default function Home() {
 
         <section className="hero wrap">
           <div className="hero-copy">
-            <div className="hero-mascot-pill">
-              <span className="mascot-sparkle"><Sparkles size={14} /></span>
-              <span>Conheça a <strong>Lia</strong>, sua IA comercial no Klyv</span>
-            </div>
             <h1>Seu comercial.<br />Mais próximo.<br /><span>Mais à frente.</span></h1>
             <p>Do primeiro contato à próxima conquista. Organize clientes, conduza propostas e acompanhe cada entrega com a inteligência da Lia ao seu lado.</p>
             <div className="hero-actions">
