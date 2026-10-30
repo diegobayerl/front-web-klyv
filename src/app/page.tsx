@@ -210,7 +210,7 @@ export default function Home() {
             </p>
 
             <div className="hero-bottom-actions">
-              <a className="button hero-btn-start" href={`${signup}?plan=free`}>Começar 14 dias grátis</a>
+              <a className="button hero-btn-start" href={`${signup}?plan=free`}>Começar agora</a>
               <a className="button hero-btn-tour" href="#produto">Conheça o produto</a>
             </div>
 
