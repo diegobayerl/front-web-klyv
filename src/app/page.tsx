@@ -24,12 +24,11 @@ const faqs = [
 ];
 
 const capabilities = [
-  { icon: Users, label: "Clientes", desc: "Gestão 360°", action: "#recursos" },
-  { icon: FileText, label: "Propostas", desc: "Pipeline Kanban", action: "pipeline" },
-  { icon: Workflow, label: "Execução", desc: "Pós-Venda & Entregas", action: "#recursos" },
-  { icon: Target, label: "Metas", desc: "Tempo Real", action: "dashboard" },
-  { icon: MessageSquare, label: "Pesquisas", desc: "NPS & Satisfação", action: "surveys" },
-  { icon: Sparkles, label: "Lia IA", desc: "WhatsApp & Web", action: "#lia" },
+  { icon: Sparkles, label: "Inteligência Comercial Ativa", desc: "A Lia operando no seu WhatsApp", action: "#lia" },
+  { icon: Target, label: "Do Primeiro Contato à Próxima Conquista", desc: "Ciclo comercial completo de ponta a ponta", action: "pipeline" },
+  { icon: BarChart3, label: "Previsibilidade & Metas", desc: "Decida com o cenário comercial completo", action: "dashboard" },
+  { icon: Users, label: "A Venda é só o Começo", desc: "Execução e pós-venda que retêm clientes", action: "#recursos" },
+  { icon: MessageSquare, label: "Fidelização Contínua", desc: "Pesquisas de satisfação e NPS em tempo real", action: "surveys" },
 ] as const;
 
 

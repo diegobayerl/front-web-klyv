@@ -3382,7 +3382,7 @@ h2 > span {
   align-items: center;
   gap: 16px;
   width: max-content;
-  animation: capabilitiesMarqueeScroll 28s linear infinite;
+  animation: capabilitiesMarqueeScroll 42s linear infinite;
   will-change: transform;
 }
 
