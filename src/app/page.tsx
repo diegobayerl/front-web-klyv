@@ -222,38 +222,26 @@ export default function Home() {
         </div>
       </section>
       <div className="capabilities-marquee-section" aria-label="Áreas integradas do Klyv">
-        <div className="capabilities-marquee-container wrap">
-          {/* Legenda fixa de abertura */}
-          <div className="capabilities-header-tag">
-            <span className="tag-prefix">Uma jornada.</span>
-            <strong className="tag-title">Tudo conectado.</strong>
-          </div>
-
-          <div className="capabilities-divider" aria-hidden="true" />
-
-          {/* Mini carrossel automático que fica girando contínuo */}
-          <div className="capabilities-marquee-viewport">
-            <div className="capabilities-marquee-track">
-              {[...capabilities, ...capabilities].map((item, idx) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={`${item.label}-${idx}`}
-                    type="button"
-                    className="capability-marquee-chip"
-                    onClick={() => handleCapabilityClick(item.action)}
-                  >
-                    <span className="chip-icon-box">
-                      <Icon size={16} strokeWidth={2} />
-                    </span>
-                    <span className="chip-text">
-                      <strong className="chip-label">{item.label}</strong>
-                      <span className="chip-desc">{item.desc}</span>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+        {/* Carrossel Full-Width Azul Klyv Sem Cards Redondos */}
+        <div className="capabilities-marquee-viewport">
+          <div className="capabilities-marquee-track">
+            {[...capabilities, ...capabilities, ...capabilities].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={`${item.label}-${idx}`}
+                  type="button"
+                  className="capability-marquee-item"
+                  onClick={() => handleCapabilityClick(item.action)}
+                >
+                  <Icon size={18} strokeWidth={2} className="capability-item-icon" />
+                  <span className="capability-item-label">{item.label}</span>
+                  <span className="capability-item-dot">·</span>
+                  <span className="capability-item-desc">{item.desc}</span>
+                  <span className="capability-item-sep">✦</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
