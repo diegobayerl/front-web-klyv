@@ -174,7 +174,24 @@ export default function Home() {
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <header className={`site-header ${isScrolled ? "scrolled" : "at-top"}`}>
       <div className="nav-wrap wrap">
-        <a className="brand" href="#" aria-label="Klyv, início"><Image src="/klyv.svg" alt="Klyv" width={140} height={56} priority /></a>
+        <a className="brand" href="#" aria-label="Klyv, início">
+          <Image
+            src="/logo-klyv-white.svg"
+            alt="Klyv"
+            width={140}
+            height={56}
+            priority
+            className="brand-logo brand-logo-white"
+          />
+          <Image
+            src="/klyv.svg"
+            alt="Klyv"
+            width={140}
+            height={56}
+            priority
+            className="brand-logo brand-logo-dark"
+          />
+        </a>
         <nav className={mobileMenu ? "main-nav open" : "main-nav"} aria-label="Navegação principal">
           {[['#produto', 'O produto'], ['#recursos', 'Possibilidades'], ['#lia', 'IA'], ['#planos', 'Planos'], ['#duvidas', 'Dúvidas']].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
           <div className="mobile-nav-cta">

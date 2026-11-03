@@ -3467,3 +3467,51 @@ h2 > span {
     font-size: 12px;
   }
 }
+
+
+/* Brand Logo Switcher (Modo Branco no Topo / Modo Escuro no Scroll) */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  width: auto;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+.site-header.at-top .brand-logo-white {
+  display: block !important;
+}
+
+.site-header.at-top .brand-logo-dark {
+  display: none !important;
+}
+
+.site-header.scrolled .brand-logo-white {
+  display: none !important;
+}
+
+.site-header.scrolled .brand-logo-dark {
+  display: block !important;
+}
+
+/* Nav links com contraste e destaque no topo transparente */
+.site-header.at-top .main-nav a,
+.site-header.at-top .login-link {
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 4px rgba(7, 30, 48, 0.5);
+}
+
+.site-header.at-top .main-nav a:hover,
+.site-header.at-top .login-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.site-header.at-top .menu-button {
+  color: #ffffff;
+}
