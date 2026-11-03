@@ -172,6 +172,17 @@ export default function Home() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
     />
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    {/* SVG Filter de Refração Óptica Real (Apple Liquid Glass Displacement) */}
+    <svg className="sr-only" aria-hidden="true" style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }}>
+      <defs>
+        <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="24" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+          <feGaussianBlur in="displaced" stdDeviation="2.5" />
+        </filter>
+      </defs>
+    </svg>
+
     <header className={`site-header ${isScrolled ? "scrolled" : "at-top"}`}>
       <div className="nav-wrap wrap">
         <a className="brand" href="#" aria-label="Klyv, início">
