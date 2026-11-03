@@ -196,10 +196,10 @@ export default function Home() {
           {[['#produto', 'O produto'], ['#recursos', 'Possibilidades'], ['#lia', 'IA'], ['#planos', 'Planos'], ['#duvidas', 'Dúvidas']].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
           <div className="mobile-nav-cta">
             <a className="login-link-mobile" href={crm} onClick={() => setMobileMenu(false)}>Entrar no Klyv <ArrowUpRight size={15} /></a>
-            <a className="button small" href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}>Começar 14 dias grátis</a>
+            <a className="apple-liquid-glass btn-hero-primary" style={{ width: "100%" }} href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}><span className="specular-highlight" aria-hidden="true" />Começar 14 dias grátis</a>
           </div>
         </nav>
-        <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="button small" href={`${signup}?plan=free`}>Criar conta</a><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
+        <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="apple-liquid-glass btn-header-cta" href={`${signup}?plan=free`}><span className="specular-highlight" aria-hidden="true" />Criar conta</a><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
       </div>
     </header>
     <main id="conteudo">
@@ -229,8 +229,14 @@ export default function Home() {
             </p>
 
             <div className="hero-bottom-actions">
-              <a className="button hero-btn-start" href={`${signup}?plan=free`}>Começar agora</a>
-              <a className="button hero-btn-tour" href="#produto">Conheça o produto</a>
+              <a className="apple-liquid-glass btn-hero-primary" href={`${signup}?plan=free`}>
+                <span className="specular-highlight" aria-hidden="true" />
+                Começar agora
+              </a>
+              <a className="apple-liquid-glass btn-hero-secondary" href="#produto">
+                <span className="specular-highlight" aria-hidden="true" />
+                Conheça o produto
+              </a>
             </div>
 
 
