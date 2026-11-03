@@ -3272,45 +3272,78 @@ h2 > span {
 }
 
 .hero-bottom-actions .button {
-  height: 50px;
-  min-width: 185px;
+  height: 52px;
+  min-width: 190px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 15px;
-  border-radius: 14px;
+  border-radius: 16px;
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Apple Liquid Glass - Começar Agora (Vidro Ciano Refrativo com Borda Iluminada) */
 .hero-bottom-actions .button.hero-btn-start {
-  padding: 0 24px;
-  font-weight: 700;
-  background: #09b5f0;
-  color: #072a42;
-  box-shadow: 0 8px 24px -4px rgba(9, 181, 240, 0.45);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0 26px;
+  font-weight: 750;
+  background: linear-gradient(180deg, rgba(14, 194, 255, 0.95) 0%, rgba(7, 139, 244, 0.88) 100%);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.8),
+              inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.2),
+              0 12px 30px -4px rgba(9, 181, 240, 0.5),
+              0 4px 10px -2px rgba(7, 30, 48, 0.3);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(7, 45, 75, 0.5);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-bottom-actions .button.hero-btn-start:hover {
+  background: linear-gradient(180deg, rgba(35, 206, 255, 1) 0%, rgba(9, 150, 255, 0.95) 100%);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 2px 2px 0 rgba(255, 255, 255, 0.95),
+              inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25),
+              0 16px 36px -4px rgba(9, 181, 240, 0.65),
+              0 6px 14px -2px rgba(7, 30, 48, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -4px rgba(9, 181, 240, 0.6);
 }
 
+.hero-bottom-actions .button.hero-btn-start:active {
+  transform: scale(0.97);
+}
+
+/* Apple Liquid Glass - Conheça o Produto (Vidro Translúcido Óptico com Espelhado Superior) */
 .hero-bottom-actions .button.hero-btn-tour {
-  padding: 0 24px;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.16);
+  padding: 0 26px;
+  font-weight: 650;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.65),
+              inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.18),
+              0 12px 28px -6px rgba(0, 0, 0, 0.35),
+              0 4px 10px -2px rgba(7, 30, 48, 0.25);
   color: #ffffff;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  text-shadow: 0 1px 3px rgba(7, 30, 48, 0.6);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-bottom-actions .button.hero-btn-tour:hover {
-  background: rgba(255, 255, 255, 0.26);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 2px 2px 0 rgba(255, 255, 255, 0.85),
+              inset 0 -1px 2px 0 rgba(0, 0, 0, 0.25),
+              0 16px 36px -6px rgba(0, 0, 0, 0.45);
   transform: translateY(-2px);
+}
+
+.hero-bottom-actions .button.hero-btn-tour:active {
+  transform: scale(0.97);
 }
 
 .hero-bottom-guarantee {
@@ -3514,4 +3547,44 @@ h2 > span {
 
 .site-header.at-top .menu-button {
   color: #ffffff;
+}
+
+/* Header Liquid Glass Button */
+.site-header.at-top .button.small {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.12) 100%);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.7),
+              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.15),
+              0 8px 20px -4px rgba(7, 30, 48, 0.35);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(7, 30, 48, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-header.at-top .button.small:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.2) 100%);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.9),
+              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2),
+              0 12px 28px -4px rgba(7, 30, 48, 0.45);
+  transform: translateY(-1px);
+}
+
+.site-header.scrolled .button.small {
+  background: linear-gradient(180deg, #0a4f80 0%, #073F67 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+              inset 0 -1px 2px 0 rgba(0, 0, 0, 0.25),
+              0 6px 18px -3px rgba(7, 63, 103, 0.25);
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-header.scrolled .button.small:hover {
+  background: linear-gradient(180deg, #0d5d96 0%, #084977 100%);
+  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.5),
+              0 8px 24px -3px rgba(7, 63, 103, 0.35);
+  transform: translateY(-1px);
 }
