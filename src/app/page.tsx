@@ -24,11 +24,12 @@ const faqs = [
 ];
 
 const capabilities = [
-  { icon: Users, label: "Clientes", action: "#recursos" },
-  { icon: FileText, label: "Propostas", action: "pipeline" },
-  { icon: Workflow, label: "Execução", action: "#recursos" },
-  { icon: Target, label: "Metas", action: "dashboard" },
-  { icon: MessageSquare, label: "Pesquisas", action: "surveys" },
+  { icon: Users, label: "Clientes", desc: "Gestão 360°", action: "#recursos" },
+  { icon: FileText, label: "Propostas", desc: "Pipeline Kanban", action: "pipeline" },
+  { icon: Workflow, label: "Execução", desc: "Pós-Venda & Entregas", action: "#recursos" },
+  { icon: Target, label: "Metas", desc: "Tempo Real", action: "dashboard" },
+  { icon: MessageSquare, label: "Pesquisas", desc: "NPS & Satisfação", action: "surveys" },
+  { icon: Sparkles, label: "Lia IA", desc: "WhatsApp & Web", action: "#lia" },
 ] as const;
 
 
@@ -220,22 +221,41 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <div className="capabilities wrap" aria-label="Áreas do Klyv">
-        <span>Uma jornada.<br /><strong>Tudo conectado.</strong></span>
-        {capabilities.map((item) => {
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.label}
-              type="button"
-              className="capability-item"
-              onClick={() => handleCapabilityClick(item.action)}
-            >
-              <Icon size={18} strokeWidth={1.5} />
-              <span>{item.label}</span>
-            </button>
-          );
-        })}
+      <div className="capabilities-marquee-section" aria-label="Áreas integradas do Klyv">
+        <div className="capabilities-marquee-container wrap">
+          {/* Legenda fixa de abertura */}
+          <div className="capabilities-header-tag">
+            <span className="tag-prefix">Uma jornada.</span>
+            <strong className="tag-title">Tudo conectado.</strong>
+          </div>
+
+          <div className="capabilities-divider" aria-hidden="true" />
+
+          {/* Mini carrossel automático que fica girando contínuo */}
+          <div className="capabilities-marquee-viewport">
+            <div className="capabilities-marquee-track">
+              {[...capabilities, ...capabilities].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={`${item.label}-${idx}`}
+                    type="button"
+                    className="capability-marquee-chip"
+                    onClick={() => handleCapabilityClick(item.action)}
+                  >
+                    <span className="chip-icon-box">
+                      <Icon size={16} strokeWidth={2} />
+                    </span>
+                    <span className="chip-text">
+                      <strong className="chip-label">{item.label}</strong>
+                      <span className="chip-desc">{item.desc}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
       <section className="section product-section" id="produto">
         <div className="wrap">
