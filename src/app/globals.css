@@ -3286,38 +3286,47 @@ h2 > span {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
+/* Botão Começar Agora - Efeito Gota Transparente Ciano / Azul Claro */
 .hero-bottom-actions .button.hero-btn-start {
-  padding: 0 28px;
+  padding: 0 30px;
   font-weight: 700;
-  background: #09b5f0;
-  color: #072a42;
-  border: 1px solid transparent;
-  box-shadow: 0 8px 24px -4px rgba(9, 181, 240, 0.45);
+  color: #ffffff;
+  background: rgba(9, 181, 240, 0.24);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(14, 194, 255, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(9, 181, 240, 0.32), 0 8px 24px 0 rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 4px rgba(7, 30, 48, 0.7);
 }
 
 .hero-bottom-actions .button.hero-btn-start:hover {
-  background: #08a5dc;
+  background: rgba(9, 181, 240, 0.38);
+  border-color: rgba(14, 194, 255, 0.85);
+  box-shadow: 0 12px 36px 0 rgba(9, 181, 240, 0.48), 0 10px 28px 0 rgba(0, 0, 0, 0.45);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px -4px rgba(9, 181, 240, 0.6);
 }
 
 .hero-bottom-actions .button.hero-btn-start:active {
   transform: scale(0.97);
 }
 
+/* Botão Conheça o Produto - Gota Transparente Cristal */
 .hero-bottom-actions .button.hero-btn-tour {
-  padding: 0 28px;
+  padding: 0 30px;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.35);
   color: #ffffff;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  text-shadow: 0 1px 3px rgba(7, 30, 48, 0.6);
 }
 
 .hero-bottom-actions .button.hero-btn-tour:hover {
-  background: rgba(255, 255, 255, 0.24);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.48);
   transform: translateY(-2px);
 }
 
