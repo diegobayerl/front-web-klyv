@@ -1,30 +1,82 @@
 "use client";
-import { useEffect } from 'react';
+
+import { useEffect } from "react";
 
 export function ScrollEffects() {
   useEffect(() => {
-    const motion = matchMedia('(prefers-reduced-motion: reduce)');
-    const mobile = matchMedia('(max-width: 700px)');
-    const animations = new Set<Animation>();
-    if (!('IntersectionObserver' in window)) return;
-    // Animate once on entry; never hide content before observation.
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        observer.unobserve(entry.target);
-        if (motion.matches) continue;
-        const animation = entry.target.animate([
-          { transform: `translateY(${mobile.matches ? 6 : 14}px)`, opacity: 0.82 },
-          { transform: 'translateY(0)', opacity: 1 },
-        ], { duration: mobile.matches ? 280 : 420, easing: 'cubic-bezier(.2,.65,.3,1)' });
-        animations.add(animation);
-        animation.onfinish = () => animations.delete(animation);
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches) {
+      document.querySelectorAll(".scroll-focus-blur").forEach((el) => {
+        el.classList.add("is-focused");
+      });
+      return;
+    }
+
+    // Verifica se o navegador suporta nativamente CSS Scroll-Driven Animations
+    const supportsScrollTimeline =
+      typeof CSS !== "undefined" &&
+      typeof CSS.supports === "function" &&
+      CSS.supports("(animation-timeline: view()) and (animation-range: entry)");
+
+    const targets = document.querySelectorAll<HTMLElement>(".scroll-focus-blur");
+    if (!targets.length) return;
+
+    if (supportsScrollTimeline) {
+      // Navegadores modernos conduzem a animação no thread compositor via CSS
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-focused");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      targets.forEach((target) => observer.observe(target));
+      return () => observer.disconnect();
+    }
+
+    // Fallback com IntersectionObserver para navegadores sem CSS Scroll-Driven Animations
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach((el) => el.classList.add("is-focused"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-focused");
+          } else {
+            const rect = entry.boundingClientRect;
+            if (rect.top > window.innerHeight) {
+              entry.target.classList.remove("is-focused");
+            }
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -10% 0px",
+        threshold: [0, 0.2, 0.5],
       }
-    }, { threshold: 0.08 });
-    document.querySelectorAll('#produto > .section-heading, #recursos > .section-heading, .feature-card, .lia-text-column > h2, .lia-feature-card, .faq-section > div:first-child').forEach(target => observer.observe(target));
-    const stop = () => { if (motion.matches) animations.forEach(animation => animation.cancel()); };
-    motion.addEventListener('change', stop);
-    return () => { observer.disconnect(); motion.removeEventListener('change', stop); animations.forEach(animation => animation.cancel()); };
+    );
+
+    targets.forEach((target) => observer.observe(target));
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        targets.forEach((el) => el.classList.add("is-focused"));
+        observer.disconnect();
+      }
+    };
+    motion.addEventListener("change", handleMotionChange);
+
+    return () => {
+      observer.disconnect();
+      motion.removeEventListener("change", handleMotionChange);
+    };
   }, []);
+
   return null;
 }

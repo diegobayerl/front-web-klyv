@@ -89,7 +89,7 @@ export function LiaShowcase() {
       <div className="wrap">
         <div className="lia-grid-layout">
           {/* Coluna da Esquerda: Explicação Conceitual & Potencial da Lia */}
-          <div className="lia-text-column">
+          <div className="lia-text-column scroll-focus-blur">
             <h2>
               Muito além de respostas.<br />
               <span>Uma inteligência que age junto com você.</span>
@@ -129,7 +129,7 @@ export function LiaShowcase() {
           </div>
 
           {/* Coluna da Direita: A Lia Exatamente Como Aparece na Tela */}
-          <div className="lia-interface-column">
+          <div className="lia-interface-column scroll-focus-blur stagger-2">
             <div className="lia-scenario-pills" role="group" aria-label="Testar comandos na Lia">
               {Object.entries(scenarios).map(([key, item]) => (
                 <button

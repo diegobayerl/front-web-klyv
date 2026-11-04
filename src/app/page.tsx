@@ -245,14 +245,14 @@ export default function Home() {
       </div>
       <section className="section product-section" id="produto">
         <div className="wrap">
-          <div className="section-heading">
+          <div className="section-heading scroll-focus-blur">
             <div><h2>Menos tempo procurando.<br /><span>Mais tempo construindo relações.</span></h2></div>
             <div className="section-narrative">
               <p>Seu cliente não é só uma linha na planilha. É uma conversa, uma oportunidade e uma história que merece continuidade.</p>
             </div>
           </div>
-          <div className="product-tabs" role="tablist" aria-label="Conheça as telas do Klyv">{previews.map((item, index) => <button key={item.id} id={`tab-${item.id}`} role="tab" aria-selected={index === activePreview} aria-controls="product-panel" tabIndex={index === activePreview ? 0 : -1} onClick={() => setActivePreview(index)} onKeyDown={event => { const next = event.key === 'ArrowRight' ? (index + 1) % previews.length : event.key === 'ArrowLeft' ? (index + previews.length - 1) % previews.length : event.key === 'Home' ? 0 : event.key === 'End' ? previews.length - 1 : null; if (next !== null) { event.preventDefault(); setActivePreview(next); document.getElementById(`tab-${previews[next].id}`)?.focus(); } }}><item.icon size={17} /><span>{item.label}</span></button>)}</div>
-          <div className="product-panel" id="product-panel" role="tabpanel" aria-labelledby={`tab-${preview.id}`} tabIndex={0}>
+          <div className="product-tabs scroll-focus-blur stagger-1" role="tablist" aria-label="Conheça as telas do Klyv">{previews.map((item, index) => <button key={item.id} id={`tab-${item.id}`} role="tab" aria-selected={index === activePreview} aria-controls="product-panel" tabIndex={index === activePreview ? 0 : -1} onClick={() => setActivePreview(index)} onKeyDown={event => { const next = event.key === 'ArrowRight' ? (index + 1) % previews.length : event.key === 'ArrowLeft' ? (index + previews.length - 1) % previews.length : event.key === 'Home' ? 0 : event.key === 'End' ? previews.length - 1 : null; if (next !== null) { event.preventDefault(); setActivePreview(next); document.getElementById(`tab-${previews[next].id}`)?.focus(); } }}><item.icon size={17} /><span>{item.label}</span></button>)}</div>
+          <div className="product-panel scroll-focus-blur stagger-2" id="product-panel" role="tabpanel" aria-labelledby={`tab-${preview.id}`} tabIndex={0}>
             <div className="product-panel-copy">
               <div>
                 <h3>{preview.title}</h3>
@@ -278,22 +278,22 @@ export default function Home() {
         </div>
       </section>
       <section className="section wrap" id="recursos">
-        <div className="section-heading"><div><h2>O negócio avança.<br /><span>O contexto vai junto.</span></h2></div></div>
+        <div className="section-heading scroll-focus-blur"><div><h2>O negócio avança.<br /><span>O contexto vai junto.</span></h2></div></div>
         <div className="feature-grid">
-          <article className="feature-card large"><span className="feature-index">01 / RELACIONAMENTO</span><Users size={26} strokeWidth={1.4} /><h3>Um cliente.<br />A história inteira.</h3><p>Contatos, interações e oportunidades reunidos. Prepare a próxima conversa sabendo o que já foi combinado.</p><div className="relationship-art" aria-hidden="true"><div className="avatar-stack"><span>AC</span><span>MO</span><span>PM</span></div><div className="relationship-copy"><strong>Pessoas antes de processos.</strong><span>O contexto que aproxima.</span></div></div></article>
-          <article className="feature-card"><span className="feature-index">02 / NEGOCIAÇÃO</span><FileText size={25} strokeWidth={1.4} /><h3>Cada proposta,<br />com seu próximo passo.</h3><p>Acompanhe versões, condições, follow-ups e ações. Clareza para conduzir negociações sem perder os detalhes.</p></article>
-          <article className="feature-card"><span className="feature-index">03 / CONTINUIDADE</span><Workflow size={25} strokeWidth={1.4} /><h3>A venda é só<br />o começo.</h3><p>Leve o relacionamento para a execução. Acompanhe entregas e ouça o cliente com pesquisas por e-mail ou link.</p></article>
-          <article className="feature-card wide"><div><span className="feature-index">04 / DIREÇÃO</span><h3>Saiba onde está.<br />Escolha aonde ir.</h3><p>Conecte a rotina às metas. Receita, pipeline, agenda e anotações ajudam a transformar informação em próximos passos.</p></div><div className="direction-art" aria-hidden="true"><div className="direction-ring"><Target size={34} strokeWidth={1} /></div><span>Visão → Decisão → Ação</span></div></article>
+          <article className="feature-card large scroll-focus-blur stagger-1"><span className="feature-index">01 / RELACIONAMENTO</span><Users size={26} strokeWidth={1.4} /><h3>Um cliente.<br />A história inteira.</h3><p>Contatos, interações e oportunidades reunidos. Prepare a próxima conversa sabendo o que já foi combinado.</p><div className="relationship-art" aria-hidden="true"><div className="avatar-stack"><span>AC</span><span>MO</span><span>PM</span></div><div className="relationship-copy"><strong>Pessoas antes de processos.</strong><span>O contexto que aproxima.</span></div></div></article>
+          <article className="feature-card scroll-focus-blur stagger-2"><span className="feature-index">02 / NEGOCIAÇÃO</span><FileText size={25} strokeWidth={1.4} /><h3>Cada proposta,<br />com seu próximo passo.</h3><p>Acompanhe versões, condições, follow-ups e ações. Clareza para conduzir negociações sem perder os detalhes.</p></article>
+          <article className="feature-card scroll-focus-blur stagger-3"><span className="feature-index">03 / CONTINUIDADE</span><Workflow size={25} strokeWidth={1.4} /><h3>A venda é só<br />o começo.</h3><p>Leve o relacionamento para a execução. Acompanhe entregas e ouça o cliente com pesquisas por e-mail ou link.</p></article>
+          <article className="feature-card wide scroll-focus-blur stagger-4"><div><span className="feature-index">04 / DIREÇÃO</span><h3>Saiba onde está.<br />Escolha aonde ir.</h3><p>Conecte a rotina às metas. Receita, pipeline, agenda e anotações ajudam a transformar informação em próximos passos.</p></div><div className="direction-art" aria-hidden="true"><div className="direction-ring"><Target size={34} strokeWidth={1} /></div><span>Visão → Decisão → Ação</span></div></article>
         </div>
       </section>
       <LiaShowcase />
-      <section className="method-section"><div className="wrap method-inner"><div><h2>Cada feedback<br />transformado em<br /><em>melhoria contínua.</em></h2><a className="button light" href={`${signup}?plan=free`}>Dê o primeiro passo <ArrowRight size={16} /></a></div><ol className="steps">{[['Pesquisas de satisfação no timing certo.', 'Dispare pesquisas dinâmicas por e-mail ou link. Colete notas, percepções e retornos reais logo após cada entrega ou fechamento.'], ['Acúmulo de histórico e dados reais.', 'Cada resposta enriquece a história do seu cliente na Klyv, transformando opiniões em uma base estruturada de inteligência comercial.'], ['A Lia e a melhoria contínua.', 'Com base no histórico acumulado e no retorno dos clientes, a Lia cruza satisfação e metas para apoiar a evolução constante das suas vendas.']].map(([title, text], index) => <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></div></section>
+      <section className="method-section"><div className="wrap method-inner scroll-focus-blur"><div><h2>Cada feedback<br />transformado em<br /><em>melhoria contínua.</em></h2><a className="button light" href={`${signup}?plan=free`}>Dê o primeiro passo <ArrowRight size={16} /></a></div><ol className="steps">{[['Pesquisas de satisfação no timing certo.', 'Dispare pesquisas dinâmicas por e-mail ou link. Colete notas, percepções e retornos reais logo após cada entrega ou fechamento.'], ['Acúmulo de histórico e dados reais.', 'Cada resposta enriquece a história do seu cliente na Klyv, transformando opiniões em uma base estruturada de inteligência comercial.'], ['A Lia e a melhoria contínua.', 'Com base no histórico acumulado e no retorno dos clientes, a Lia cruza satisfação e metas para apoiar a evolução constante das suas vendas.']].map(([title, text], index) => <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></div></section>
       <section className="section wrap pricing-section" id="planos">
-        <div className="pricing-heading">
+        <div className="pricing-heading scroll-focus-blur">
           <h2>Um plano para cada momento.</h2>
         </div>
 
-        <div className="mobile-plan-comparison">
+        <div className="mobile-plan-comparison scroll-focus-blur stagger-1">
           <div className="mobile-plan-navigation">
             <button type="button" aria-label="Plano anterior" onClick={() => setMobilePlan(index => (index + plans.length - 1) % plans.length)}><ChevronLeft size={21} aria-hidden="true" /></button>
             <div aria-live="polite" aria-atomic="true"><strong>{selectedPlan.name}</strong><span>{mobilePlan + 1} de {plans.length} planos</span></div>
@@ -313,7 +313,7 @@ export default function Home() {
           </dl>
           <div className="mobile-plan-dots" aria-label="Escolher plano">{plans.map((plan, index) => <button type="button" key={plan.name} aria-label={`Ver plano ${plan.name}`} aria-pressed={index === mobilePlan} onClick={() => setMobilePlan(index)}><span /></button>)}</div>
         </div>
-        <div className="comparison-table-wrapper" role="region" aria-label="Comparação de planos Klyv" tabIndex={0}>
+        <div className="comparison-table-wrapper scroll-focus-blur stagger-1" role="region" aria-label="Comparação de planos Klyv" tabIndex={0}>
           <table className="comparison-table">
             <caption className="comparison-sr-only">Preços, usuários e funcionalidades de cada plano Klyv</caption>
             <thead>
@@ -347,9 +347,9 @@ export default function Home() {
         </div>
         <p className="comparison-note">Comece pela avaliação gratuita de 14 dias no plano Free. Compare acima os recursos disponíveis em cada plano.</p>
       </section>
-      <section className="section faq-section wrap" id="duvidas"><div><span className="eyebrow">Antes de começar</span><h2>Vamos deixar<br /><span>tudo claro.</span></h2><p>Respostas diretas para os próximos passos.</p></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={17} /></summary><p>{answer}</p></details>)}</div></section>
+      <section className="section faq-section wrap scroll-focus-blur" id="duvidas"><div><span className="eyebrow">Antes de começar</span><h2>Vamos deixar<br /><span>tudo claro.</span></h2><p>Respostas diretas para os próximos passos.</p></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={17} /></summary><p>{answer}</p></details>)}</div></section>
       <section className="final-section wrap">
-        <div className="final-cta">
+        <div className="final-cta scroll-focus-blur">
           <div>
             <span className="eyebrow">Pronto para organizar sua operação?</span>
             <h2>Construa relações mais próximas.<br /><span>Feche negócios com clareza.</span></h2>

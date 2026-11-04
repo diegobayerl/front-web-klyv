@@ -3583,3 +3583,65 @@ h2 > span {
   background: #0a4f80;
   transform: translateY(-1px);
 }
+
+
+/* ==========================================================================
+   SCROLL REVEAL: DESFOQUE & FOCO NO CENTRO (Cinematic Blur-to-Focus on Scroll)
+   ========================================================================== */
+.scroll-focus-blur {
+  opacity: 0.15;
+  filter: blur(14px);
+  transform: translateY(32px) scale(0.97);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+
+.scroll-focus-blur.is-focused {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0) scale(1);
+}
+
+/* Staggers para grids e listas sequenciais */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+
+/* Progressive Enhancement: Suporte Nativo a CSS Scroll-Driven Animations */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes scrollBlurToFocus {
+      0% {
+        opacity: 0.18;
+        filter: blur(14px);
+        transform: translateY(36px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .scroll-focus-blur {
+      transition: none; /* A animação nativa conduzida pelo scroll assume o controle no compositor */
+      animation: scrollBlurToFocus auto cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 42%;
+    }
+  }
+}
+
+/* Acessibilidade: respeita quem prefere movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-focus-blur {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
