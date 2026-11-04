@@ -3640,3 +3640,132 @@ h2 > span {
   border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-1px);
 }
+
+
+/* ==========================================================================
+   liquid-glass-react Integration (Apple Real Refraction & Displacement)
+   ========================================================================== */
+
+.klyv-liquid-glass {
+  position: relative;
+  border-radius: 9999px;
+  user-select: none;
+}
+
+.klyv-liquid-glass .glass {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 9999px !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.klyv-liquid-glass:hover .glass {
+  transform: translateY(-2px);
+}
+
+.klyv-liquid-glass:active .glass {
+  transform: scale(0.97);
+}
+
+/* Conteúdo interno (Fonte Nunito e texto nítido) */
+.klyv-liquid-glass .glass > div {
+  font-family: inherit !important;
+  font-size: 15px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.klyv-liquid-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Specular Highlight de 1.5px na borda superior */
+.klyv-liquid-glass .specular-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 50%, transparent 100%);
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 1. Variante Primária (Começar agora - Ciano / Azul Líquido Refrativo) */
+.klyv-liquid-primary .glass,
+.klyv-liquid-primary.klyv-liquid-placeholder {
+  background: rgba(9, 181, 240, 0.22) !important;
+  border: 1px solid rgba(9, 181, 240, 0.45) !important;
+  box-shadow: 0 10px 32px 0 rgba(9, 181, 240, 0.32), 0 8px 24px 0 rgba(0, 0, 0, 0.35) !important;
+}
+
+.klyv-liquid-primary:hover .glass {
+  background: rgba(9, 181, 240, 0.35) !important;
+  border-color: rgba(14, 194, 255, 0.75) !important;
+  box-shadow: 0 14px 40px 0 rgba(9, 181, 240, 0.48), 0 10px 28px 0 rgba(0, 0, 0, 0.45) !important;
+}
+
+.klyv-liquid-primary .klyv-liquid-content {
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(7, 30, 48, 0.7);
+}
+
+/* 2. Variante Secundária (Conheça o produto - Vidro Translúcido Puro com Distorção) */
+.klyv-liquid-secondary .glass,
+.klyv-liquid-secondary.klyv-liquid-placeholder {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+.klyv-liquid-secondary:hover .glass {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 0 14px 40px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+.klyv-liquid-secondary .klyv-liquid-content {
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(7, 30, 48, 0.6);
+}
+
+/* 3. Variante Header (Criar conta) */
+.klyv-liquid-header .glass,
+.klyv-liquid-header.klyv-liquid-placeholder {
+  font-size: 14px !important;
+}
+
+.site-header.at-top .klyv-liquid-header .glass,
+.site-header.at-top .klyv-liquid-header.klyv-liquid-placeholder {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25) !important;
+}
+
+.site-header.scrolled .klyv-liquid-header .glass,
+.site-header.scrolled .klyv-liquid-header.klyv-liquid-placeholder {
+  background: rgba(7, 63, 103, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  box-shadow: 0 4px 16px 0 rgba(7, 63, 103, 0.25) !important;
+}
+
+/* Placeholder para SSR */
+.klyv-liquid-placeholder {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
