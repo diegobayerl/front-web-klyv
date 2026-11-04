@@ -152,18 +152,6 @@ export default function Home() {
   const selectedPlan = plans[mobilePlan];
   const preview = previews[activePreview];
 
-  const handleCapabilityClick = (action: string) => {
-    if (action === "dashboard" || action === "pipeline" || action === "surveys") {
-      const targetIndex = previews.findIndex(p => p.id === action);
-      if (targetIndex !== -1) {
-        setActivePreview(targetIndex);
-      }
-      document.getElementById("produto")?.scrollIntoView({ behavior: "smooth" });
-    } else if (action.startsWith("#")) {
-      document.querySelector(action)?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return <>
     <ScrollEffects />
     <script
@@ -243,18 +231,13 @@ export default function Home() {
             {[...capabilities, ...capabilities, ...capabilities].map((item, idx) => {
               const Icon = item.icon;
               return (
-                <button
-                  key={`${item.label}-${idx}`}
-                  type="button"
-                  className="capability-marquee-item"
-                  onClick={() => handleCapabilityClick(item.action)}
-                >
+                <div key={`${item.label}-${idx}`} className="capability-marquee-item">
                   <Icon size={18} strokeWidth={2} className="capability-item-icon" />
                   <span className="capability-item-label">{item.label}</span>
                   <span className="capability-item-dot">·</span>
                   <span className="capability-item-desc">{item.desc}</span>
                   <span className="capability-item-sep">✦</span>
-                </button>
+                </div>
               );
             })}
           </div>
