@@ -3420,7 +3420,7 @@ h2 > span {
   align-items: center;
   gap: 20px;
   width: max-content;
-  animation: capabilitiesMarqueeScroll 40s linear infinite;
+  animation: capabilitiesMarqueeScroll 90s linear infinite;
   will-change: transform;
   pointer-events: none; /* 100% decorativo, zero interrupção ou hover */
 }
