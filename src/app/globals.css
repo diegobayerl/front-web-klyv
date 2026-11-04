@@ -1289,23 +1289,145 @@ h2 > span {
 
 .product-panel-copy {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 30px;
-  padding: 16px 0 30px;
+  gap: 40px;
+  padding: 20px 0 32px;
+}
+
+.product-panel-info {
+  flex: 1;
+  min-width: 0;
+  max-width: 720px;
+}
+
+.product-panel-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  margin-bottom: 12px;
 }
 
 .product-panel-copy h3 {
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 25px;
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: #06172B;
+  margin: 0 0 10px 0;
 }
 
 .product-panel-copy p {
-  max-width: 520px;
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+  color: #475569;
+  margin: 0 0 18px 0;
+  max-width: 680px;
+}
+
+.product-panel-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+}
+
+.product-highlight-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.product-highlight-item svg {
+  color: #0284c7;
+  flex-shrink: 0;
+}
+
+/* Call to Action Executivo de Alta Conversão */
+.product-panel-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 9px;
+  flex-shrink: 0;
+  padding-top: 10px;
+}
+
+.product-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #09223c 0%, #06172B 100%);
+  color: #ffffff !important;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none !important;
+  border: 1px solid rgba(6, 23, 43, 0.9);
+  box-shadow: 
+    0 10px 28px -4px rgba(6, 23, 43, 0.42),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.product-cta-btn:hover {
+  background: linear-gradient(180deg, #0d2f52 0%, #081d33 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 14px 34px -4px rgba(6, 23, 43, 0.52),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.45);
+}
+
+.product-cta-btn:active {
+  transform: scale(0.98);
+}
+
+.product-cta-btn svg {
+  transition: transform 0.25s ease;
+}
+
+.product-cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+.product-cta-guarantee {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .product-panel-copy {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    padding: 16px 0 24px;
+  }
+  .product-panel-cta-wrap {
+    align-items: flex-start;
+    padding-top: 0;
+    width: 100%;
+  }
+  .product-cta-btn {
+    width: 100%;
+  }
 }
 
 .product-screen {

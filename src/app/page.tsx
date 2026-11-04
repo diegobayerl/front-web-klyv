@@ -10,9 +10,36 @@ import { SeamlessLoopVideo } from "../components/SeamlessLoopVideo";
 const crm = (process.env.NEXT_PUBLIC_CRM_URL || "https://app.klyv.com.br").replace(/\/$/, "");
 const signup = `${crm}/company/create`;
 const previews = [
-  { id: "dashboard", label: "Enxergue o todo", icon: BarChart3, title: "Decida com o cenário completo.", text: "Receita, metas e oportunidades na mesma visão. Entenda o momento da operação antes de escolher o próximo passo.", alt: "Prévia ilustrativa do dashboard Klyv, com receita, pipeline e gráficos de metas." },
-  { id: "pipeline", label: "Conduza cada negócio", icon: Workflow, title: "A próxima etapa fica clara.", text: "Organize propostas em um kanban, acompanhe versões e mantenha o histórico da negociação por perto.", alt: "Prévia ilustrativa das propostas Klyv organizadas por prospecção, negociação e aprovação." },
-  { id: "surveys", label: "Conheça seus clientes", icon: Users, title: "Ouça quem confia no seu trabalho.", text: "Acompanhe métricas de NPS e satisfação para transformar retorno em novos negócios.", alt: "Prévia ilustrativa das pesquisas de satisfação Klyv." },
+  {
+    id: "dashboard",
+    label: "Enxergue o todo",
+    icon: BarChart3,
+    badge: "PREVISIBILIDADE DE RECEITA",
+    title: "Saiba exatamente quanto vai fechar antes do mês acabar.",
+    text: "Elimine planilhas paralelas e palpites. Acompanhe a distância para a meta, o volume real em negociação e tome decisões antes de ser surpreendido pelo fechamento.",
+    highlights: ["Previsão de caixa confiável", "Metas em tempo real", "Sem surpresas no fim do mês"],
+    alt: "Prévia ilustrativa do dashboard Klyv, com receita, pipeline e gráficos de metas."
+  },
+  {
+    id: "pipeline",
+    label: "Conduza cada negócio",
+    icon: Workflow,
+    badge: "GESTÃO DE OPORTUNIDADES",
+    title: "Nenhuma proposta esfria. Cada negócio com próximo passo garantido.",
+    text: "Acabe com o esquecimento comercial. Saiba em segundos quais clientes precisam de follow-up hoje e recupere negociações mornas antes que vão para o concorrente.",
+    highlights: ["Follow-ups sem atraso", "Histórico de revisões", "Ciclo de vendas mais ágil"],
+    alt: "Prévia ilustrativa das propostas Klyv organizadas por prospecção, negociação e aprovação."
+  },
+  {
+    id: "surveys",
+    label: "Conheça seus clientes",
+    icon: Users,
+    badge: "RETENÇÃO E RECOMPRA",
+    title: "A venda é só o começo: descubra o que retém ou afasta seus clientes.",
+    text: "Colete NPS e feedbacks no momento exato da entrega. Identifique clientes promotores para gerar indicações e corrija insatisfações antes do cancelamento.",
+    highlights: ["Alertas de clientes em risco", "Recompras contínuas", "Pesquisas 100% dinâmicas"],
+    alt: "Prévia ilustrativa das pesquisas de satisfação Klyv."
+  },
 ];
 const faqs = [
   ["O que consigo organizar no Klyv?", "Clientes, contatos, propostas e suas versões, contratos, execução, follow-ups, ações, metas, agenda e anotações. As pesquisas de satisfação completam a visão do relacionamento após a venda."],
@@ -280,13 +307,26 @@ export default function Home() {
           </div>
           <div className="product-panel scroll-focus-blur stagger-2" id="product-panel" role="tabpanel" aria-labelledby={`tab-${preview.id}`} tabIndex={0}>
             <div className="product-panel-copy">
-              <div>
+              <div className="product-panel-info">
+                <span className="product-panel-badge">{preview.badge}</span>
                 <h3>{preview.title}</h3>
                 <p>{preview.text}</p>
+                <div className="product-panel-highlights">
+                  {preview.highlights.map((item) => (
+                    <span key={item} className="product-highlight-item">
+                      <Check size={14} strokeWidth={2.5} />
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <a className="text-link" href={`${signup}?plan=free`}>
-                Começar agora <ArrowRight size={15} />
-              </a>
+              <div className="product-panel-cta-wrap">
+                <a className="product-cta-btn" href={`${signup}?plan=free`}>
+                  <span>Testar 14 dias grátis</span>
+                  <ArrowRight size={16} />
+                </a>
+                <span className="product-cta-guarantee">Sem cartão de crédito · Setup em 1 min</span>
+              </div>
             </div>
             <div className="product-screen">
               <InteractiveDashboardPreview
