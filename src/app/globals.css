@@ -3374,7 +3374,7 @@ h2 > span {
 
 
 /* ==========================================================================
-   CARROSSEL TICKER LUMINOSO DE ALTA PERFORMANCE (Site de Vendas / Decorativo)
+   CARROSSEL TICKER LUMINOSO DE ALTA PERFORMANCE (Faixa Laranja Vibrante / Site de Vendas)
    ========================================================================== */
 .capabilities-marquee-section {
   width: 100%;
@@ -3382,16 +3382,19 @@ h2 > span {
   z-index: 10;
   overflow: hidden;
   padding: 16px 0;
-  /* Fundo Azul Klyv Profundo com Efeito de Vidro Iluminado */
-  background: linear-gradient(180deg, #0a4f80 0%, #073F67 45%, #05263d 100%);
-  border-top: 1px solid rgba(56, 189, 248, 0.65);
-  border-bottom: 1px solid rgba(4, 24, 40, 0.9);
-  box-shadow: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.45),
-              0 -10px 32px -4px rgba(9, 181, 240, 0.35),
-              0 16px 40px -4px rgba(4, 28, 46, 0.85);
+  /* Fundo Laranja Vibrante com Iluminação e Profundidade Sunset/Amber */
+  background: 
+    radial-gradient(ellipse 65% 140% at 50% -20%, rgba(255, 237, 213, 0.45) 0%, rgba(255, 140, 20, 0.25) 50%, transparent 85%),
+    linear-gradient(90deg, #9a3412 0%, #c2410c 12%, #ea580c 30%, #ff7a00 50%, #ea580c 70%, #c2410c 88%, #9a3412 100%);
+  border-top: 1px solid rgba(255, 237, 213, 0.75);
+  border-bottom: 1px solid rgba(124, 45, 18, 0.9);
+  box-shadow: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.5),
+              inset 0 -2px 6px rgba(124, 45, 18, 0.6),
+              0 -10px 32px -4px rgba(234, 88, 12, 0.45),
+              0 18px 45px -4px rgba(124, 45, 18, 0.7);
 }
 
-/* Linha de iluminação central no topo (Feixe de Luz Neon Apple/Stripe) */
+/* Linha de iluminação central no topo (Feixe de Luz Solar Branco/Âmbar) */
 .capabilities-marquee-section::before {
   content: "";
   position: absolute;
@@ -3399,9 +3402,9 @@ h2 > span {
   left: 50%;
   transform: translateX(-50%);
   width: 65%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 1) 50%, transparent 100%);
-  box-shadow: 0 0 20px 4px rgba(14, 194, 255, 0.9);
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 35%, #ffffff 50%, rgba(255, 255, 255, 0.85) 65%, transparent 100%);
+  box-shadow: 0 0 24px 6px rgba(255, 255, 255, 0.9), 0 0 50px 14px rgba(255, 237, 213, 0.7);
   pointer-events: none;
   z-index: 2;
 }
@@ -3449,42 +3452,42 @@ h2 > span {
   pointer-events: none;
 }
 
-/* Ícone iluminado com suave aura ciano */
+/* Ícone iluminado em branco cristal puro */
 .capability-item-icon {
-  color: #38bdf8;
+  color: #ffffff;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.65));
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85));
 }
 
 .capability-item-label {
   font-size: 14.5px;
-  font-weight: 750;
+  font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.01em;
-  text-shadow: 0 1px 6px rgba(4, 28, 46, 0.8);
+  text-shadow: 0 1px 4px rgba(124, 45, 18, 0.9);
 }
 
 .capability-item-dot {
-  color: rgba(56, 189, 248, 0.6);
+  color: rgba(255, 255, 255, 0.75);
   font-size: 14px;
 }
 
 .capability-item-desc {
   font-size: 13.5px;
-  font-weight: 500;
-  color: rgba(224, 242, 254, 0.88);
+  font-weight: 550;
+  color: #ffedd5;
   letter-spacing: -0.005em;
-  text-shadow: 0 1px 4px rgba(4, 28, 46, 0.6);
+  text-shadow: 0 1px 3px rgba(124, 45, 18, 0.8);
 }
 
-/* Estrela separadora brilhante */
+/* Estrela separadora brilhante ouro/âmbar */
 .capability-item-sep {
-  color: #09b5f0;
-  font-size: 11px;
+  color: #fef08a;
+  font-size: 12px;
   margin-left: 20px;
   display: inline-block;
-  opacity: 0.85;
-  filter: drop-shadow(0 0 8px rgba(9, 181, 240, 0.8));
+  opacity: 0.95;
+  filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.95));
 }
 
 @media (max-width: 768px) {
