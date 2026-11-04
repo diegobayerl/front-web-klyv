@@ -139,24 +139,14 @@ export default function Home() {
   const [activePreview, setActivePreview] = useState(0);
   const [mobilePlan, setMobilePlan] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout;
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 24);
-      setIsScrolling(true);
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        setIsScrolling(false);
-      }, 150);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const planKeys = ['free', 'basic', 'pro', 'enterprise'] as const;
   const selectedPlan = plans[mobilePlan];
@@ -169,7 +159,7 @@ export default function Home() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
     />
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <header className={`site-header ${isScrolled ? "scrolled" : "at-top"} ${isScrolling ? "scrolling-active" : ""}`}>
+    <header className={`site-header ${isScrolled ? "scrolled" : "at-top"}`}>
       <div className="nav-wrap wrap">
         <a className="brand" href="#" aria-label="Klyv, início">
           <Image
