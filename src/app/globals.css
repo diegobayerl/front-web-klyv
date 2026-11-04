@@ -3398,9 +3398,7 @@ h2 > span {
   will-change: transform;
 }
 
-.capabilities-marquee-track:hover {
-  animation-play-state: paused;
-}
+
 
 @keyframes capabilitiesMarqueeScroll {
   from {
