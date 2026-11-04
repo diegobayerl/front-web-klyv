@@ -3374,7 +3374,7 @@ h2 > span {
 
 
 /* ==========================================================================
-   CARROSSEL TICKER LUMINOSO DE ALTA PERFORMANCE (Faixa Laranja Vibrante / Site de Vendas)
+   CARROSSEL TICKER LUMINOSO (Fundo Azul Klyv Minimalista / Decorativo)
    ========================================================================== */
 .capabilities-marquee-section {
   width: 100%;
@@ -3382,29 +3382,25 @@ h2 > span {
   z-index: 10;
   overflow: hidden;
   padding: 16px 0;
-  /* Fundo Laranja Vibrante com Iluminação e Profundidade Sunset/Amber */
-  background: 
-    radial-gradient(ellipse 65% 140% at 50% -20%, rgba(255, 237, 213, 0.45) 0%, rgba(255, 140, 20, 0.25) 50%, transparent 85%),
-    linear-gradient(90deg, #9a3412 0%, #c2410c 12%, #ea580c 30%, #ff7a00 50%, #ea580c 70%, #c2410c 88%, #9a3412 100%);
-  border-top: 1px solid rgba(255, 237, 213, 0.75);
-  border-bottom: 1px solid rgba(124, 45, 18, 0.9);
-  box-shadow: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.5),
-              inset 0 -2px 6px rgba(124, 45, 18, 0.6),
-              0 -10px 32px -4px rgba(234, 88, 12, 0.45),
-              0 18px 45px -4px rgba(124, 45, 18, 0.7);
+  /* Fundo Azul Klyv Profundo e Elegante */
+  background: linear-gradient(180deg, #094a77 0%, #073F67 48%, #052a45 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(3, 18, 30, 0.8);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
+              0 10px 30px -4px rgba(3, 18, 30, 0.7);
 }
 
-/* Linha de iluminação central no topo (Feixe de Luz Solar Branco/Âmbar) */
+/* Linha de iluminação superior minimalista (Fio de Luz Refinado) */
 .capabilities-marquee-section::before {
   content: "";
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 65%;
-  height: 2.5px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 35%, #ffffff 50%, rgba(255, 255, 255, 0.85) 65%, transparent 100%);
-  box-shadow: 0 0 24px 6px rgba(255, 255, 255, 0.9), 0 0 50px 14px rgba(255, 237, 213, 0.7);
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.6) 30%, rgba(255, 255, 255, 0.95) 50%, rgba(56, 189, 248, 0.6) 70%, transparent 100%);
+  box-shadow: 0 0 10px 1px rgba(56, 189, 248, 0.4);
   pointer-events: none;
   z-index: 2;
 }
@@ -3452,42 +3448,42 @@ h2 > span {
   pointer-events: none;
 }
 
-/* Ícone iluminado em branco cristal puro */
+/* Ícone iluminado sutil em ciano */
 .capability-item-icon {
-  color: #ffffff;
+  color: #38bdf8;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85));
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.45));
 }
 
 .capability-item-label {
   font-size: 14.5px;
-  font-weight: 800;
+  font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.01em;
-  text-shadow: 0 1px 4px rgba(124, 45, 18, 0.9);
+  text-shadow: 0 1px 3px rgba(3, 18, 30, 0.6);
 }
 
 .capability-item-dot {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.35);
   font-size: 14px;
 }
 
 .capability-item-desc {
   font-size: 13.5px;
-  font-weight: 550;
-  color: #ffedd5;
+  font-weight: 500;
+  color: rgba(224, 242, 254, 0.85);
   letter-spacing: -0.005em;
-  text-shadow: 0 1px 3px rgba(124, 45, 18, 0.8);
+  text-shadow: 0 1px 2px rgba(3, 18, 30, 0.5);
 }
 
-/* Estrela separadora brilhante ouro/âmbar */
+/* Separador elegante e discreto */
 .capability-item-sep {
-  color: #fef08a;
-  font-size: 12px;
+  color: #38bdf8;
+  font-size: 10px;
   margin-left: 20px;
   display: inline-block;
-  opacity: 0.95;
-  filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.95));
+  opacity: 0.75;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
 }
 
 @media (max-width: 768px) {
