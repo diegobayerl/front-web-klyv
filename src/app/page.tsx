@@ -251,7 +251,36 @@ export default function Home() {
               <p>Seu cliente não é só uma linha na planilha. É uma conversa, uma oportunidade e uma história que merece continuidade.</p>
             </div>
           </div>
-          <div className="product-tabs scroll-focus-blur stagger-1" role="tablist" aria-label="Conheça as telas do Klyv">{previews.map((item, index) => <button key={item.id} id={`tab-${item.id}`} role="tab" aria-selected={index === activePreview} aria-controls="product-panel" tabIndex={index === activePreview ? 0 : -1} onClick={() => setActivePreview(index)} onKeyDown={event => { const next = event.key === 'ArrowRight' ? (index + 1) % previews.length : event.key === 'ArrowLeft' ? (index + previews.length - 1) % previews.length : event.key === 'Home' ? 0 : event.key === 'End' ? previews.length - 1 : null; if (next !== null) { event.preventDefault(); setActivePreview(next); document.getElementById(`tab-${previews[next].id}`)?.focus(); } }}><item.icon size={17} /><span>{item.label}</span></button>)}</div>
+          <div className="product-tabs-navbar scroll-focus-blur stagger-1" role="tablist" aria-label="Conheça as telas do Klyv">
+            <div 
+              className="product-tabs-indicator"
+              style={{ transform: `translateX(${activePreview * 100}%)` }}
+              aria-hidden="true"
+            />
+            {previews.map((item, index) => (
+              <button
+                key={item.id}
+                id={`tab-${item.id}`}
+                role="tab"
+                aria-selected={index === activePreview}
+                aria-controls="product-panel"
+                tabIndex={index === activePreview ? 0 : -1}
+                onClick={() => setActivePreview(index)}
+                className={`product-tab-btn ${index === activePreview ? "is-active" : ""}`}
+                onKeyDown={event => {
+                  const next = event.key === 'ArrowRight' ? (index + 1) % previews.length : event.key === 'ArrowLeft' ? (index + previews.length - 1) % previews.length : event.key === 'Home' ? 0 : event.key === 'End' ? previews.length - 1 : null;
+                  if (next !== null) {
+                    event.preventDefault();
+                    setActivePreview(next);
+                    document.getElementById(`tab-${previews[next].id}`)?.focus();
+                  }
+                }}
+              >
+                <item.icon size={17} className="product-tab-icon" />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </div>
           <div className="product-panel scroll-focus-blur stagger-2" id="product-panel" role="tabpanel" aria-labelledby={`tab-${preview.id}`} tabIndex={0}>
             <div className="product-panel-copy">
               <div>
