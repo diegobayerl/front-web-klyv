@@ -7,8 +7,6 @@ import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, BarChart3, Check, 
 import { InteractiveDashboardPreview } from "../components/InteractiveDashboardPreview";
 import { LiaShowcase } from "../components/LiaShowcase";
 import { SeamlessLoopVideo } from "../components/SeamlessLoopVideo";
-import { LiquidGlassButton } from "../components/LiquidGlassButton";
-
 const crm = (process.env.NEXT_PUBLIC_CRM_URL || "https://app.klyv.com.br").replace(/\/$/, "");
 const signup = `${crm}/company/create`;
 const previews = [
@@ -173,17 +171,6 @@ export default function Home() {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
     />
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    {/* SVG Filter de Refração Óptica Real (Apple Liquid Glass Displacement) */}
-    <svg className="sr-only" aria-hidden="true" style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }}>
-      <defs>
-        <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="24" xChannelSelector="R" yChannelSelector="G" result="displaced" />
-          <feGaussianBlur in="displaced" stdDeviation="2.5" />
-        </filter>
-      </defs>
-    </svg>
-
     <header className={`site-header ${isScrolled ? "scrolled" : "at-top"}`}>
       <div className="nav-wrap wrap">
         <a className="brand" href="#" aria-label="Klyv, início">
@@ -208,10 +195,10 @@ export default function Home() {
           {[['#produto', 'O produto'], ['#recursos', 'Possibilidades'], ['#lia', 'IA'], ['#planos', 'Planos'], ['#duvidas', 'Dúvidas']].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
           <div className="mobile-nav-cta">
             <a className="login-link-mobile" href={crm} onClick={() => setMobileMenu(false)}>Entrar no Klyv <ArrowUpRight size={15} /></a>
-            <a className="apple-liquid-glass btn-hero-primary" style={{ width: "100%" }} href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}><span className="specular-highlight" aria-hidden="true" />Começar 14 dias grátis</a>
+            <a className="button small" href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}>Começar 14 dias grátis</a>
           </div>
         </nav>
-        <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><LiquidGlassButton href={`${signup}?plan=free`} variant="header" displacementScale={50} aberrationIntensity={2} elasticity={0.25} padding="9px 24px">Criar conta</LiquidGlassButton><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
+        <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="button small" href={`${signup}?plan=free`}>Criar conta</a><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
       </div>
     </header>
     <main id="conteudo">
@@ -241,26 +228,8 @@ export default function Home() {
             </p>
 
             <div className="hero-bottom-actions">
-              <LiquidGlassButton
-                href={`${signup}?plan=free`}
-                variant="primary"
-                displacementScale={80}
-                aberrationIntensity={3}
-                elasticity={0.35}
-                padding="14px 34px"
-              >
-                Começar agora
-              </LiquidGlassButton>
-              <LiquidGlassButton
-                href="#produto"
-                variant="secondary"
-                displacementScale={75}
-                aberrationIntensity={2.5}
-                elasticity={0.3}
-                padding="14px 34px"
-              >
-                Conheça o produto
-              </LiquidGlassButton>
+              <a className="button hero-btn-start" href={`${signup}?plan=free`}>Começar agora</a>
+              <a className="button hero-btn-tour" href="#produto">Conheça o produto</a>
             </div>
 
 

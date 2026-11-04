@@ -3266,9 +3266,63 @@ h2 > span {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
   margin-bottom: 0;
+}
+
+.hero-bottom-actions .button {
+  height: 50px;
+  min-width: 185px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 9999px; /* Bordas arredondadas modernas */
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-bottom-actions .button.hero-btn-start {
+  padding: 0 28px;
+  font-weight: 700;
+  background: #09b5f0;
+  color: #072a42;
+  border: 1px solid transparent;
+  box-shadow: 0 8px 24px -4px rgba(9, 181, 240, 0.45);
+}
+
+.hero-bottom-actions .button.hero-btn-start:hover {
+  background: #08a5dc;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(9, 181, 240, 0.6);
+}
+
+.hero-bottom-actions .button.hero-btn-start:active {
+  transform: scale(0.97);
+}
+
+.hero-bottom-actions .button.hero-btn-tour {
+  padding: 0 28px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-bottom-actions .button.hero-btn-tour:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.hero-bottom-actions .button.hero-btn-tour:active {
+  transform: scale(0.97);
 }
 
 .hero-bottom-guarantee {
@@ -3474,298 +3528,41 @@ h2 > span {
   color: #ffffff;
 }
 
-/* ==========================================================================
-   Apple Liquid Glass (visionOS / macOS / iOS 18) - Refractive Optical Distortion
-   ========================================================================== */
-
-.apple-liquid-glass {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px; /* Bordas 100% arredondadas pílula Apple */
-  font-family: inherit;
-  font-weight: 600;
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-  user-select: none;
-  overflow: hidden;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.4);
-  letter-spacing: -0.01em;
-}
-
-.apple-liquid-glass:active {
-  transform: scale(0.96);
-}
-
-/* Camada 1: Lente Convexa Líquida (curvatura óptica de vidro espesso) */
-.apple-liquid-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(130% 120% at 50% 0%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.06) 55%, transparent 100%);
-  pointer-events: none;
-  z-index: 1;
-  transition: opacity 0.35s ease;
-}
-
-/* Camada 2: Friso de Luz Inferior (Reflexo interno da curvatura da gota) */
-.apple-liquid-glass::after {
-  content: "";
-  position: absolute;
-  inset: auto 15% 0 15%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
-  border-radius: 9999px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Camada 3: Specular Highlight de 1.5px na borda superior (corte de luz do vidro) */
-.apple-liquid-glass .specular-highlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 50%, transparent 100%);
-  border-top-left-radius: 9999px;
-  border-top-right-radius: 9999px;
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 0.3s ease;
-}
-
-.apple-liquid-glass:hover .specular-highlight {
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 1) 50%, transparent 100%);
-}
-
-/* Garante que o texto fique sempre nítido e em primeiro plano */
-.apple-liquid-glass > * {
-  position: relative;
-  z-index: 3;
-}
-
-/* 1. Botão Começar Agora - Vidro Ciano Líquido com Refração e Distorção */
-.apple-liquid-glass.btn-hero-primary {
-  height: 52px;
-  min-width: 195px;
-  padding: 0 32px;
-  font-size: 15px;
-  font-weight: 700;
-  background: rgba(9, 181, 240, 0.22);
-  /* Fallback padrão */
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  /* Refração óptica com distorção SVG real */
-  backdrop-filter: url(#liquid-distortion) blur(3px) saturate(190%);
-  -webkit-backdrop-filter: url(#liquid-distortion) blur(3px) saturate(190%);
-  border: 1px solid rgba(9, 181, 240, 0.45);
-  box-shadow: 0 10px 32px 0 rgba(9, 181, 240, 0.32), 0 8px 24px 0 rgba(0, 0, 0, 0.35);
-  text-shadow: 0 1px 4px rgba(7, 30, 48, 0.7);
-}
-
-.apple-liquid-glass.btn-hero-primary:hover {
-  background: rgba(9, 181, 240, 0.35);
-  border-color: rgba(14, 194, 255, 0.75);
-  box-shadow: 0 14px 40px 0 rgba(9, 181, 240, 0.48), 0 10px 28px 0 rgba(0, 0, 0, 0.45);
-  transform: translateY(-2px);
-}
-
-/* 2. Botão Conheça o Produto - Vidro Translúcido Puro com Distorção da Imagem de Fundo */
-.apple-liquid-glass.btn-hero-secondary {
-  height: 52px;
-  min-width: 195px;
-  padding: 0 32px;
-  font-size: 15px;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.10);
-  /* Fallback padrão */
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  /* Refração óptica com distorção SVG real */
-  backdrop-filter: url(#liquid-distortion) blur(3px) saturate(190%);
-  -webkit-backdrop-filter: url(#liquid-distortion) blur(3px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.4);
-  text-shadow: 0 1px 3px rgba(7, 30, 48, 0.6);
-}
-
-.apple-liquid-glass.btn-hero-secondary:hover {
-  background: rgba(255, 255, 255, 0.20);
-  border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 14px 40px 0 rgba(0, 0, 0, 0.5);
-  transform: translateY(-2px);
-}
-
-/* 3. Botão Criar Conta (Header) */
-.apple-liquid-glass.btn-header-cta {
+/* Header Button - Arredondado Simples e Limpo */
+.site-header .button.small {
+  min-height: 40px;
   height: 40px;
-  padding: 0 24px;
+  padding: 0 22px;
   font-size: 14px;
-  font-weight: 600;
-}
-
-.site-header.at-top .apple-liquid-glass.btn-header-cta {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: url(#liquid-distortion) blur(2.5px) saturate(180%);
-  -webkit-backdrop-filter: url(#liquid-distortion) blur(2.5px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25);
-  color: #ffffff;
-}
-
-.site-header.at-top .apple-liquid-glass.btn-header-cta:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-1px);
-}
-
-.site-header.scrolled .apple-liquid-glass.btn-header-cta {
-  background: rgba(7, 63, 103, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  box-shadow: 0 4px 16px 0 rgba(7, 63, 103, 0.25);
-  color: #ffffff;
-}
-
-.site-header.scrolled .apple-liquid-glass.btn-header-cta:hover {
-  background: rgba(7, 63, 103, 1);
-  border-color: rgba(255, 255, 255, 0.35);
-  transform: translateY(-1px);
-}
-
-
-/* ==========================================================================
-   liquid-glass-react Integration (Apple Real Refraction & Displacement)
-   ========================================================================== */
-
-.klyv-liquid-glass {
-  position: relative;
+  font-weight: 700;
   border-radius: 9999px;
-  user-select: none;
-}
-
-.klyv-liquid-glass .glass {
-  position: relative;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 9999px !important;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.klyv-liquid-glass:hover .glass {
-  transform: translateY(-2px);
-}
-
-.klyv-liquid-glass:active .glass {
-  transform: scale(0.97);
-}
-
-/* Conteúdo interno (Fonte Nunito e texto nítido) */
-.klyv-liquid-glass .glass > div {
-  font-family: inherit !important;
-  font-size: 15px !important;
-  line-height: 1.2 !important;
-  letter-spacing: -0.01em !important;
-}
-
-.klyv-liquid-content {
-  position: relative;
-  z-index: 2;
-  color: #ffffff;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-}
-
-/* Specular Highlight de 1.5px na borda superior */
-.klyv-liquid-glass .specular-highlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 50%, transparent 100%);
-  border-top-left-radius: 9999px;
-  border-top-right-radius: 9999px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* 1. Variante Primária (Começar agora - Ciano / Azul Líquido Refrativo) */
-.klyv-liquid-primary .glass,
-.klyv-liquid-primary.klyv-liquid-placeholder {
-  background: rgba(9, 181, 240, 0.22) !important;
-  border: 1px solid rgba(9, 181, 240, 0.45) !important;
-  box-shadow: 0 10px 32px 0 rgba(9, 181, 240, 0.32), 0 8px 24px 0 rgba(0, 0, 0, 0.35) !important;
-}
-
-.klyv-liquid-primary:hover .glass {
-  background: rgba(9, 181, 240, 0.35) !important;
-  border-color: rgba(14, 194, 255, 0.75) !important;
-  box-shadow: 0 14px 40px 0 rgba(9, 181, 240, 0.48), 0 10px 28px 0 rgba(0, 0, 0, 0.45) !important;
-}
-
-.klyv-liquid-primary .klyv-liquid-content {
-  font-weight: 700;
-  text-shadow: 0 1px 4px rgba(7, 30, 48, 0.7);
-}
-
-/* 2. Variante Secundária (Conheça o produto - Vidro Translúcido Puro com Distorção) */
-.klyv-liquid-secondary .glass,
-.klyv-liquid-secondary.klyv-liquid-placeholder {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.4) !important;
-}
-
-.klyv-liquid-secondary:hover .glass {
-  background: rgba(255, 255, 255, 0.18) !important;
-  border-color: rgba(255, 255, 255, 0.45) !important;
-  box-shadow: 0 14px 40px 0 rgba(0, 0, 0, 0.5) !important;
-}
-
-.klyv-liquid-secondary .klyv-liquid-content {
-  font-weight: 600;
-  text-shadow: 0 1px 3px rgba(7, 30, 48, 0.6);
-}
-
-/* 3. Variante Header (Criar conta) */
-.klyv-liquid-header .glass,
-.klyv-liquid-header.klyv-liquid-placeholder {
-  font-size: 14px !important;
-}
-
-.site-header.at-top .klyv-liquid-header .glass,
-.site-header.at-top .klyv-liquid-header.klyv-liquid-placeholder {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border: 1px solid rgba(255, 255, 255, 0.28) !important;
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25) !important;
-}
-
-.site-header.scrolled .klyv-liquid-header .glass,
-.site-header.scrolled .klyv-liquid-header.klyv-liquid-placeholder {
-  background: rgba(7, 63, 103, 0.88) !important;
-  border: 1px solid rgba(255, 255, 255, 0.20) !important;
-  box-shadow: 0 4px 16px 0 rgba(7, 63, 103, 0.25) !important;
-}
-
-/* Placeholder para SSR */
-.klyv-liquid-placeholder {
-  position: relative;
-  align-items: center;
   justify-content: center;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.2s ease;
+}
+
+.site-header.at-top .button.small {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.site-header.at-top .button.small:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.site-header.scrolled .button.small {
+  background: #073F67;
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+
+.site-header.scrolled .button.small:hover {
+  background: #0a4f80;
+  transform: translateY(-1px);
 }
