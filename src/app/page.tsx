@@ -245,11 +245,8 @@ export default function Home() {
       </div>
       <section className="section product-section" id="produto">
         <div className="wrap">
-          <div className="section-heading scroll-focus-blur">
+          <div className="section-heading product-heading-centered scroll-focus-blur">
             <div><h2>Menos tempo procurando.<br /><span>Mais tempo construindo relações.</span></h2></div>
-            <div className="section-narrative">
-              <p>Seu cliente não é só uma linha na planilha. É uma conversa, uma oportunidade e uma história que merece continuidade.</p>
-            </div>
           </div>
           <div className="product-tabs-navbar scroll-focus-blur stagger-1" role="tablist" aria-label="Conheça as telas do Klyv">
             <div 

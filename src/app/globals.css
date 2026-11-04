@@ -1165,6 +1165,19 @@ h2 > span {
   padding-bottom: 82px;
 }
 
+
+/* Product Heading Centralizado e Equalizado com a Navbar de Abas */
+.product-heading-centered {
+  justify-content: center !important;
+  text-align: center !important;
+  margin-bottom: 32px !important;
+}
+
+.product-heading-centered > div {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
 /* ==========================================================================
    SELETOR DE TELAS ESTILO NAVBAR FLUTUANTE (Liquid Glass com Botão Deslizante)
    ========================================================================== */
