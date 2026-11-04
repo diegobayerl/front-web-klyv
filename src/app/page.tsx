@@ -246,7 +246,7 @@ export default function Home() {
       <section className="section product-section" id="produto">
         <div className="wrap">
           <div className="section-heading">
-            <div><span className="eyebrow">O trabalho flui quando tudo conversa</span><h2>Menos tempo procurando.<br /><span>Mais tempo construindo relações.</span></h2></div>
+            <div><h2>Menos tempo procurando.<br /><span>Mais tempo construindo relações.</span></h2></div>
             <div className="section-narrative">
               <p>Seu cliente não é só uma linha na planilha. É uma conversa, uma oportunidade e uma história que merece continuidade.</p>
             </div>
