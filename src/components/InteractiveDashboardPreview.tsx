@@ -203,8 +203,14 @@ export function InteractiveDashboardPreview({
         )}
 
         <div className="demo-main" aria-label="Conteúdo demonstrativo do Klyv">
-          {activePage === 'dashboard' ? (
-            <>
+          <div 
+            className="demo-screens-slider"
+            style={{
+              transform: `translateX(-${(activePage === 'dashboard' ? 0 : activePage === 'pipeline' ? 1 : 2) * (100 / 3)}%)`
+            }}
+          >
+            {/* TELA 1: DASHBOARD COMERCIAL */}
+            <div className={`demo-screen-slide ${activePage === 'dashboard' ? 'is-active' : ''}`} data-screen="dashboard">
               <header className="demo-dashboard-header">
                 <div>
                   <h2>Performance Comercial</h2>
@@ -239,9 +245,10 @@ export function InteractiveDashboardPreview({
                 ))}
               </section>
               {goal}
-            </>
-          ) : activePage === 'pipeline' ? (
-            <>
+            </div>
+
+            {/* TELA 2: PROPOSTAS KANBAN */}
+            <div className={`demo-screen-slide ${activePage === 'pipeline' ? 'is-active' : ''}`} data-screen="pipeline">
               <h2 className="demo-page-title">Propostas</h2>
               <div className="demo-toolbar">
                 <label className="demo-search">
@@ -280,9 +287,10 @@ export function InteractiveDashboardPreview({
                   </section>
                 ))}
               </div>
-            </>
-          ) : (
-            <>
+            </div>
+
+            {/* TELA 3: PESQUISAS DE SATISFAÇÃO */}
+            <div className={`demo-screen-slide ${activePage === 'surveys' ? 'is-active' : ''}`} data-screen="surveys">
               <h2 className="demo-page-title">Pesquisas de Satisfação</h2>
               <div className="dashboard-kpis">
                 {[
@@ -311,8 +319,8 @@ export function InteractiveDashboardPreview({
                   <p>“Equipe atenciosa, com clareza em cada etapa.” — Cliente demonstrativo</p>
                 </details>
               ))}
-            </>
-          )}
+            </div>
+          </div>
           <p className="demo-data-note">Ambiente demonstrativo · dados fictícios</p>
         </div>
       </div>
