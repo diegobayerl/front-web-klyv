@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
+import { siteDescription, siteTitle, siteUrl } from "../lib/site";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -9,7 +10,7 @@ const nunito = Nunito({
   display: "swap",
 });
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://klyv.com.br").replace(/\/$/, "");
+const indexable = process.env.NODE_ENV === "production";
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#fbfcfa" };
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,27 +23,10 @@ export const metadata: Metadata = {
     },
   },
   title: {
-    default: "Klyv | Inteligência Comercial, Propostas, Clientes e IA com a Lia",
+    default: siteTitle,
     template: "%s | Klyv",
   },
-  description: "Do primeiro contato à próxima conquista. Organize clientes, conduza propostas, acompanhe entregas, pesquisas de satisfação e opere com a Lia no Klyv. Teste grátis por 14 dias.",
-  keywords: [
-    "Klyv",
-    "Klyv Inteligência Comercial",
-    "inteligência comercial",
-    "gestão comercial",
-    "propostas comerciais",
-    "funil de vendas",
-    "kanban de propostas",
-    "assistente IA comercial",
-    "Lia IA",
-    "IA no WhatsApp para vendas",
-    "pesquisa de satisfação NPS",
-    "gestão de clientes B2B",
-    "follow-up comercial",
-    "pós-venda e execução",
-    "metas comerciais",
-  ],
+  description: siteDescription,
   authors: [{ name: "Klyv", url: siteUrl }],
   creator: "Klyv",
   publisher: "Klyv",
@@ -52,10 +36,10 @@ export const metadata: Metadata = {
     telephone: false,
   },
   robots: {
-    index: true,
+    index: indexable,
     follow: true,
     googleBot: {
-      index: true,
+      index: indexable,
       follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
@@ -72,35 +56,29 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: siteUrl,
     siteName: "Klyv",
-    title: "Klyv | Inteligência Comercial, Propostas, Clientes e IA com a Lia",
-    description: "Do primeiro contato à próxima conquista. Clientes, propostas, execução, metas e a assistente Lia conectados em um só lugar. Teste grátis por 14 dias.",
+    title: siteTitle,
+    description: siteDescription,
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1024,
         height: 480,
-        type: "image/png",
-        alt: "Klyv — Seu comercial mais próximo e mais à frente",
-      },
-      {
-        url: "/og-image.svg",
-        width: 1024,
-        height: 480,
-        type: "image/svg+xml",
-        alt: "Klyv — Plataforma de Inteligência Comercial",
+        type: "image/jpeg",
+        alt: "Klyv — Cada negociação no lugar. O próximo passo, claro.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Klyv | Inteligência Comercial, Propostas e IA com a Lia",
-    description: "Organize clientes, propostas, metas e pesquisas com o apoio da Lia no Klyv. Teste grátis por 14 dias.",
-    images: ["/og-image.png"],
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/og-image.jpg"],
   },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR" className={nunito.variable}>
+      <head><link rel="describedby" href="/llms.txt" type="text/plain" /></head>
       <body className={`${nunito.className} antialiased`}>{children}</body>
     </html>
   );

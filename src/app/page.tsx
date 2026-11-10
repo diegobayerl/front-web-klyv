@@ -1,431 +1,211 @@
 "use client";
 
 import Image from "next/image";
-import { ScrollEffects } from "../components/ScrollEffects";
-import { useEffect, useState } from "react";
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, BarChart3, Check, ChevronDown, FileText, Layers3, Menu, MessageSquare, Minus, Sparkles, Target, Users, Workflow, X } from "lucide-react";
-import { InteractiveDashboardPreview } from "../components/InteractiveDashboardPreview";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ArrowUpRight, BarChart3, Check, ChevronDown, ChevronLeft, ChevronRight, FileText, Menu, MessageSquare, Minus, X } from "lucide-react";
+import { InteractiveDashboardPreview, type Page } from "../components/InteractiveDashboardPreview";
 import { LiaShowcase } from "../components/LiaShowcase";
-import { SeamlessLoopVideo } from "../components/SeamlessLoopVideo";
+import { SalesStructuredData } from "../components/SalesStructuredData";
+import "./sales.css";
+
 const crm = (process.env.NEXT_PUBLIC_CRM_URL || "https://app.klyv.com.br").replace(/\/$/, "");
 const signup = `${crm}/company/create`;
-const previews = [
-  {
-    id: "dashboard",
-    label: "Enxergue o todo",
-    icon: BarChart3,
-    badge: "PREVISIBILIDADE DE RECEITA",
-    title: "Saiba exatamente quanto vai fechar antes do mês acabar.",
-    text: "Elimine planilhas paralelas e palpites. Acompanhe a distância para a meta, o volume real em negociação e tome decisões antes de ser surpreendido pelo fechamento.",
-    highlights: ["Previsão de caixa confiável", "Metas em tempo real", "Sem surpresas no fim do mês"],
-    alt: "Prévia ilustrativa do dashboard Klyv, com receita, pipeline e gráficos de metas."
-  },
-  {
-    id: "pipeline",
-    label: "Conduza cada negócio",
-    icon: Workflow,
-    badge: "GESTÃO DE OPORTUNIDADES",
-    title: "Nenhuma proposta esfria. Cada negócio com próximo passo garantido.",
-    text: "Acabe com o esquecimento comercial. Saiba em segundos quais clientes precisam de follow-up hoje e recupere negociações mornas antes que vão para o concorrente.",
-    highlights: ["Follow-ups sem atraso", "Histórico de revisões", "Ciclo de vendas mais ágil"],
-    alt: "Prévia ilustrativa das propostas Klyv organizadas por prospecção, negociação e aprovação."
-  },
-  {
-    id: "surveys",
-    label: "Conheça seus clientes",
-    icon: Users,
-    badge: "RETENÇÃO E RECOMPRA",
-    title: "A venda é só o começo: descubra o que retém ou afasta seus clientes.",
-    text: "Colete NPS e feedbacks no momento exato da entrega. Identifique clientes promotores para gerar indicações e corrija insatisfações antes do cancelamento.",
-    highlights: ["Alertas de clientes em risco", "Recompras contínuas", "Pesquisas 100% dinâmicas"],
-    alt: "Prévia ilustrativa das pesquisas de satisfação Klyv."
-  },
+const trial = `${signup}?plan=free`;
+const previews: { id: Page; label: string; icon: typeof BarChart3; title: string; text: string }[] = [
+  { id: "dashboard", label: "Resultados", icon: BarChart3, title: "Receita, propostas e metas na mesma visão.", text: "Alterne o período para acompanhar os resultados e o que falta para a meta." },
+  { id: "pipeline", label: "Propostas", icon: FileText, title: "Veja em que etapa está cada negociação.", text: "Busque um cliente, alterne entre kanban e lista ou abra uma proposta para ver os detalhes." },
+  { id: "surveys", label: "Pós-venda", icon: MessageSquare, title: "Acompanhe o que seus clientes têm a dizer.", text: "Explore as campanhas e os indicadores de satisfação depois da entrega." },
+];
+const plans = [
+  { key: "free", name: "Teste 14 dias", price: "R$ 0", billing: "14 dias completos", audience: "Para testar o CRM e a Lia com até 2 pessoas.", cta: "Testar 14 dias grátis" },
+  { key: "basic", name: "Basic", price: "R$ 67", billing: "por mês", audience: "Para organizar a operação individual.", cta: "Escolher Basic" },
+  { key: "pro", name: "Pro", price: "R$ 157", billing: "por mês", audience: "Para trabalhar em dupla, com a Lia.", cta: "Escolher Pro" },
+  { key: "enterprise", name: "Enterprise", price: "Personalizado", billing: "sob demanda", audience: "Para equipes e operação pelo WhatsApp.", cta: "Criar conta Enterprise" },
+] as const;
+type PlanKey = typeof plans[number]["key"];
+type Feature = { name: string } & Record<PlanKey, string>;
+const features: Feature[] = [
+  { name: "Usuários incluídos", free: "Até 2 usuários", basic: "1 usuário", pro: "Até 2 usuários", enterprise: "Sob demanda" },
+  { name: "Clientes e contatos", free: "full", basic: "full", pro: "full", enterprise: "full" },
+  { name: "Propostas e pipeline", free: "full", basic: "full", pro: "full", enterprise: "full" },
+  { name: "Agenda e anotações", free: "full", basic: "full", pro: "full", enterprise: "full" },
+  { name: "Execução e pós-venda", free: "full", basic: "full", pro: "full", enterprise: "full" },
+  { name: "Metas comerciais", free: "full", basic: "basic", pro: "full", enterprise: "full" },
+  { name: "Dashboard", free: "full", basic: "basic", pro: "full", enterprise: "full" },
+  { name: "Pesquisas de satisfação", free: "full", basic: "full", pro: "full", enterprise: "full" },
+  { name: "Lia (Assistente IA)", free: "full", basic: "none", pro: "full", enterprise: "full" },
+  { name: "Lia nas pesquisas", free: "full", basic: "none", pro: "full", enterprise: "full" },
+  { name: "Lia no dashboard", free: "full", basic: "none", pro: "full", enterprise: "full" },
+  { name: "Operação pelo WhatsApp", free: "none", basic: "none", pro: "none", enterprise: "full" },
 ];
 const faqs = [
-  ["O que consigo organizar no Klyv?", "Clientes, contatos, propostas e suas versões, contratos, execução, follow-ups, ações, metas, agenda e anotações. As pesquisas de satisfação completam a visão do relacionamento após a venda."],
-  ["Posso começar gratuitamente?", "Sim. Novas contas no plano Free contam com 14 dias de avaliação gratuita para você conhecer o Klyv sem precisar de cartão de crédito."],
-  ["A partir de que plano posso ter acesso à Lia?", "O acesso à Lia está disponível a partir do plano Pro (e Enterprise), voltado para operações que buscam inteligência comercial e automação de rotinas via chat e WhatsApp."],
-  ["Quais funcionalidades a Lia pode fazer?", "A Lia executa tarefas comerciais sob o seu comando: agenda reuniões na sua pauta, cria lembretes e ações de follow-up (via WhatsApp, e-mail ou telefone), consulta metas e receita em tempo real e atualiza negociações — operando tanto pelo chat do Klyv quanto diretamente pelo WhatsApp."],
-  ["Existe processo de pós-venda no Klyv?", "Sim. No Klyv, a venda é só o começo: você conta com um módulo de execução para acompanhar entregas, centraliza o histórico do cliente e envia pesquisas de satisfação dinâmicas por e-mail ou link para garantir a melhoria contínua."]
+  ["Para quem é o Klyv?", "Para quem precisa acompanhar clientes, negociar propostas e continuar o relacionamento depois da venda. Você pode organizar sua operação individual ou trabalhar com uma equipe, conforme o plano escolhido."],
+  ["O que posso experimentar nos 14 dias grátis?", "Até duas pessoas podem cadastrar clientes, acompanhar propostas e entregas, consultar metas e usar a Lia durante 14 dias. O teste não exige cartão de crédito."],
+  ["A Lia e o WhatsApp estão liberados durante o teste?", "O teste inclui a Lia no chat, nas pesquisas e no dashboard. A operação pelo WhatsApp é exclusiva do Enterprise."],
+  ["A demonstração usa dados da minha empresa?", "Não. As telas e os exemplos desta página usam dados fictícios, sem conexão com a sua conta. Os comandos demonstrados não cadastram reuniões nem enviam mensagens."],
+  ["O valor do plano é por usuário?", "Os valores apresentados são mensais por plano, com os usuários indicados na comparação: 1 no Basic e até 2 no Pro. No Enterprise, o número de usuários e as condições são personalizados."],
+  ["O Klyv também acompanha o pós-venda?", "Sim. Depois da aprovação da proposta, você pode acompanhar os prazos de execução e consultar o retorno dos clientes nas pesquisas de satisfação."],
 ];
-
-const capabilities = [
-  { icon: Sparkles, label: "Inteligência Comercial Ativa", desc: "A Lia operando no seu WhatsApp", action: "#lia" },
-  { icon: Target, label: "Do Primeiro Contato à Próxima Conquista", desc: "Ciclo comercial completo de ponta a ponta", action: "pipeline" },
-  { icon: BarChart3, label: "Previsibilidade & Metas", desc: "Decida com o cenário comercial completo", action: "dashboard" },
-  { icon: Users, label: "A Venda é só o Começo", desc: "Execução e pós-venda que retêm clientes", action: "#recursos" },
-  { icon: MessageSquare, label: "Fidelização Contínua", desc: "Pesquisas de satisfação e NPS em tempo real", action: "surveys" },
-] as const;
-
-
-const plans = [
-  { name: 'Free', value: 'R$ 0', billing: '14 dias de teste grátis', cta: 'Testar 14 dias grátis', href: `${signup}?plan=free` },
-  { name: 'Basic', value: 'R$ 67', billing: 'por mês', cta: 'Escolher Basic', href: `${signup}?plan=basic` },
-  { name: 'Pro', value: 'R$ 157', billing: 'por mês', cta: 'Escolher Pro', href: `${signup}?plan=pro` },
-  { name: 'Enterprise', value: 'Personalizado', billing: 'sob demanda', cta: 'Conhecer Enterprise', href: `${signup}?plan=enterprise` },
-];
-
-type FeatureStatus = 'full' | 'basic' | 'none';
-
-interface ComparisonFeature {
-  name: string;
-  free: FeatureStatus | string;
-  basic: FeatureStatus | string;
-  pro: FeatureStatus | string;
-  enterprise: FeatureStatus | string;
+function Status({ value }: { value: string }) {
+  if (value === "full") return <span className="sales-status"><Check size={15} aria-hidden="true" />Completo</span>;
+  if (value === "none") return <span className="sales-status unavailable"><Minus size={14} aria-hidden="true" />Não incluído</span>;
+  if (value === "basic") return <span className="sales-status limited">Básico</span>;
+  return <span>{value}</span>;
 }
-
-const comparisonFeatures: ComparisonFeature[] = [
-  { name: 'Usuários', free: '1 usuário', basic: '1 usuário', pro: 'até 2 usuários', enterprise: 'sob demanda' },
-  { name: 'Clientes / Contatos', free: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Propostas / Pipeline', free: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Agenda / Anotações', free: 'full', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Execução do serviço', free: 'none', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Metas Comerciais', free: 'none', basic: 'basic', pro: 'full', enterprise: 'full' },
-  { name: 'Dashboard', free: 'basic', basic: 'basic', pro: 'full', enterprise: 'full' },
-  { name: 'Pós-Venda & Execução', free: 'none', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Pesquisas de Satisfação', free: 'none', basic: 'full', pro: 'full', enterprise: 'full' },
-  { name: 'Lia', free: 'none', basic: 'none', pro: 'basic', enterprise: 'full' },
-  { name: 'Lia pesquisa de satisfação', free: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
-  { name: 'Lia no Dashboard', free: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
-  { name: 'Operação pelo WhatsApp', free: 'none', basic: 'none', pro: 'none', enterprise: 'full' },
-];
-
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://klyv.com.br").replace(/\/$/, "");
-
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${siteUrl}/#organization`,
-      name: "Klyv",
-      url: siteUrl,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/klyv.svg`,
-      },
-      description: "Plataforma de inteligência comercial para organizar clientes, propostas, execução, metas, pesquisas de satisfação e operar com a assistente de IA Lia.",
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      url: siteUrl,
-      name: "Klyv Inteligência Comercial",
-      publisher: { "@id": `${siteUrl}/#organization` },
-      inLanguage: "pt-BR",
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": `${siteUrl}/#software`,
-      name: "Klyv",
-      applicationCategory: "BusinessApplication",
-      applicationSubCategory: "Sales & Commercial Intelligence",
-      operatingSystem: "Web",
-      url: siteUrl,
-      inLanguage: "pt-BR",
-      publisher: { "@id": `${siteUrl}/#organization` },
-      description: "Do primeiro contato à próxima conquista. Organize clientes, conduza propostas em kanban, acompanhe entregas, pesquisas de satisfação (NPS/CSAT) e opere com a assistente de IA Lia no Klyv e no WhatsApp.",
-      image: `${siteUrl}/og-image.svg`,
-      screenshot: `${siteUrl}/og-image.png`,
-      featureList: [
-        "Gestão 360° de clientes e contatos",
-        "Pipeline Kanban de propostas comerciais e controle de revisões",
-        "Acompanhamento de execução e pós-venda",
-        "Metas comerciais mensais, trimestrais e anuais em tempo real",
-        "Pesquisas dinâmicas de satisfação e NPS por e-mail ou link",
-        "Assistente operacional de IA (Lia) integrada ao Klyv e ao WhatsApp",
-      ],
-      offers: {
-        "@type": "Offer",
-        name: "Plano Free - 14 dias de avaliação gratuita",
-        price: "0.00",
-        priceCurrency: "BRL",
-        availability: "https://schema.org/InStock",
-        url: `${signup}?plan=free`,
-        description: "Avaliação gratuita por 14 dias para você conhecer o Klyv sem cartão de crédito.",
-      },
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteUrl}/#faq`,
-      mainEntity: faqs.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: answer,
-        },
-      })),
-    },
-  ],
-};
 
 export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [activePreview, setActivePreview] = useState(0);
   const [mobilePlan, setMobilePlan] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 24);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 15);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const planKeys = ['free', 'basic', 'pro', 'enterprise'] as const;
-  const selectedPlan = plans[mobilePlan];
-  const preview = previews[activePreview];
 
-  return <>
-    <ScrollEffects />
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const header = useRef<HTMLElement>(null);
+  const productPanel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const panel = productPanel.current;
+    if (!panel || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      panel.classList.add("sales-panel-entered");
+      observer.disconnect();
+    }, { threshold: 0.08 });
+    observer.observe(panel);
+    return () => observer.disconnect();
+  }, []);
+  const preview = previews[activePreview];
+  const selectedPlan = plans[mobilePlan];
+  useEffect(() => {
+    if (!mobileMenu) return;
+    const close = (event: PointerEvent) => { if (!header.current?.contains(event.target as Node)) setMobileMenu(false); };
+    const desktop = window.matchMedia("(min-width: 821px)");
+    const resize = () => { if (desktop.matches) setMobileMenu(false); };
+    document.addEventListener("pointerdown", close);
+    desktop.addEventListener("change", resize);
+    return () => { document.removeEventListener("pointerdown", close); desktop.removeEventListener("change", resize); };
+  }, [mobileMenu]);
+
+  return <div className="sales-site">
+    <SalesStructuredData faqs={faqs} plans={plans} />
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <header className={`site-header ${isScrolled ? "scrolled" : "at-top"}`}>
-      <div className="nav-wrap wrap">
-        <a className="brand" href="#" aria-label="Klyv, início">
-          <Image
-            src="/logo-klyv-white.svg"
-            alt="Klyv"
-            width={140}
-            height={56}
-            priority
-            className="brand-logo brand-logo-white"
-          />
-          <Image
-            src="/klyv.svg"
-            alt="Klyv"
-            width={140}
-            height={56}
-            priority
-            className="brand-logo brand-logo-dark"
-          />
-        </a>
-        <nav className={mobileMenu ? "main-nav open" : "main-nav"} aria-label="Navegação principal">
-          {[['#produto', 'O produto'], ['#recursos', 'Possibilidades'], ['#lia', 'IA'], ['#planos', 'Planos'], ['#duvidas', 'Dúvidas']].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
-          <div className="mobile-nav-cta">
-            <a className="login-link-mobile" href={crm} onClick={() => setMobileMenu(false)}>Entrar no Klyv <ArrowUpRight size={15} /></a>
-            <a className="button small" href={`${signup}?plan=free`} onClick={() => setMobileMenu(false)}>Começar 14 dias grátis</a>
-          </div>
+    <header className={`sales-header ${scrolled ? "is-scrolled" : "at-top"}`} ref={header} onKeyDown={event => { if (event.key === "Escape" && mobileMenu) { setMobileMenu(false); menuButton.current?.focus(); } }}>
+      <div className="sales-scroll-progress" aria-hidden="true" />
+      <div className="sales-wrap sales-nav">
+        <a href="#" aria-label="Klyv, início" className="sales-brand-link"><Image src="/klyv.svg" alt="Klyv" width={138} height={75} priority /></a>
+        <nav id="sales-navigation" className={mobileMenu ? "sales-links is-open" : "sales-links"} aria-label="Navegação principal">
+          {[["#produto", "Produto"], ["#planos", "Planos"], ["#lia", "Conheça a Lia"], ["#duvidas", "Dúvidas"]].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
+          <a href={crm} className="sales-mobile-login">Entrar no Klyv <ArrowUpRight size={14} /></a>
         </nav>
-        <div className="nav-actions"><a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="button small" href={`${signup}?plan=free`}>Criar conta</a><button className="menu-button" onClick={() => setMobileMenu(value => !value)} aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
+        <div className="sales-nav-actions"><a className="sales-login" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="sales-button compact" href={trial}>Começar agora <ArrowRight size={15} /></a><button ref={menuButton} type="button" className="sales-menu" aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu} aria-controls="sales-navigation" onClick={() => setMobileMenu(!mobileMenu)}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
       </div>
     </header>
     <main id="conteudo">
-      <section className="hero-fullvideo-section">
-        {/* Vídeo Full-Bleed em Loop Contínuo Sem Filtro Branco */}
-        <div className="hero-fullvideo-backdrop" aria-hidden="true">
-          <SeamlessLoopVideo
-            src="/blue-fox-mascot.mp4?v=8"
-            className="hero-fullvideo-player"
-            objectPosition="68% 15%"
-          />
-          {/* Suave vinheta escura apenas na base do hoodie para máxima legibilidade sem nenhum card */}
-          <div className="hero-bottom-scrim" />
-        </div>
-
-        {/* Conteúdo na parte inferior */}
-        <div className="hero-bottom-container wrap">
-          <div className="hero-bottom-copy">
-            <h1>
-              Seu comercial.<br />
-              Mais próximo.<br />
-              <span>Mais à frente.</span>
-            </h1>
-
-            <p>
-              Do primeiro contato à próxima conquista. Organize clientes, conduza propostas em kanban e acompanhe cada entrega com a inteligência da Lia operando no Klyv e no WhatsApp.
-            </p>
-
-            <div className="hero-bottom-actions">
-              <a className="button hero-btn-start" href={`${signup}?plan=free`}>Começar agora</a>
-              <a className="button hero-btn-tour" href="#produto">Conheça o produto</a>
-            </div>
-
-
+      <section className="sales-hero-centered" id="inicio">
+        <div className="sales-hero-content">
+          <h1 className="sales-hero-title">
+            Cada negociação no lugar.<br />
+            <span className="sales-hero-highlight">O próximo passo, claro.</span>
+          </h1>
+          <p className="sales-hero-subtitle">
+            O CRM para equipes que vendem serviços. Veja qual proposta precisa de retorno hoje e acompanhe a entrega depois que o cliente disser sim.
+          </p>
+          <div className="sales-hero-actions">
+            <a className="sales-hero-primary-btn" href={trial}>
+              <span>Testar 14 dias grátis</span>
+              <ArrowUpRight size={17} />
+            </a>
+            <a className="sales-hero-secondary-btn" href="#produto">
+              Ver demonstração
+            </a>
           </div>
+          <p className="sales-hero-reassurance">
+            Até 2 usuários no teste · Sem cartão de crédito
+          </p>
         </div>
       </section>
-      <div className="capabilities-marquee-section" aria-label="Áreas integradas do Klyv">
-        {/* Carrossel Full-Width Azul Klyv Sem Cards Redondos */}
-        <div className="capabilities-marquee-viewport">
-          <div className="capabilities-marquee-track">
-            {[...capabilities, ...capabilities, ...capabilities].map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div key={`${item.label}-${idx}`} className="capability-marquee-item">
-                  <Icon size={18} strokeWidth={2} className="capability-item-icon" />
-                  <span className="capability-item-label">{item.label}</span>
-                  <span className="capability-item-dot">·</span>
-                  <span className="capability-item-desc">{item.desc}</span>
-                  <span className="capability-item-sep">✦</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-      <section className="section product-section" id="produto">
-        <div className="wrap">
-          <div className="section-heading product-heading-centered scroll-focus-blur">
-            <div><h2>Menos tempo procurando.<br /><span>Mais tempo construindo relações.</span></h2></div>
-          </div>
-          <div className="product-tabs-navbar scroll-focus-blur stagger-1" role="tablist" aria-label="Conheça as telas do Klyv">
-            <div 
-              className="product-tabs-indicator"
-              style={{ transform: `translateX(${activePreview * 100}%)` }}
-              aria-hidden="true"
-            />
-            {previews.map((item, index) => (
-              <button
-                key={item.id}
-                id={`tab-${item.id}`}
-                role="tab"
-                aria-selected={index === activePreview}
-                aria-controls="product-panel"
-                tabIndex={index === activePreview ? 0 : -1}
-                onClick={() => setActivePreview(index)}
-                className={`product-tab-btn ${index === activePreview ? "is-active" : ""}`}
-                onKeyDown={event => {
-                  const next = event.key === 'ArrowRight' ? (index + 1) % previews.length : event.key === 'ArrowLeft' ? (index + previews.length - 1) % previews.length : event.key === 'Home' ? 0 : event.key === 'End' ? previews.length - 1 : null;
-                  if (next !== null) {
-                    event.preventDefault();
-                    setActivePreview(next);
-                    document.getElementById(`tab-${previews[next].id}`)?.focus();
-                  }
-                }}
-              >
-                <item.icon size={17} className="product-tab-icon" />
-                <span>{item.label}</span>
-              </button>
-            ))}
-          </div>
-          <div className="product-panel scroll-focus-blur stagger-2" id="product-panel" role="tabpanel" aria-labelledby={`tab-${preview.id}`} tabIndex={0}>
-            <div className="product-panel-copy">
-              <div className="product-panel-info">
-                <span className="product-panel-badge">{preview.badge}</span>
-                <h3>{preview.title}</h3>
-                <p>{preview.text}</p>
-                <div className="product-panel-highlights">
-                  {preview.highlights.map((item) => (
-                    <span key={item} className="product-highlight-item">
-                      <Check size={14} strokeWidth={2.5} />
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="product-panel-cta-wrap">
-                <a className="product-cta-btn" href={`${signup}?plan=free`}>
-                  <span>Testar 14 dias grátis</span>
-                  <ArrowRight size={16} />
-                </a>
-                <span className="product-cta-guarantee">Sem cartão de crédito · Setup em 1 min</span>
-              </div>
-            </div>
-            <div className="product-screen">
-              <InteractiveDashboardPreview
-                currentPage={preview.id as "dashboard" | "pipeline" | "surveys"}
-                onPageChange={(nextPage) => {
-                  const targetIndex = previews.findIndex((p) => p.id === nextPage);
-                  if (targetIndex !== -1) {
-                    setActivePreview(targetIndex);
-                  }
-                }}
-              />
-            </div>
-          </div>
-        </div>
+      <section className="sales-product sales-wrap scroll-reveal-scale" id="produto" aria-label="Explore o Klyv">
+        <div className="sales-demo-bar"><span><i aria-hidden="true" />Demonstração interativa · Dados fictícios</span></div>
+        <div className="sales-tabs" role="tablist" aria-label="Telas do Klyv">{previews.map((item, index) => <button key={item.id} type="button" id={`tab-${item.id}`} role="tab" aria-selected={index === activePreview} aria-controls="product-panel" tabIndex={index === activePreview ? 0 : -1} onClick={() => setActivePreview(index)} onKeyDown={event => { const next = event.key === "ArrowRight" ? (index + 1) % previews.length : event.key === "ArrowLeft" ? (index + previews.length - 1) % previews.length : event.key === "Home" ? 0 : event.key === "End" ? previews.length - 1 : null; if (next !== null) { event.preventDefault(); setActivePreview(next); document.getElementById(`tab-${previews[next].id}`)?.focus(); } }}><item.icon size={16} /><span>{item.label}</span></button>)}</div>
+        <div ref={productPanel} id="product-panel" role="tabpanel" aria-labelledby={`tab-${preview.id}`} tabIndex={0}><InteractiveDashboardPreview currentPage={preview.id} onPageChange={page => { const index = previews.findIndex(item => item.id === page); if (index >= 0) setActivePreview(index); }} /></div>
+        <div className="sales-demo-caption"><strong>{preview.title}</strong><p>{preview.text}</p></div>
       </section>
-      <section className="section wrap" id="recursos">
-        <div className="section-heading scroll-focus-blur"><div><h2>O negócio avança.<br /><span>O contexto vai junto.</span></h2></div></div>
-        <div className="feature-grid">
-          <article className="feature-card large scroll-focus-blur stagger-1"><span className="feature-index">01 / RELACIONAMENTO</span><Users size={26} strokeWidth={1.4} /><h3>Um cliente.<br />A história inteira.</h3><p>Contatos, interações e oportunidades reunidos. Prepare a próxima conversa sabendo o que já foi combinado.</p><div className="relationship-art" aria-hidden="true"><div className="avatar-stack"><span>AC</span><span>MO</span><span>PM</span></div><div className="relationship-copy"><strong>Pessoas antes de processos.</strong><span>O contexto que aproxima.</span></div></div></article>
-          <article className="feature-card scroll-focus-blur stagger-2"><span className="feature-index">02 / NEGOCIAÇÃO</span><FileText size={25} strokeWidth={1.4} /><h3>Cada proposta,<br />com seu próximo passo.</h3><p>Acompanhe versões, condições, follow-ups e ações. Clareza para conduzir negociações sem perder os detalhes.</p></article>
-          <article className="feature-card scroll-focus-blur stagger-3"><span className="feature-index">03 / CONTINUIDADE</span><Workflow size={25} strokeWidth={1.4} /><h3>A venda é só<br />o começo.</h3><p>Leve o relacionamento para a execução. Acompanhe entregas e ouça o cliente com pesquisas por e-mail ou link.</p></article>
-          <article className="feature-card wide scroll-focus-blur stagger-4"><div><span className="feature-index">04 / DIREÇÃO</span><h3>Saiba onde está.<br />Escolha aonde ir.</h3><p>Conecte a rotina às metas. Receita, pipeline, agenda e anotações ajudam a transformar informação em próximos passos.</p></div><div className="direction-art" aria-hidden="true"><div className="direction-ring"><Target size={34} strokeWidth={1} /></div><span>Visão → Decisão → Ação</span></div></article>
+      <section className="sales-flow sales-wrap" id="recursos" aria-label="Do primeiro contato ao pós-venda">{[
+        ["01", "Retome a conversa com contexto.", "Encontre os contatos, as propostas e o histórico do cliente sem procurar em lugares diferentes."],
+        ["02", "Dê um próximo passo à proposta.", "Organize versões, reuniões e follow-ups para acompanhar cada negociação até a decisão."],
+        ["03", "Continue presente depois da venda.", "Acompanhe a execução e reúna o retorno do cliente nas pesquisas de satisfação."],
+      ].map(([number, title, text], index) => <article key={number} className={`scroll-reveal stagger-${index + 1}`}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</section>
+      <section className="sales-section sales-pricing sales-wrap scroll-reveal" id="planos">
+        <div className="sales-section-heading"><div><p className="sales-eyebrow">PLANOS</p><h2>Planos e preços</h2></div><p>Compare os recursos e o número de pessoas que podem usar cada plano.</p></div>
+        <div className="sales-mobile-plans">
+          <div className="sales-plan-selector" aria-label="Escolher plano">{plans.map((plan, index) => <button key={plan.key} type="button" aria-pressed={index === mobilePlan} onClick={() => setMobilePlan(index)}>{plan.key === "free" ? "Teste" : plan.name}</button>)}</div>
+          <div className="sales-plan-navigation"><button type="button" aria-label="Plano anterior" onClick={() => setMobilePlan((mobilePlan + plans.length - 1) % plans.length)}><ChevronLeft size={21} /></button><div aria-live="polite" aria-atomic="true"><strong>{selectedPlan.name}</strong><span>{mobilePlan + 1} de {plans.length}</span></div><button type="button" aria-label="Próximo plano" onClick={() => setMobilePlan((mobilePlan + 1) % plans.length)}><ChevronRight size={21} /></button></div>
+          <div className="sales-mobile-price"><strong>{selectedPlan.price}</strong><span>{selectedPlan.billing}</span><p>{selectedPlan.audience}</p></div>
+          <a className={`sales-button ${selectedPlan.key === "pro" ? "" : "secondary"}`} href={`${signup}?plan=${selectedPlan.key}`}>{selectedPlan.cta}<ArrowUpRight size={15} /></a>
+          <dl className="sales-mobile-features">{features.map(row => <div key={row.name}><dt>{row.name}</dt><dd><Status value={row[selectedPlan.key]} /></dd></div>)}</dl>
         </div>
+        <div className="sales-table-wrapper" role="region" aria-label="Comparação de planos" tabIndex={0}><table className="sales-table"><caption className="sr-only">Comparação de preços, usuários e funcionalidades do Klyv</caption><thead><tr><th scope="col">O que está incluído</th>{plans.map(plan => <th scope="col" key={plan.key} className={plan.key === "pro" ? "sales-pro" : undefined}><div className="sales-plan-heading"><strong>{plan.name}</strong><span className="sales-plan-price">{plan.price}</span><span>{plan.billing}</span><p>{plan.audience}</p><a className={`sales-button ${plan.key === "pro" ? "" : "secondary"}`} href={`${signup}?plan=${plan.key}`}>{plan.cta}<ArrowUpRight size={13} /></a></div></th>)}</tr></thead><tbody>{features.map(row => <tr key={row.name}><th scope="row">{row.name}</th>{plans.map(plan => <td key={plan.key} className={plan.key === "pro" ? "sales-pro" : undefined}><Status value={row[plan.key]} /></td>)}</tr>)}</tbody></table></div>
       </section>
       <LiaShowcase />
-      <section className="method-section"><div className="wrap method-inner scroll-focus-blur"><div><h2>Cada feedback<br />transformado em<br /><em>melhoria contínua.</em></h2><a className="button light" href={`${signup}?plan=free`}>Dê o primeiro passo <ArrowRight size={16} /></a></div><ol className="steps">{[['Pesquisas de satisfação no timing certo.', 'Dispare pesquisas dinâmicas por e-mail ou link. Colete notas, percepções e retornos reais logo após cada entrega ou fechamento.'], ['Acúmulo de histórico e dados reais.', 'Cada resposta enriquece a história do seu cliente na Klyv, transformando opiniões em uma base estruturada de inteligência comercial.'], ['A Lia e a melhoria contínua.', 'Com base no histórico acumulado e no retorno dos clientes, a Lia cruza satisfação e metas para apoiar a evolução constante das suas vendas.']].map(([title, text], index) => <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></div></section>
-      <section className="section wrap pricing-section" id="planos">
-        <div className="pricing-heading scroll-focus-blur">
-          <h2>Um plano para cada momento.</h2>
-        </div>
-
-        <div className="mobile-plan-comparison scroll-focus-blur stagger-1">
-          <div className="mobile-plan-navigation">
-            <button type="button" aria-label="Plano anterior" onClick={() => setMobilePlan(index => (index + plans.length - 1) % plans.length)}><ChevronLeft size={21} aria-hidden="true" /></button>
-            <div aria-live="polite" aria-atomic="true"><strong>{selectedPlan.name}</strong><span>{mobilePlan + 1} de {plans.length} planos</span></div>
-            <button type="button" aria-label="Próximo plano" onClick={() => setMobilePlan(index => (index + 1) % plans.length)}><ChevronRight size={21} aria-hidden="true" /></button>
-          </div>
-          <div className="mobile-plan-price"><strong>{selectedPlan.value}</strong><span>{selectedPlan.billing}</span></div>
-          <a className={`plan-compare-button ${selectedPlan.name === 'Pro' ? 'primary' : ''}`} href={selectedPlan.href}>{selectedPlan.cta}<ArrowUpRight size={14} aria-hidden="true" /></a>
-          <dl className="mobile-plan-features" aria-label={`Funcionalidades do plano ${selectedPlan.name}`}>
-            {comparisonFeatures.map(row => {
-              const value = row[planKeys[mobilePlan]];
-              return <div key={row.name}><dt>{row.name}</dt><dd>
-                {value === 'full' ? <span className="comparison-status included"><Check size={14} aria-hidden="true" />Completo</span>
-                  : value === 'basic' ? <span className="comparison-status basic">Básico</span>
-                  : value === 'none' ? <span className="comparison-status excluded"><Minus size={14} aria-hidden="true" />Não incluso</span> : value}
-              </dd></div>;
-            })}
-          </dl>
-          <div className="mobile-plan-dots" aria-label="Escolher plano">{plans.map((plan, index) => <button type="button" key={plan.name} aria-label={`Ver plano ${plan.name}`} aria-pressed={index === mobilePlan} onClick={() => setMobilePlan(index)}><span /></button>)}</div>
-        </div>
-        <div className="comparison-table-wrapper scroll-focus-blur stagger-1" role="region" aria-label="Comparação de planos Klyv" tabIndex={0}>
-          <table className="comparison-table">
-            <caption className="comparison-sr-only">Preços, usuários e funcionalidades de cada plano Klyv</caption>
-            <thead>
-              <tr>
-                <th scope="col" className="col-feature">O que está incluído</th>
-                {plans.map(plan => <th scope="col" className="col-plan" key={plan.name}>
-                  <div className="plan-th-head">
-                    <strong className="plan-th-title">{plan.name}</strong>
-                    <span className="plan-th-price">{plan.value}</span>
-                    <span className="plan-th-billing">{plan.billing}</span>
-                    <a className={`plan-compare-button ${plan.name === 'Pro' ? 'primary' : ''}`} href={plan.href}>{plan.cta}<ArrowUpRight size={13} aria-hidden="true" /></a>
-                  </div>
-                </th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {comparisonFeatures.map(row => <tr key={row.name}>
-                <th scope="row" className="cell-feature-name">{row.name}</th>
-                {(['free', 'basic', 'pro', 'enterprise'] as const).map(key => {
-                  const value = row[key];
-                  return <td className="cell-plan-val" key={key}>
-                    {value === 'full' ? <span className="comparison-status included"><Check size={15} aria-hidden="true" />Completo</span>
-                      : value === 'basic' ? <span className="comparison-status basic">Básico</span>
-                      : value === 'none' ? <span className="comparison-status excluded"><Minus size={14} aria-hidden="true" />Não incluso</span>
-                      : <span>{value}</span>}
-                  </td>;
-                })}
-              </tr>)}
-            </tbody>
-          </table>
-        </div>
-        <p className="comparison-note">Comece pela avaliação gratuita de 14 dias no plano Free. Compare acima os recursos disponíveis em cada plano.</p>
-      </section>
-      <section className="section faq-section wrap scroll-focus-blur" id="duvidas"><div><span className="eyebrow">Antes de começar</span><h2>Vamos deixar<br /><span>tudo claro.</span></h2><p>Respostas diretas para os próximos passos.</p></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={17} /></summary><p>{answer}</p></details>)}</div></section>
-      <section className="final-section wrap">
-        <div className="final-cta scroll-focus-blur">
+      <section className="sales-section sales-faq sales-wrap scroll-reveal" id="duvidas"><div><p className="sales-eyebrow">ANTES DE COMEÇAR</p><h2>Perguntas frequentes</h2><a className="sales-text-link" href="#planos">Rever os planos <ArrowUpRight size={16} /></a></div><div>{faqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={18} /></summary><p>{answer}</p></details>)}</div></section>
+      <section className="sales-cta-banner">
+        <div className="sales-wrap sales-cta-banner-content scroll-reveal">
+          <h2 className="sales-cta-banner-title">
+            Comece com uma proposta real.
+          </h2>
+          <p className="sales-cta-banner-sub">
+            Cadastre um cliente, adicione uma proposta e marque seu primeiro follow-up.
+          </p>
           <div>
-            <span className="eyebrow">Pronto para organizar sua operação?</span>
-            <h2>Construa relações mais próximas.<br /><span>Feche negócios com clareza.</span></h2>
+            <a className="sales-cta-banner-btn" href={trial}>
+              Testar 14 dias grátis <ArrowUpRight size={16} />
+            </a>
           </div>
-          <div>
-            <a className="button" href={`${signup}?plan=free`}>Começar 14 dias grátis <ArrowRight size={16} /></a>
-            <p>Venha para a Klyv. Avaliação gratuita por 14 dias · Sem cartão de crédito</p>
-          </div>
+          <p className="sales-cta-banner-note">
+            Teste de 14 dias · Até 2 usuários · Sem cartão de crédito
+          </p>
         </div>
       </section>
     </main>
-    <footer className="site-footer wrap"><div className="footer-top"><a className="brand" href="#" aria-label="Klyv, voltar ao início"><Image src="/klyv.svg" alt="Klyv" width={140} height={56} /></a><p>Boas relações. Grandes negócios.</p><a href={crm}>Já é cliente? Acesse o Klyv <ArrowUpRight size={14} /></a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Klyv · Inteligência comercial</span><nav aria-label="Links do rodapé"><a href="#produto">Produto</a><a href="#lia">IA</a><a href="#planos">Planos</a><a href="#duvidas">Dúvidas</a><a className="footer-legal-button" href="/termos-de-uso">Termos de Uso <ArrowUpRight size={13} aria-hidden="true" /></a></nav><span>Feito para aproximar.</span></div></footer>
-  </>;
+    <footer className="sales-footer-dark">
+      <div className="sales-wrap">
+        <div className="sales-footer-dark-grid">
+          <div className="sales-footer-dark-brand">
+            <a href="#" aria-label="Klyv, voltar ao início" className="sales-footer-dark-logo">
+              <Image src="/logo-klyv-white.svg" alt="Klyv" width={118} height={64} priority={false} />
+            </a>
+            <p>
+              Inteligência comercial para conectar clientes, negociações e o que vem depois.
+            </p>
+          </div>
+          <div className="sales-footer-dark-col">
+            <h3>PRODUTO</h3>
+            <nav aria-label="Produto">
+              <a href="#inicio">Visão geral</a>
+              <a href="#produto">Demonstração interativa</a>
+              <a href="#lia">Assistente Lia</a>
+              <a href="#planos">Planos</a>
+            </nav>
+          </div>
+          <div className="sales-footer-dark-col">
+            <h3>COMECE NA KLYV</h3>
+            <nav aria-label="Comece na Klyv">
+              <a href={trial}>Testar 14 dias grátis <ArrowUpRight size={13} /></a>
+              <a href={crm}>Entrar na plataforma <ArrowUpRight size={13} /></a>
+            </nav>
+          </div>
+        </div>
+        <div className="sales-footer-dark-bottom">
+          <span>© {new Date().getFullYear()} Klyv. Todos os direitos reservados.</span>
+          <a href="/termos-de-uso">Termos de uso</a>
+        </div>
+      </div>
+    </footer>
+  </div>;
 }

@@ -1,15 +1,16 @@
 import type { MetadataRoute } from 'next';
+import { siteUrl } from '../lib/site';
 
 export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
-  const url = (process.env.NEXT_PUBLIC_SITE_URL || 'https://klyv.com.br').replace(/\/$/, '');
+  if (process.env.NODE_ENV !== 'production') return { rules: { userAgent: '*', disallow: '/' } };
   return {
     rules: {
       userAgent: '*',
       allow: '/',
       disallow: ['/api/'],
     },
-    sitemap: `${url}/sitemap.xml`,
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }

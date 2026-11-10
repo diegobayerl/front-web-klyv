@@ -1,6 +1,8 @@
 # Termos de Uso — pendências de validação
 
-Minuta 0.2 de 20/10/2026 em `/termos-de-uso`. Texto em `src/app/termos-de-uso/content.ts`. Página com noindex e aviso de minuta; não foi adicionado aceite contratual ao cadastro nem alterado o CRM.
+Minuta 0.3 de 10/11/2026 em `/termos-de-uso`. Texto em `src/app/termos-de-uso/content.ts`. A versão está em desenvolvimento e aguarda identificação do prestador e aprovação jurídica.
+
+**Aceite no cadastro — verificação de 10/11/2026.** A tela de criação de empresa já exige uma caixa de seleção e aponta para o endereço público dos termos. No back-end, `src/schemas/company-schema.ts` aceita a ausência de `termsAccepted` e atribui `true` por padrão. O esquema Prisma verificado não contém registro dedicado da versão aceita. Antes de adotar uma versão vinculante, conferir todos os fluxos de contratação, exigir manifestação expressa no servidor e guardar a versão apresentada, o identificador do contratante e o momento do aceite. Preservar a versão anterior para consulta. Não presumir que contas existentes aceitaram esta minuta.
 
 Antes da adoção definitiva:
 - Identificar quem efetivamente presta o serviço até a constituição da pessoa jurídica e validar denominação pretendida Klyv Inteligência Comercial, CNPJ, endereço e poderes de representação.

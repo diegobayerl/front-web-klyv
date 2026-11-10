@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { ArrowUp, ArrowUpRight, Bell, Building2, Calendar, Check, FileText, LayoutDashboard, LogOut, MessageCircle, MessageSquareHeart, Moon, PanelLeftClose, PanelLeftOpen, Plus, Rocket, Search, Settings, StickyNote, Sun, Target, Users, X } from 'lucide-react';
 import { dashboardData, deals } from './crm-demo/data';
+import { RevenueCharts } from './crm-demo/RevenueCharts';
 import { formatCurrency as money } from './crm-demo/formatters';
 import type { PeriodOption } from './crm-demo/types';
 import '@fontsource-variable/plus-jakarta-sans';
@@ -47,7 +48,6 @@ export function InteractiveDashboardPreview({
   const [deal, setDeal] = useState<number | null>(null);
   const [notifications, setNotifications] = useState(false);
   const [list, setList] = useState(false);
-  const [input, setInput] = useState('');
 
   const data = dashboardData(period);
   const k = data.kpis;
@@ -119,6 +119,7 @@ export function InteractiveDashboardPreview({
                   type="button"
                   title={label}
                   aria-current={isSelected ? 'page' : undefined}
+                  disabled={!isNavigable}
                   onClick={lockToDashboard || !isNavigable ? undefined : () => changePage(id as Page)}
                 >
                   <Icon size={17} />
@@ -127,7 +128,7 @@ export function InteractiveDashboardPreview({
               );
             })}
             <div className="demo-divider" />
-            <button type="button" title="Configurações">
+            <button type="button" title="Configurações indisponíveis na demonstração" disabled>
               <Settings size={17} />
               <span>Configurações</span>
             </button>
@@ -143,9 +144,9 @@ export function InteractiveDashboardPreview({
               <span>Tema {theme === 'light' ? 'escuro' : 'claro'}</span>
             </button>
             <div className="demo-user">
-              <span className="demo-avatar">DB</span>
+              <span className="demo-avatar">MC</span>
               <div>
-                Diego Bayerl Hupp<small>PRO</small>
+                Marina Costa<small>DEMONSTRAÇÃO</small>
               </div>
               <LogOut size={16} />
             </div>
@@ -158,9 +159,6 @@ export function InteractiveDashboardPreview({
               <MessageCircle size={18} />
               <strong>Lia</strong>
               <small>Assistente IA</small>
-              <button type="button" className="demo-icon" aria-label="Limpar texto" onClick={() => setInput('')}>
-                <Plus size={17} />
-              </button>
               <button type="button" className="demo-icon" aria-label="Fechar Lia" onClick={() => setLia(false)}>
                 <X size={17} />
               </button>
@@ -170,35 +168,10 @@ export function InteractiveDashboardPreview({
                 <MessageCircle size={27} />
                 <h2>Olá.</h2>
                 <p>Por onde vamos começar?</p>
-                {['Acompanhar minhas metas', 'Organizar as propostas', 'Pesquisas de satisfação'].map((text) => (
-                  <button type="button" key={text} onClick={() => setInput(text)}>
-                    {text}
-                    <ArrowUpRight size={12} />
-                  </button>
-                ))}
               </div>
             </div>
-            <form onSubmit={(e) => e.preventDefault()}>
-              <textarea
-                aria-label="Mensagem para Lia na demonstração"
-                placeholder="Converse com a Lia..."
-                value={input}
-                maxLength={500}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                  }
-                }}
-              />
-              <div>
-                <small>Demonstração interativa</small>
-                <button type="button" aria-label="Envio desativado nesta demonstração" onClick={(e) => e.preventDefault()} style={{ opacity: input.trim() ? 0.7 : 0.4, cursor: 'default' }}>
-                  <ArrowUp size={17} />
-                </button>
-              </div>
-            </form>
-            <small className="demo-chat-disclaimer">Demonstração · apenas digitação disponível nesta prévia.</small>
+            <div className="demo-guided-chat"><p>Esta é uma prévia da interface. Veja exemplos de reuniões, follow-ups e consultas na demonstração guiada.</p><a href="#lia" onClick={() => setLia(false)}>Explorar exemplos da Lia <ArrowUpRight size={14} /></a></div>
+            <small className="demo-chat-disclaimer">Dados fictícios · sem conexão com sua conta.</small>
           </section>
         )}
 
@@ -210,7 +183,7 @@ export function InteractiveDashboardPreview({
             }}
           >
             {/* TELA 1: DASHBOARD COMERCIAL */}
-            <div className={`demo-screen-slide ${activePage === 'dashboard' ? 'is-active' : ''}`} data-screen="dashboard">
+            <div className={`demo-screen-slide ${activePage === 'dashboard' ? 'is-active' : ''}`} data-screen="dashboard" aria-hidden={activePage !== 'dashboard'} inert={activePage !== 'dashboard'}>
               <header className="demo-dashboard-header">
                 <div>
                   <h2>Performance Comercial</h2>
@@ -245,10 +218,11 @@ export function InteractiveDashboardPreview({
                 ))}
               </section>
               {goal}
+              {activePage === 'dashboard' && <RevenueCharts data={data} period={period} />}
             </div>
 
             {/* TELA 2: PROPOSTAS KANBAN */}
-            <div className={`demo-screen-slide ${activePage === 'pipeline' ? 'is-active' : ''}`} data-screen="pipeline">
+            <div className={`demo-screen-slide ${activePage === 'pipeline' ? 'is-active' : ''}`} data-screen="pipeline" aria-hidden={activePage !== 'pipeline'} inert={activePage !== 'pipeline'}>
               <h2 className="demo-page-title">Propostas</h2>
               <div className="demo-toolbar">
                 <label className="demo-search">
@@ -321,7 +295,6 @@ export function InteractiveDashboardPreview({
               ))}
             </div>
           </div>
-          <p className="demo-data-note">Ambiente demonstrativo · dados fictícios</p>
         </div>
       </div>
 

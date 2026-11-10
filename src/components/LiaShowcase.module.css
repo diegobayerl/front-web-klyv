@@ -1,0 +1,18 @@
+.section { scroll-margin-top: 84px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.choices button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 9px 13px; border: 1px solid #c6d6dc; border-radius: 8px; background: #fff; color: #264550; font: inherit; font-size: 13px; cursor: pointer; }
+.choices button:hover { border-color: #7696a3; }
+.choices button[aria-pressed="true"] { background: #153844; border-color: #153844; color: #fff; }
+.choices button:focus-visible { outline: 3px solid #007496; outline-offset: 3px; }
+.location { display: flex; align-items: center; gap: 7px; margin-top: 16px; color: #345764; font-size: 12px; }
+@media (max-width: 800px) {
+  .section .layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .section { padding-block: 44px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .replyChange { animation: reply-enter 180ms ease-out; }
+  @keyframes reply-enter {
+    from { opacity: .7; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
