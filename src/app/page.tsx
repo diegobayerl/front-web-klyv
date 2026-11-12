@@ -6,6 +6,8 @@ import { ArrowRight, ArrowUpRight, BarChart3, Check, ChevronDown, ChevronLeft, C
 import { InteractiveDashboardPreview, type Page } from "../components/InteractiveDashboardPreview";
 import { LiaShowcase } from "../components/LiaShowcase";
 import { SalesStructuredData } from "../components/SalesStructuredData";
+import { SeamlessLoopVideo } from "../components/SeamlessLoopVideo";
+import { HeroLiveCockpit } from "../components/HeroLiveCockpit";
 import "./sales.css";
 
 const crm = (process.env.NEXT_PUBLIC_CRM_URL || "https://app.klyv.com.br").replace(/\/$/, "");
@@ -58,6 +60,7 @@ export default function Home() {
   const [activePreview, setActivePreview] = useState(0);
   const [mobilePlan, setMobilePlan] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [videoTime, setVideoTime] = useState(0);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 15);
@@ -95,39 +98,86 @@ export default function Home() {
   return <div className="sales-site">
     <SalesStructuredData faqs={faqs} plans={plans} />
     <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <header className={`sales-header ${scrolled ? "is-scrolled" : "at-top"}`} ref={header} onKeyDown={event => { if (event.key === "Escape" && mobileMenu) { setMobileMenu(false); menuButton.current?.focus(); } }}>
+    <header className={`site-header ${scrolled ? "scrolled" : "at-top"}`} ref={header} onKeyDown={event => { if (event.key === "Escape" && mobileMenu) { setMobileMenu(false); menuButton.current?.focus(); } }}>
       <div className="sales-scroll-progress" aria-hidden="true" />
-      <div className="sales-wrap sales-nav">
-        <a href="#" aria-label="Klyv, início" className="sales-brand-link"><Image src="/klyv.svg" alt="Klyv" width={138} height={75} priority /></a>
-        <nav id="sales-navigation" className={mobileMenu ? "sales-links is-open" : "sales-links"} aria-label="Navegação principal">
+      <div className="nav-wrap wrap">
+        <a href="#" aria-label="Klyv, início" className="brand">
+          <Image
+            src="/logo-klyv-white.svg"
+            alt="Klyv"
+            width={138}
+            height={56}
+            priority
+            className="brand-logo-white"
+          />
+          <Image
+            src="/klyv.svg"
+            alt="Klyv"
+            width={138}
+            height={56}
+            priority
+            className="brand-logo-dark"
+          />
+        </a>
+        <nav id="sales-navigation" className={mobileMenu ? "main-nav open" : "main-nav"} aria-label="Navegação principal">
           {[["#produto", "Produto"], ["#planos", "Planos"], ["#lia", "Conheça a Lia"], ["#duvidas", "Dúvidas"]].map(([href, label]) => <a key={href} href={href} onClick={() => setMobileMenu(false)}>{label}</a>)}
-          <a href={crm} className="sales-mobile-login">Entrar no Klyv <ArrowUpRight size={14} /></a>
+          <div className="mobile-nav-cta">
+            <a href={crm} className="login-link-mobile" onClick={() => setMobileMenu(false)}>Entrar no Klyv <ArrowUpRight size={14} /></a>
+            <a className="button small" href={trial} onClick={() => setMobileMenu(false)}>Começar agora</a>
+          </div>
         </nav>
-        <div className="sales-nav-actions"><a className="sales-login" href={crm}>Entrar <ArrowUpRight size={14} /></a><a className="sales-button compact" href={trial}>Começar agora <ArrowRight size={15} /></a><button ref={menuButton} type="button" className="sales-menu" aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu} aria-controls="sales-navigation" onClick={() => setMobileMenu(!mobileMenu)}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button></div>
+        <div className="nav-actions">
+          <a className="login-link" href={crm}>Entrar <ArrowUpRight size={14} /></a>
+          <a className="button small" href={trial}>Começar agora</a>
+          <button ref={menuButton} type="button" className="menu-button" aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"} aria-expanded={mobileMenu} aria-controls="sales-navigation" onClick={() => setMobileMenu(!mobileMenu)}>{mobileMenu ? <X size={22} /> : <Menu size={22} />}</button>
+        </div>
       </div>
     </header>
     <main id="conteudo">
-      <section className="sales-hero-centered" id="inicio">
-        <div className="sales-hero-content">
-          <h1 className="sales-hero-title">
-            Cada negociação no lugar.<br />
-            <span className="sales-hero-highlight">O próximo passo, claro.</span>
-          </h1>
-          <p className="sales-hero-subtitle">
-            O CRM para equipes que vendem serviços. Veja qual proposta precisa de retorno hoje e acompanhe a entrega depois que o cliente disser sim.
-          </p>
-          <div className="sales-hero-actions">
-            <a className="sales-hero-primary-btn" href={trial}>
-              <span>Testar 14 dias grátis</span>
-              <ArrowUpRight size={17} />
-            </a>
-            <a className="sales-hero-secondary-btn" href="#produto">
-              Ver demonstração
-            </a>
+      <section className="hero-fullvideo-section" id="inicio">
+        {/* Vídeo Full-Bleed em Loop Contínuo com a Mascote Fox Lia */}
+        <div className="hero-fullvideo-backdrop" aria-hidden="true">
+          <SeamlessLoopVideo
+            src="/blue-fox-mascot.mp4?v=8"
+            className="hero-fullvideo-player"
+            objectPosition="50% 12%"
+            onTimeUpdate={setVideoTime}
+          />
+          <div className="hero-bottom-scrim" />
+        </div>
+
+        {/* Conteúdo na parte inferior: Texto à esquerda + Cockpit Interativo à direita sincronizado com a Lia */}
+        <div className="hero-bottom-container wrap">
+          <div className="hero-bottom-copy">
+            <h1>
+              <span className="hero-headline-white">Cada negociação no lugar.</span>
+              <span className="hero-headline-blue">O próximo passo, claro.</span>
+            </h1>
+
+            <p>
+              Centralize clientes e propostas em uma visão simples e intuitiva, com apoio da Lia no chat e no WhatsApp. Do primeiro contato ao pós-venda.
+            </p>
+
+            <div className="hero-bottom-actions">
+              <a className="button hero-btn-start" href={trial}>
+                <span>Testar 14 dias grátis</span>
+                <ArrowUpRight size={17} />
+              </a>
+              <a className="button hero-btn-tour" href="#produto">
+                Ver demonstração
+              </a>
+            </div>
+
+            <div className="hero-bottom-guarantee">
+              <span className="tiny-check"><Check size={11} strokeWidth={2.5} /></span>
+              <span>Avaliação de 14 dias com tudo liberado · Sem cartão de crédito</span>
+            </div>
           </div>
-          <p className="sales-hero-reassurance">
-            Até 2 usuários no teste · Sem cartão de crédito
-          </p>
+
+          {/* Janela Cockpit CRM viva na lateral direita da Lia */}
+          <div className="hero-cockpit-slot">
+            <HeroLiveCockpit currentTime={videoTime} />
+          </div>
         </div>
       </section>
       <section className="sales-product sales-wrap scroll-reveal-scale" id="produto" aria-label="Explore o Klyv">

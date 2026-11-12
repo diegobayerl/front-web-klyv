@@ -2,7 +2,7 @@
 
 Minuta 0.3 de 10/11/2026 em `/termos-de-uso`. Texto em `src/app/termos-de-uso/content.ts`. A versão está em desenvolvimento e aguarda identificação do prestador e aprovação jurídica.
 
-**Aceite no cadastro — verificação de 10/11/2026.** A tela de criação de empresa já exige uma caixa de seleção e aponta para o endereço público dos termos. No back-end, `src/schemas/company-schema.ts` aceita a ausência de `termsAccepted` e atribui `true` por padrão. O esquema Prisma verificado não contém registro dedicado da versão aceita. Antes de adotar uma versão vinculante, conferir todos os fluxos de contratação, exigir manifestação expressa no servidor e guardar a versão apresentada, o identificador do contratante e o momento do aceite. Preservar a versão anterior para consulta. Não presumir que contas existentes aceitaram esta minuta.
+**Aceite no cadastro — desenvolvimento, 11/11/2026.** A API agora exige aceite expresso da versão apresentada e registra empresa, usuário e horário no banco, na mesma transação do cadastro. O texto por versão fica arquivado. Contas existentes não recebem aceite retroativo. A minuta 0.3 não habilita cadastro em produção: publicar uma nova versão aprovada e configurar TERMS_VERSION antes da implantação. A exclusão física da empresa também remove os recibos; definir política de preservação antes de operar o painel administrativo em produção.
 
 Antes da adoção definitiva:
 - Identificar quem efetivamente presta o serviço até a constituição da pessoa jurídica e validar denominação pretendida Klyv Inteligência Comercial, CNPJ, endereço e poderes de representação.

@@ -7,6 +7,7 @@ interface SeamlessLoopVideoProps {
   poster?: string;
   className?: string;
   objectPosition?: string;
+  onTimeUpdate?: (currentTime: number) => void;
 }
 
 export function SeamlessLoopVideo({
@@ -14,6 +15,7 @@ export function SeamlessLoopVideo({
   poster = "/mascot-poster.webp",
   className = "",
   objectPosition = "center center",
+  onTimeUpdate,
 }: SeamlessLoopVideoProps) {
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
@@ -81,15 +83,42 @@ export function SeamlessLoopVideo({
     v2.addEventListener("timeupdate", checkV2);
     v1.addEventListener("playing", handlePlayStart, { once: true });
 
+    const handleTimeTick = () => {
+      const current = activeVideo === 1 ? v1.currentTime : v2.currentTime;
+      if (onTimeUpdate && typeof current === "number") {
+        onTimeUpdate(current);
+      }
+    };
+
+    v1.addEventListener("timeupdate", handleTimeTick);
+    v2.addEventListener("timeupdate", handleTimeTick);
+
     // Inicia vídeo 1
     v1.play().then(() => setHasStarted(true)).catch(() => {});
 
     return () => {
       v1.removeEventListener("timeupdate", checkV1);
       v2.removeEventListener("timeupdate", checkV2);
+      v1.removeEventListener("timeupdate", handleTimeTick);
+      v2.removeEventListener("timeupdate", handleTimeTick);
       v1.removeEventListener("playing", handlePlayStart);
     };
-  }, [src]);
+  }, [src, activeVideo, onTimeUpdate]);
+
+  // Suporte de alta precisão via requestAnimationFrame para animações fluidas
+  useEffect(() => {
+    if (!onTimeUpdate) return;
+    let raf: number;
+    const tick = () => {
+      const activeEl = activeVideo === 1 ? video1Ref.current : video2Ref.current;
+      if (activeEl && !activeEl.paused) {
+        onTimeUpdate(activeEl.currentTime);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [activeVideo, onTimeUpdate]);
 
   return (
     <div

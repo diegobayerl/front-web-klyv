@@ -76,7 +76,9 @@ export default function TermsPage() {
               <h2>Referências legais</h2>
               <p>Fontes oficiais consultadas na elaboração desta minuta.</p>
               <ul className="legal-references">
-<li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm">Lei nº 13.709/2018 — Lei Geral de Proteção de Dados Pessoais</a></li>
+                <li><a href="https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.html">Lei nº 13.709/2018 — Lei Geral de Proteção de Dados Pessoais</a></li>
+                <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l9609.htm">Lei nº 9.609/1998 — Lei do Software</a></li>
+                <li><a href="https://www2.camara.leg.br/legin/fed/decret/2013/decreto-7962-15-marco-2013-775557-publicacaooriginal-139266-pe.html">Decreto nº 7.962/2013 — Contratação no comércio eletrônico</a></li>
             <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm">Lei nº 12.965/2014 — Marco Civil da Internet</a></li>
             <li><a href="https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm">Lei nº 10.406/2002 — Código Civil</a></li>
             <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm">Lei nº 8.078/1990 — Código de Defesa do Consumidor</a></li>

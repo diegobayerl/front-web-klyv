@@ -64,7 +64,8 @@
   overflow: clip; 
   background: #fff; 
   box-shadow: 0 20px 50px -25px rgba(20, 61, 77, 0.16); 
-  margin-top: 16px; 
+  margin-top: clamp(40px, 5.5vw, 68px);
+  margin-bottom: clamp(40px, 5.5vw, 68px); 
 }
 .sales-demo-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px 0; font-size: 12px; }
 .sales-demo-bar > span:first-child { display: flex; align-items: center; gap: 9px; font-weight: 700; }
@@ -176,18 +177,327 @@
 .sales-product .demo-guided-chat { margin: 18px; padding: 18px; border: 1px solid var(--crm-border); border-radius: 10px; font-size: 12px; line-height: 1.8; }
 .sales-product .demo-guided-chat a { display: inline-flex; gap: 8px; align-items: center; margin-top: 16px; color: var(--crm-accent); font-weight: 600; }
 
-.sales-hero-centered {
+/* ==========================================================================
+   HERO FULL-BLEED VIDEO & MASCOTE LIA (Carro Chefe com Header Transparente)
+   ========================================================================== */
+.hero-fullvideo-section {
   position: relative;
-  padding: clamp(116px,11vw,156px) 24px clamp(32px,4.5vw,64px);
-  background: linear-gradient(180deg,#fbfcfa 32%,#f0f6f7 74%,#fbfcfa);
+  width: 100%;
+  height: 100vh;
+  min-height: 640px;
+  max-height: 980px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  background: #092337;
+  padding-bottom: clamp(64px, 8.5vh, 96px);
 }
-.sales-hero-content { max-width: 920px; margin: auto; text-align: center; }
-.sales-hero-title { color: #122e40; font-size: clamp(42px,5.2vw,74px); font-weight: 750; line-height: 1.04; letter-spacing: -.055em; text-wrap: balance; }
-.sales-hero-highlight { color: #165c76; }
-.sales-hero-subtitle { max-width: 59ch; margin: 22px auto 0; font-size: clamp(16px,1.45vw,19px); color: #475f6c; line-height: 1.6; text-wrap: pretty; }
-.sales-hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-.sales-hero-reassurance { margin-top: 14px; color: #506775; font-size: 13px; }
-.sales-scroll-progress { pointer-events: none; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: #16758e; transform: scaleX(0); transform-origin: left; }
+
+.hero-fullvideo-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-fullvideo-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Proteção suave de contraste: cobre 100% da altura para ZERO linhas ou cortes */
+.hero-bottom-scrim {
+  position: absolute;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    180deg, 
+    rgba(7, 30, 48, 0.45) 0%, 
+    rgba(7, 30, 48, 0.12) 12%, 
+    transparent 20%, 
+    transparent 50%, 
+    rgba(7, 30, 48, 0.35) 70%, 
+    rgba(7, 30, 48, 0.78) 90%, 
+    rgba(7, 30, 48, 0.94) 100%
+  );
+}
+
+@media (min-width: 801px) {
+  .hero-bottom-scrim {
+    background: 
+      radial-gradient(
+        ellipse 80% 65% at 0% 100%,
+        rgba(7, 30, 48, 0.88) 0%,
+        rgba(7, 30, 48, 0.50) 40%,
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg, 
+        rgba(7, 30, 48, 0.45) 0%, 
+        rgba(7, 30, 48, 0.12) 12%, 
+        transparent 20%, 
+        transparent 50%, 
+        rgba(7, 30, 48, 0.35) 70%, 
+        rgba(7, 30, 48, 0.78) 90%, 
+        rgba(7, 30, 48, 0.94) 100%
+      );
+  }
+}
+
+.hero-bottom-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: clamp(20px, 3vw, 48px);
+  padding-inline: clamp(24px, 4vw, 56px);
+}
+
+.hero-bottom-copy {
+  max-width: 480px;
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  animation: heroBottomFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroBottomFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-bottom-copy h1 {
+  font-size: clamp(28px, 3.1vw, 38px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 18px;
+  text-align: left;
+  max-width: 480px;
+  text-shadow: 0 2px 14px rgba(7, 30, 48, 0.75);
+}
+
+.hero-headline-white {
+  display: block;
+  color: #ffffff !important;
+  white-space: nowrap;
+  text-shadow: 0 2px 14px rgba(7, 30, 48, 0.75);
+}
+
+.hero-headline-blue {
+  display: block;
+  color: #09b5f0 !important;
+  white-space: nowrap;
+  text-shadow: 0 2px 14px rgba(7, 30, 48, 0.75);
+}
+
+@media (max-width: 580px) {
+  .hero-headline-white,
+  .hero-headline-blue {
+    white-space: normal;
+  }
+}
+
+.hero-bottom-copy p {
+  font-size: clamp(14px, 1.1vw, 15px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.94);
+  max-width: 420px;
+  margin-bottom: 24px;
+  text-align: left;
+  text-shadow: 0 1px 8px rgba(7, 30, 48, 0.85);
+}
+
+/* ==========================================================================
+   MINIATURA DO SISTEMA REAL KLYV (Sincronizado com a Mascote Lia)
+   ========================================================================== */
+.hero-cockpit-slot {
+  flex: 0 0 clamp(400px, 34vw, 520px);
+  max-width: 520px;
+  animation: heroMiniCrmEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroMiniCrmEnter {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.hero-mini-crm-window {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px -12px rgba(7, 30, 48, 0.48), 
+              0 0 0 1px rgba(7, 30, 48, 0.08),
+              0 0 45px rgba(9, 181, 240, 0.18);
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+}
+
+.hero-mini-crm-window:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 30px 70px -15px rgba(7, 30, 48, 0.55), 
+              0 0 0 1px rgba(9, 181, 240, 0.3),
+              0 0 55px rgba(9, 181, 240, 0.25);
+}
+
+/* Viewport com o Sistema Real Klyv em Escala Perfeita */
+.hero-mini-crm-viewport {
+  width: 100%;
+  height: 298px;
+  overflow: hidden;
+  position: relative;
+  background: #f6f7f9;
+  border-radius: 18px;
+}
+
+.hero-mini-crm-scaler {
+  width: 880px;
+  height: 540px;
+  transform: scale(0.55);
+  transform-origin: top left;
+  pointer-events: auto;
+}
+
+.hero-mini-crm-scaler .crm-demo {
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: 100% !important;
+}
+
+.hero-mini-crm-scaler .demo-shell {
+  height: 540px !important;
+}
+
+@media (max-width: 1200px) {
+  .hero-cockpit-slot {
+    flex: 0 0 420px;
+    max-width: 420px;
+  }
+  .hero-mini-crm-viewport {
+    height: 260px;
+  }
+  .hero-mini-crm-scaler {
+    transform: scale(0.48);
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-bottom-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .hero-cockpit-slot {
+    width: 100%;
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-cockpit-slot {
+    display: none; /* Em smartphones prioriza o vídeo e os CTAs */
+  }
+}
+
+.hero-bottom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.hero-bottom-actions .button.hero-btn-start {
+  height: 50px;
+  padding: 0 28px;
+  font-weight: 750;
+  color: #072a42 !important;
+  background: #09b5f0;
+  border: 1px solid #38bdf8;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px -4px rgba(9, 181, 240, 0.55), 0 4px 12px rgba(7, 30, 48, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.hero-bottom-actions .button.hero-btn-start:hover {
+  background: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -4px rgba(9, 181, 240, 0.7), 0 6px 18px rgba(7, 30, 48, 0.45);
+}
+
+.hero-bottom-actions .button.hero-btn-tour {
+  height: 50px;
+  padding: 0 28px;
+  font-weight: 600;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(7, 30, 48, 0.6);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-bottom-actions .button.hero-btn-tour:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+.hero-bottom-guarantee {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 600;
+  text-shadow: 0 1px 6px rgba(7, 30, 48, 0.8);
+  margin-top: 14px;
+}
+
+.hero-bottom-guarantee .tiny-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+@media (max-width: 800px) {
+  .hero-bottom-container { padding-inline: 20px; }
+  .hero-bottom-copy h1 { font-size: clamp(26px, 6.5vw, 34px); }
+  .hero-bottom-copy p { font-size: 14px; padding-inline: 0; }
+  .hero-fullvideo-section { padding-bottom: 52px; min-height: 100vh; }
+}
+
+.sales-scroll-progress { pointer-events: none; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: #09b5f0; transform: scaleX(0); transform-origin: left; z-index: 60; }
 .sales-site :where(a, button, summary, [tabindex]):focus-visible { outline: 3px solid #13799a; outline-offset: 2px; }
 .sales-footer-dark a:focus-visible, .sales-cta-banner a:focus-visible { outline-color: #8ad8ed; }
 
